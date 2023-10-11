@@ -1,5 +1,6 @@
 import { Button } from './Button'
 import { Logo } from './Logo'
+import { NavbarItem } from './NavbarItem'
 
 type NavBarProps = {
   hasLogo: boolean
@@ -11,11 +12,11 @@ export const NavBar = ({ hasLogo }: NavBarProps) => {
       {hasLogo && <Logo />}
 
       <div className='flex items-center gap-3'>
-        <ul className='flex items-start gap-6 px-4 py-0'>
+        <ul className='flex gap-6 px-4 py-0'>
+          <NavbarItem label='Reserva' />
           <NavbarItem label='Nosotros' />
           <NavbarItem label='Beneficios' />
           <NavbarItem label='Patrocinadores' />
-          <NavbarItem label='Reserva' />
         </ul>
 
         <Button
@@ -29,8 +30,4 @@ export const NavBar = ({ hasLogo }: NavBarProps) => {
       </div>
     </div>
   )
-}
-
-export const NavbarItem = ({ label }: { label: string }) => {
-  return <li className='font-body w-fit mt-[-1.00px] text-black text-center'>{label}</li>
 }

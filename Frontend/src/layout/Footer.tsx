@@ -1,46 +1,31 @@
+import { BUSINESS } from '../consts/consts'
+import { SocialIcon } from '../components/SocialIcon'
+
 const Footer = () => {
   return (
-    <footer className='w-full h-72 px-36 py-14 bg-base-blue1 text-white font-body text-lg'>
-      <section className='w-full max-w-6xl my-0 mx-auto justify-between flex gap-4'>
-        <div className='w-1/5 flex-col justify-start items-start gap-4 flex'>
-          <div className='w-80 h-16 pt-0.5 pb-10 justify-center items-center inline-flex'>
-            <div className='text-base-green2 text-3xl font-normal font-display'>Reserva tu campo</div>
+    <footer className='w-full text-sm bg-base-blue1 text-white/60 font-body'>
+      <section className='flex items-stretch justify-between w-full max-w-6xl gap-4 py-16 mx-auto my-0 px-7'>
+        <article className='flex flex-col justify-between w-1/5'>
+          <h2 className='text-2xl leading-none text-base-green2 font-display'>{BUSINESS.name}</h2>
+          <p>Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sintelit officia consequat</p>
+        </article>
+
+        <article className='flex flex-col gap-4'>
+          <h3 className='text-2xl text-white'>Heading</h3>
+          <p>Link here</p>
+          <p>Link here</p>
+          <p>Link here</p>
+          <p>Link here</p>
+        </article>
+
+        <article className='flex flex-col gap-4'>
+          <h3 className='mb-3 text-2xl text-white'>Siguenos en redes</h3>
+          <div className='flex gap-4'>
+            <SocialIcon />
+            <SocialIcon />
+            <SocialIcon />
           </div>
-          <p className='opacity-60'>Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sintelit officia consequat</p>
-        </div>
-
-        <div className=''>
-          <div className=' text-2xl'>Heading</div>
-          <div className=' opacity-60'>Link here</div>
-          <div className=' opacity-60'>Link here</div>
-          <div className=' opacity-60'>Link here</div>
-          <div className=' opacity-60'>Link here</div>
-        </div>
-
-        <div className=''>
-          <div className=' text-2xl'>Heading</div>
-          <div className=' opacity-60'>Link here</div>
-          <div className=' opacity-60'>Link here</div>
-          <div className=' opacity-60'>Link here</div>
-          <div className=' opacity-60'>Link here</div>
-        </div>
-
-        <div className=''>
-          <div className=' text-2xl'>Heading</div>
-          <div className=' opacity-60'>Link here</div>
-          <div className=' opacity-60'>Link here</div>
-          <div className=' opacity-60'>Link here</div>
-          <div className=' opacity-60'>Link here</div>
-        </div>
-
-        <div className='flex-col justify-start items-start gap-3 flex'>
-          <div className='text-2xl'>Siguenos en redes</div>
-          <div className='gap-4 flex'>
-            <div className='w-8 h-8 relative' />
-            <div className='w-8 h-8 relative' />
-            <div className='w-8 h-8 relative' />
-          </div>
-        </div>
+        </article>
       </section>
     </footer>
   )

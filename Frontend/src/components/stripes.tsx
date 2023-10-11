@@ -1,12 +1,11 @@
-const Stripes = ({ ...props }) => {
-  const { className } = props
+const Stripes = () => {
   return (
     <svg
       viewBox='0 0 941 944'
       fill='none'
       xmlns='http://www.w3.org/2000/svg'
       preserveAspectRatio='none'
-      className={className}>
+      className={`text-base-green1 absolute top-0 left-0 h-full w-3/5 -z-10`}>
       <g clip-path='url(#clip0_44_552)'>
         <path
           opacity='0.6'
