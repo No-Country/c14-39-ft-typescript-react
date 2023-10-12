@@ -2,12 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer components {
-  .all-\[unset\] {
-    all: unset;
-  }
-}
-
 :root {
   --base-black: rgba(0, 0, 0, 1);
   --base-blue1: rgba(3, 79, 99, 1);
@@ -31,4 +25,10 @@
   --sizes-x4: 40px;
   --sizes-x5: 48px;
   --sizes-xo5: 8px;
+}
+
+@layer components {
+  .all-\[unset\] {
+    all: unset;
+  }
 }

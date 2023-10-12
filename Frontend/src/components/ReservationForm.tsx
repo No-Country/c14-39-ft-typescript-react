@@ -1,37 +1,75 @@
+import { useState } from 'react'
 import { Button } from './Button'
+import { MySelect } from './MySelect'
+import { COMMON_TWSTYLES } from '../data/consts'
+
+import mockData from '../data/mockdata.json'
 
 export const ReservationForm = () => {
+  const [selectedOption, setSelectedOption] = useState<Option | null>(null)
+
+  const options = mockData.map(cancha => {
+    const mappedOption: Option = {
+      title: cancha?.nombre,
+      id: Number(cancha?.id),
+    }
+    return mappedOption
+  })
+
+  const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    const selectedId = parseInt(event.target.value)
+    const selectedOption = options.find(option => option.id === selectedId)
+    console.log(selectedOption)
+    setSelectedOption(selectedOption || null)
+  }
+
   return (
     <article className='w-full max-w-6xl mx-auto my-0 px-7 font-body'>
-      <div className='flex flex-col items-center gap-4 p-8 bg-white/60 rounded-3xl backdrop-blur-2xl'>
+      <form className='flex flex-col items-center gap-4 p-8 bg-white/60 rounded-3xl backdrop-blur-2xl'>
         {/*  */}
-        <div className='flex flex-col items-center text-center'>
-          <p className='text-2xl'>¿Quieres jugar un partido de fútbol?</p>
-          <p className='text-3xl text-base-blue1 font-display'>¡Reserva tu campo hoy mismo!</p>
-        </div>
+        <PreForm />
         {/*  */}
 
         <div className='flex flex-col gap-20 lg:flex-row'>
           {/*  */}
           <div>
             <p className='mb-3 text-lg'>Puedes empezar por tu ubicación</p>
-            <form className='flex items-end gap-3'>
-              <div className='flex items-center h-12 gap-1 py-3 pl-4 bg-white border-2 rounded-lg pr-9 border-base-blue1'>
-                <div className='text-lg '>Selecciona tu ciudad</div>
+            <div className='flex items-end gap-3'>
+              <MySelect
+                options={options}
+                value={selectedOption}
+                onChange={handleChange}
+              />
+
+              <div className='w-32 flex-col gap-1.5 flex'>
+                <label
+                  htmlFor='date'
+                  className='text-base leading-tight uppercase '>
+                  Fecha
+                </label>
+                <input
+                  type='date'
+                  name='date'
+                  id='date'
+                  className={COMMON_TWSTYLES.input}
+                  placeholder='Hoy'
+                />
               </div>
-              <div className='w-32 flex-col   gap-1.5 flex'>
-                <div className='text-base leading-tight uppercase '>Fecha</div>
-                <div className=' pl-3.5 pr-12 py-3 bg-white rounded-lg border-2 border-base-blue1   gap-2 flex'>
-                  <div className='h-6 text-lg grow shrink basis-0 '>Hoy</div>
-                </div>
+              <div className='w-32 flex-col gap-1.5 flex'>
+                <label
+                  htmlFor='time'
+                  className='text-base leading-tight uppercase '>
+                  Hora
+                </label>
+                <input
+                  type='time'
+                  name='time'
+                  id='time'
+                  className={COMMON_TWSTYLES.input}
+                  placeholder='13:00'
+                />
               </div>
-              <div className='w-28 flex-col   gap-1.5 flex'>
-                <div className='text-base leading-tight uppercase '>Hora</div>
-                <div className=' pl-3.5 pr-12 py-3 bg-white rounded-lg border-2 border-base-blue1   gap-2 flex'>
-                  <div className='h-6 text-lg grow shrink basis-0 '>13:00</div>
-                </div>
-              </div>
-            </form>
+            </div>
           </div>
           {/*  */}
           <div className='flex flex-col justify-between w-96'>
@@ -42,7 +80,7 @@ export const ReservationForm = () => {
               name='search'
               id='search'
               placeholder='Ej: Cancha del Faro'
-              className='bg-white border-2 rounded-full border-base-blue1 pl-3.5 pr-12 py-3 placeholder:text-black text-lg'
+              className={COMMON_TWSTYLES.search}
             />
           </div>
           {/*  */}
@@ -51,9 +89,19 @@ export const ReservationForm = () => {
           <Button
             label='Reserva'
             style='secondary'
+            type='submit'
           />
         </div>
-      </div>
+      </form>
     </article>
+  )
+}
+
+export const PreForm = () => {
+  return (
+    <div className='flex flex-col items-center text-center'>
+      <p className='text-2xl'>¿Quieres jugar un partido de fútbol?</p>
+      <p className='text-3xl text-base-blue1 font-display'>¡Reserva tu campo hoy mismo!</p>
+    </div>
   )
 }

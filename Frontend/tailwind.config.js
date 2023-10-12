@@ -26,7 +26,6 @@ export default {
         'sh-sm': 'var(--sh-sm)',
         'sh-xl': 'var(--sh-xl)',
         'sh-xs': 'var(--sh-xs)',
-        xl: 'var(--xl)',
       },
     },
   },

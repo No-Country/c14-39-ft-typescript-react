@@ -1,4 +1,4 @@
-import { BUSINESS } from '../consts/consts'
+import { BUSINESS } from '../data/consts'
 import { SocialIcon } from '../components/SocialIcon'
 
 const Footer = () => {
