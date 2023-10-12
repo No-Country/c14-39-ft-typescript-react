@@ -9,6 +9,24 @@ POST http://localhost:3000/api/country
 Content-Type: application/json
 
 {
-  "name": "Peru",
-  "image": "imagen peru"
+  "name": "Argentina",
+  "image": "imagen Argentina"
+}
+
+### GET USER
+GET http://localhost:3000/api/users
+
+### POST USER
+POST http://localhost:3000/api/users
+Content-Type: application/json
+
+{
+  "name": "Carlos",
+  "lastname": "Ramirez",
+  "email": "K4yTq@example.com",
+  "password": "123456",
+  "city": "Lima",
+  "address": "Av. Principal",
+  "image": "imagen1",
+  "countryId": "6527fa4cf2587615874a3da4"
 }
