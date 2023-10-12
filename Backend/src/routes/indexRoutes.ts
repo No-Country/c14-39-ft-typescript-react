@@ -1,18 +1,19 @@
-import express from 'express'
-import userRouter from '../routes/userRouter'
-import countryRouter from '../routes/countryRouter'
+import express from "express";
+import userRouter from "../routes/userRouter";
+import countryRouter from "../routes/countryRouter";
 
-const app = express()
-const server = express.Router()
+const app = express();
+const server = express.Router();
 
-server.get('/', (_, res) => {
+server.get("/", (_, res) => {
   res.json({
-    message: "Hello world"
-  })
-} )
+    message: "Hello world",
+  });
+});
 
-app.use('/', server)
-app.use('/users', userRouter)
-app.use('/country', countryRouter)
+app.use("/", server);
 
-export default app
+app.use("/users", userRouter);
+app.use("/country", countryRouter);
+
+export default app;
