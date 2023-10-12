@@ -1,14 +1,12 @@
 import { Schema, model } from "mongoose";
 
 const typeSchema = new Schema({
-  name: { type: String, required: true },
+  name: {
+    type: String,
+    required: true,
+    enum: ["User", "Admin", "Owner"],
+  },
   description: { type: String, required: true },
-  users: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: "User",
-    }
-  ],
 });
 
 typeSchema.set("toJSON", {
@@ -21,4 +19,4 @@ typeSchema.set("toJSON", {
 
 const Type = model("Type", typeSchema);
 
-export default Type
+export default Type;
