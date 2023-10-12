@@ -1,6 +1,9 @@
 ### GET USER
 GET http://localhost:3000/api/users
 
+### GET DOC
+GET http://localhost:3000/api-docs
+
 ### GET COUNTRY
 GET http://localhost:3000/api/country
 
@@ -8,25 +11,85 @@ GET http://localhost:3000/api/country
 POST http://localhost:3000/api/country
 Content-Type: application/json
 
+// NO SE VA A CREAR, DIRECTO DE API.
+// PARA PRUEBA:
 {
-  "name": "Argentina",
-  "image": "imagen Argentina"
+  "name": "Colombia",
+  "image": "imagen Colombia"
 }
 
-### GET USER
+### GET TYPE
+GET http://localhost:3000/api/types
+
+### POST TYPE
+POST http://localhost:3000/api/types
+Content-Type: application/json
+
+# {
+#   "name": "Admin",
+#   "description": "Administrador del sistema"
+# }
+
+# {
+#   "name": "User",
+#   "description": "Usuario que solicita una cancha"
+# }
+
+{
+  "name": "Owner",
+  "description": "Propietario de la cancha"
+}
+
+### GET USERS
 GET http://localhost:3000/api/users
+
+### GET USER BY ID
+GET http://localhost:3000/api/users/6528298a9d37623e9305edd8
 
 ### POST USER
 POST http://localhost:3000/api/users
 Content-Type: application/json
 
 {
-  "name": "Carlos",
-  "lastname": "Ramirez",
-  "email": "K4yTq@example.com",
-  "password": "123456",
-  "city": "Lima",
+  "name": "Otro nombre",
+  "lastname": "Otro apellido",
+  "email": "sdfasdfsadf@example.com",
+  "password": "111111",
+  "city": "Buenos Aires",
   "address": "Av. Principal",
-  "image": "imagen1",
-  "countryId": "6527fa4cf2587615874a3da4"
+  "image": "imagen2",
+  "countryId": "65281e37b364c6c550d6647b",
+  "typeId": "65281f769d9d184d7a3a891b"
 }
+
+### DELETE USER BY ID
+DELETE  http://localhost:3000/api/users/652823bf61985ae2f3e0fb8d
+
+### UPDATE USER
+PUT http://localhost:3000/api/users
+Content-Type: application/json
+
+{
+  "name": "Eduardo",
+  "email": "mmmmm@example.com",
+  "userId": "6528298a9d37623e9305edd8"
+}
+
+### LOGIN USER
+POST http://localhost:3000/api/login
+Content-Type: application/json
+
+# {
+#   "email": "mmmmm@example.com",
+#   "password": "111111"
+# }
+
+{
+  "email": "mmmmm@example.com",
+  "password": "otracontraseña"
+}
+
+# {
+#   "email": "otrocorreo@example.com",
+#   "password": "otracontraseña"
+# }
