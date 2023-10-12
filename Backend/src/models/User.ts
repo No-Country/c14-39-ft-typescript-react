@@ -8,14 +8,14 @@ const userSchema = new Schema({
   city: { type: String, required: true },
   address: { type: String, required: true },
   image: { type: String, required: true },
-  country: {
+  country_id: {
     type: Schema.Types.ObjectId,
     ref: "Country",
   },
-  type: {
+  type_id: {
     type: Schema.Types.ObjectId,
-    ref: "Type"
-  }
+    ref: "Type",
+  },
 });
 
 userSchema.set("toJSON", {
@@ -29,4 +29,4 @@ userSchema.set("toJSON", {
 
 const User = model("User", userSchema);
 
-export default User
+export default User;

@@ -53,13 +53,13 @@ Content-Type: application/json
 {
   "name": "Otro nombre",
   "lastname": "Otro apellido",
-  "email": "sdfasdfsadf@example.com",
+  "email": "sdfasdfsadfd@example.com",
   "password": "111111",
   "city": "Buenos Aires",
   "address": "Av. Principal",
   "image": "imagen2",
-  "countryId": "65281e37b364c6c550d6647b",
-  "typeId": "65281f769d9d184d7a3a891b"
+  "country_id": "65281e37b364c6c550d6647b",
+  "type_id": "65281f769d9d184d7a3a891b"
 }
 
 ### DELETE USER BY ID
