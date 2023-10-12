@@ -1,0 +1,14 @@
+### GET USER
+GET http://localhost:3000/api/users
+
+### GET COUNTRY
+GET http://localhost:3000/api/country
+
+### POST COUNTRY
+POST http://localhost:3000/api/country
+Content-Type: application/json
+
+{
+  "name": "Peru",
+  "image": "imagen peru"
+}

@@ -1,17 +1,32 @@
 import mongoose from "mongoose";
+import * as dotenv from 'dotenv'
+import { Express } from 'express'
+dotenv.config()
 
-const connectionString = "mongodb+srv://luisguzman:emulnor1865@atlascluster.uumd5o7.mongodb.net/nocountry?retryWrites=true&w=majority"
+const { DB_USER, DB_PASSWORD } = process.env
 
-mongoose
-  .connect(connectionString)
-  .then(() => {
-    console.log("conectado a la base de datos");
-  })
-  .catch((err) => {
-    console.log(err);
+const connectionString = `mongodb+srv://${DB_USER}:${DB_PASSWORD}@atlascluster.uumd5o7.mongodb.net/nocountry?retryWrites=true&w=majority`
+
+const PORT: string | number = process.env.PORT ?? 3000
+
+export const initServer = (app: Express) => {
+  mongoose
+    .connect(connectionString)
+    .then(() => {
+      app.listen(PORT, () => {
+        console.log(
+          `El servidor está corriendo en el puerto => localhost:${PORT}`
+        );
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      process.exit(1)
+    });
+
+  process.on("uncaughtException", (error) => {
+    console.log(error);
+    mongoose.disconnect();
   });
 
-process.on("uncaughtException", (error) => {
-  console.log(error);
-  mongoose.disconnect();
-});
+}

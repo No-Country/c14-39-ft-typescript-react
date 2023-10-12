@@ -14,11 +14,8 @@ const typeSchema = new Schema({
 typeSchema.set("toJSON", {
   transform: (document: any, returnedObject: any) => {
     returnedObject.id = returnedObject._id;
-
-    const { _id, __v, ...restOfReturnedObject } = returnedObject
-    restOfReturnedObject.id = _id
-
-    returnedObject = restOfReturnedObject
+    delete returnedObject._id;
+    delete returnedObject.__v;
   },
 });
 

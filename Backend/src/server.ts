@@ -1,12 +1,20 @@
-import express from 'express'
-import '../src/db'
+// Tipado para express
+import express,{Express} from 'express'
+import {initServer} from './db'
 
-const app = express()
+// Rutas principal
+import indexRoutes from '../src/routes/indexRoutes'
+
+// dependencias node
+const app: Express = express()
+import cors from 'cors'
+
 
 app.use(express.json())
+app.use(cors())
 
-app.get('/', (_req, res) => {
-  res.send('Hello world')
-})
+initServer(app);
+
+app.use('/api', indexRoutes)
 
 export default app
