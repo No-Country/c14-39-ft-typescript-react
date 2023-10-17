@@ -31,8 +31,10 @@ userRouter
         schema: UserSchemaValidator,
       });
 
-      if (!isValid) {
-        const errorString = errors?.map((error) => error.message).join(",");
+      if (!isValid || errors) {
+        const errorString: string | any = errors
+          ?.map((error) => error.message)
+          .join(" , ");
         throw new Error(errorString);
       }
 
