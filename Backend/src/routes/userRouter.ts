@@ -5,7 +5,7 @@ import {
   getUserById,
   getUsers,
   modifyUserById,
-} from "../controllers/users";
+} from "../controllers/usersControllers";
 import { UserSchemaValidator, validateSchema } from "../models/schemas";
 import { HttpCodes } from "../utils/HTTPCodes.util";
 
@@ -31,8 +31,8 @@ userRouter
         schema: UserSchemaValidator,
       });
 
-      if (!isValid) {
-        const errorString = errors?.map((error) => error.message).join(",");
+      if (!isValid || errors) {
+        const errorString = errors?.map((error: any) => error.message).join(",");
         throw new Error(errorString);
       }
 
