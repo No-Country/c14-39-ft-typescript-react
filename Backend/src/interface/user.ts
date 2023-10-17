@@ -5,7 +5,7 @@ export interface UserData {
   password: string;
   city: string;
   address: string;
-  image: string;
+  image?: string;
   country_id: string;
   type_id: string;
 }

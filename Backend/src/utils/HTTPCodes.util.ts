@@ -1,4 +1,4 @@
-export class HttpCodes {
+export  class HttpCodes {
   static readonly CODE_SUCCESS = 200;
   static readonly CODE_SUCCESS_CREATED = 201;
   static readonly CODE_BAD_REQUEST = 400;
