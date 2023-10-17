@@ -1,4 +1,4 @@
-// validation user schema width zod
+// validation user schema with zod
 import { z, ZodError } from "zod";
 
 // user schema validate
@@ -58,6 +58,17 @@ export const UserSchemaValidator = z.object({
     required_error: "El tipo de usuario es requerido",
   }),
 });
+
+// user update schema validate
+export const UserUpdateSchema = UserSchemaValidator
+  .partial()
+  .merge(z.object({
+    userId: z.string({
+      invalid_type_error: "El id debe ser un string",
+      required_error: "El id es requerido",
+    })
+  }));
+
 
 // country schema validate
 export const CountrySchemaValidator = z.object({

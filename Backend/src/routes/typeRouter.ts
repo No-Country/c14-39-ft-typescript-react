@@ -1,5 +1,6 @@
 import express from 'express'
-import Type from '../models/Type'
+import { Type } from '../models'
+import { HttpCodes, validateType } from '../utils'
 
 const TypeRouter = express.Router()
 
@@ -7,24 +8,32 @@ TypeRouter.route('/').
   get(async (_, res) => {
     try {
       const types = await Type.find().select('-users')
-      res.status(201).json({ types })
+      return res.status(HttpCodes.CODE_SUCCESS).json({ types })
     } catch (error) {
-      throw error
+      return res.status(HttpCodes.CODE_NOT_FOUND).json({
+        message: `${error}`,
+      })
     }
   })
   .post(async (req, res) => {
     try {
-      const { name, description } = req.body
+      const body = req.body
+
+      // validate types
+
+      const { data } = validateType(body)
+
       const newType = new Type({
-        name,
-        description
+        ...data
       })
 
       await newType.save()
 
-      res.status(201).json({ type: newType, message: "Type created" })
-    } catch (error: any) {
-      res.status(400).json({ error: error.message })
+      return res.status(HttpCodes.CODE_SUCCESS_CREATED).json({ type: newType, message: "Type created" })
+    } catch (error) {
+      return res.status(HttpCodes.CODE_BAD_REQUEST).json({
+        message: `${error}`,
+      })
     }
   })
 

@@ -1,6 +1,3 @@
-### GET USER
-GET http://localhost:3000/api/users
-
 ### GET DOC
 GET http://localhost:3000/api-docs
 
@@ -44,35 +41,34 @@ Content-Type: application/json
 GET http://localhost:3000/api/users
 
 ### GET USER BY ID
-GET http://localhost:3000/api/users/6528298a9d37623e9305edd8
+GET http://localhost:3000/api/users/65284aa094bf62b7a1ff788b
 
 ### POST USER
 POST http://localhost:3000/api/users
 Content-Type: application/json
 
 {
-  "name": "Otro nombre",
-  "lastname": "Otro apellido",
-  "email": "sdfasdfsadfd@example.com",
+  "name": "Otro usuario 10",
+  "lastname": "Otro apellido 10",
+  "email": "correo10@example.com",
   "password": "111111",
   "city": "Buenos Aires",
   "address": "Av. Principal",
   "image": "imagen2",
-  "country_id": "65281e37b364c6c550d6647b",
-  "type_id": "65281f769d9d184d7a3a891b"
+  "country_id": "65281e37b364c6c550d6647b"
 }
 
 ### DELETE USER BY ID
-DELETE  http://localhost:3000/api/users/652823bf61985ae2f3e0fb8d
+DELETE  http://localhost:3000/api/users/652ec81ea8b47f2baa08b2
 
 ### UPDATE USER
 PUT http://localhost:3000/api/users
 Content-Type: application/json
 
 {
-  "name": "Eduardo",
-  "email": "mmmmm@example.com",
-  "userId": "6528298a9d37623e9305edd8"
+  "name": "Otro nombre 9",
+  "email": "otrocorreo9@example.com",
+  "userId": "652ec81ea8b47f2baa0862b2"
 }
 
 ### LOGIN USER

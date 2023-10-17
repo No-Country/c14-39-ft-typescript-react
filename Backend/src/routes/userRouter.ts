@@ -6,8 +6,7 @@ import {
   getUsers,
   modifyUserById,
 } from "../controllers/usersControllers";
-import { UserSchemaValidator, validateSchema } from "../models/schemas";
-import { HttpCodes } from "../utils/HTTPCodes.util";
+import { HttpCodes, validateUser, validateUserUpdate } from '../utils'
 
 const userRouter = express.Router();
 
@@ -16,28 +15,21 @@ userRouter
   .get(async (_, res) => {
     try {
       const users = await getUsers();
-      res.status(200).json({ users });
+      res.status(HttpCodes.CODE_SUCCESS).json({ users });
     } catch (error) {
-      throw error;
+      return res.status(HttpCodes.CODE_NOT_FOUND).json({
+        message: `${error}`,
+      })
     }
   })
   .post(async (req, res) => {
     try {
       const body = req.body;
 
-      // validate
-      const { isValid, data, errors } = validateSchema({
-        data: body,
-        schema: UserSchemaValidator,
-      });
+      // validate se coloco en utils refactorizado
+      const { data } = validateUser(body)
 
-      if (!isValid || errors) {
-        const errorString: string | any = errors
-          ?.map((error) => error.message)
-          .join(" , ");
-        throw new Error(errorString);
-      }
-
+      // create user
       const newUser = await createUser({
         ...data,
       });
@@ -55,11 +47,21 @@ userRouter
   })
   .put(async (req, res) => {
     try {
-      // faltaria validation del req.body
-      const user = await modifyUserById(req.body);
-      res.status(200).json(user);
+      // validate
+      const body = req.body
+
+      // validate
+      const { data } = validateUserUpdate(body)
+
+      // update user
+      const user = await modifyUserById({
+        ...data
+      });
+      res.status(HttpCodes.CODE_SUCCESS).json(user);
     } catch (error) {
-      throw error;
+      return res.status(HttpCodes.CODE_BAD_REQUEST).json({
+        message: `${error}`,
+      })
     }
   });
 
@@ -69,9 +71,11 @@ userRouter
     try {
       const { userId } = req.params;
       const user = await getUserById(userId);
-      res.status(200).json(user);
+      res.status(HttpCodes.CODE_SUCCESS).json(user);
     } catch (error) {
-      throw error;
+      return res.status(HttpCodes.CODE_NOT_FOUND).json({
+        message: `${error}`,
+      })
     }
   })
   .delete(async (req, res) => {
@@ -80,7 +84,9 @@ userRouter
       const user = await deleteUser(userId);
       res.status(200).json(user);
     } catch (error) {
-      throw error;
+      return res.status(HttpCodes.CODE_BAD_REQUEST).json({
+        message: `${error}`,
+      })
     }
   });
 

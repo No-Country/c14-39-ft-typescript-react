@@ -1,6 +1,6 @@
-import User from '../models/User'
+import { User } from '../models'
+import { UserLoginData } from '../interface'
 import bcrypt from 'bcrypt'
-import { UserLoginData } from '../interface/user'
 
 export const loginUser = async ({ email, password }: UserLoginData) => {
   try {

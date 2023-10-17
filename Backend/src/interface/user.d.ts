@@ -10,8 +10,8 @@ export interface UserData {
   type_id: string;
 }
 
-export interface UserDataWithId extends UserData {
+export interface UserUdpateId extends UserData {
   userId: string;
 }
 
-export interface UserLoginData extends Pick<UserData, "email" | "password"> {}
+export interface UserLoginData extends Pick<UserData, "email" | "password"> { }

@@ -1,0 +1,44 @@
+### GET DOC
+GET http://localhost:3000/api-docs
+
+### GET SPORTCENTER
+GET http://localhost:3000/api/sportCenter
+
+### GET SPORTCENTER BY ID
+GET http://localhost:3000/api/sportCenter/65284aa094bf62b7a1ff788b
+
+### POST SPORTCENTER
+POST http://localhost:3000/api/sportCenter
+Content-Type: application/json
+
+{
+  "name": "sportcenter 1",
+  "description": "Description 1",
+  "phone": 123456789,
+  "email": "email1@example.com",
+  "address": "address1",
+  "lat": 1,
+  "alt": 1,
+  "open": true,
+  "close": true,
+  "active": true,
+  "imgs": [
+    "imagen1",
+    "imagen2"
+  ],
+  "country_id": "65281e37b364c6c550d6647b",
+  "user_id": "652ec81ea8b47f2baa0862b2"
+}
+
+### DELETE SPORTCENTER BY ID
+DELETE  http://localhost:3000/api/sportCenter/652ec81ea8b47f2baa08b2
+
+### UPDATE SPORTCENTER
+PUT http://localhost:3000/api/sportCenter
+Content-Type: application/json
+
+{
+  "name": "Otro nombre 9",
+  "email": "otrocorreo9@example.com",
+  "userId": "652ec81ea8b47f2baa0862b2"
+}

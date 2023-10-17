@@ -1,5 +1,6 @@
 import express from 'express'
 import { loginUser } from '../controllers/loginControllers'
+import { HttpCodes } from '../utils'
 
 const LoginRouter = express.Router()
 
@@ -14,9 +15,11 @@ LoginRouter.route('/')
 
       const user = await loginUser({ email, password })
 
-      res.status(201).json({ user, message: "User Authenticated" })
-    } catch (error: any) {
-      res.status(400).json({ error: error.message })
+      return res.status(HttpCodes.CODE_SUCCESS).json({ user, message: "User Authenticated" })
+    } catch (error) {
+      return res.status(HttpCodes.CODE_UNAUTHORIZED).json({
+        message: `${error}`
+      })
     }
   })
 

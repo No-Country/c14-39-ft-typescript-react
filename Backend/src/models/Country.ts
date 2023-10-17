@@ -3,12 +3,6 @@ import { Schema, model } from "mongoose";
 const countrySchema = new Schema({
   name: { type: String, required: true },
   image: { type: String, required: true },
-  users: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: "User",
-    }
-  ],
 });
 
 countrySchema.set("toJSON", {
@@ -19,6 +13,4 @@ countrySchema.set("toJSON", {
   },
 });
 
-const Country = model("Country", countrySchema);
-
-export default Country
+export const Country = model("Country", countrySchema);

@@ -3,7 +3,8 @@ import { Schema, model } from "mongoose";
 const userSchema = new Schema({
   name: { type: String, required: true },
   lastname: { type: String, required: true },
-  email: { type: String, required: true },
+  // falta añadir validacion email unique true con mongoose-unique-validator o Unique Indexes de mongodb u otro
+  email: { type: String, required: true, unique: true },
   passwordHash: { type: String, required: true },
   city: { type: String, required: true },
   address: { type: String, required: true },
@@ -11,11 +12,17 @@ const userSchema = new Schema({
   country_id: {
     type: Schema.Types.ObjectId,
     ref: "Country",
+    required: true,
   },
   type_id: {
     type: Schema.Types.ObjectId,
     ref: "Type",
+    required: true,
   },
+  sportCenter_id: {
+    type: Schema.Types.ObjectId,
+    ref: "SportCenter",
+  }
 });
 
 userSchema.set("toJSON", {
@@ -27,6 +34,4 @@ userSchema.set("toJSON", {
   },
 });
 
-const User = model("User", userSchema);
-
-export default User;
+export const User = model("User", userSchema);

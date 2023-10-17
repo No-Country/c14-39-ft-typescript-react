@@ -1,7 +1,5 @@
-import { UserData, UserDataWithId } from "../interface/user";
-import User from "../models/User";
-import Country from "../models/Country";
-import Type from "../models/Type";
+import { UserData, UserUdpateId } from "../interface";
+import { User, Country, Type } from "../models";
 import bcrypt from "bcrypt";
 
 export const getUsers = async () => {
@@ -16,10 +14,10 @@ export const getUsers = async () => {
 export const getUserById = async (userId: string) => {
   try {
     const user = await User.findById(userId)
-      .populate("country", {
+      .populate("country_id", {
         name: 1,
       })
-      .populate("type", {
+      .populate("type_id", {
         name: 1,
       });
     return user;
@@ -63,9 +61,9 @@ export const deleteUser = async (userId: string) => {
   }
 };
 
-export const modifyUserById = async (result: Partial<UserDataWithId>) => {
+export const modifyUserById = async (data: Partial<UserUdpateId>) => {
   try {
-    const { userId, ...restOfResult } = result;
+    const { userId, ...restOfResult } = data;
     const user = await User.findByIdAndUpdate(
       userId,
       { $set: restOfResult },
