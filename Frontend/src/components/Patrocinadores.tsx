@@ -1,26 +1,26 @@
 const Patrocinadores = () => {
   return (
-    <section className='w-full px-36 py-12 bg-black'>
-      <h2 className='w-full max-w-6xl my-0 mx-auto text-base-blue2 text-4xl font-display mb-8'>Patrocinadores</h2>
-      <div className='w-full max-w-6xl my-0 mx-auto justify-between items-center inline-flex'>
+    <section className='w-full py-12 bg-black'>
+      <h2 className='pb-8 text-4xl wrapper text-base-blue2 font-display'>Patrocinadores</h2>
+      <div className='flex items-center justify-center gap-3 wrapper'>
         <img
-          className='w-40 h-40'
+          className='w-full max-w-[140px]'
           src='https://via.placeholder.com/160x160'
         />
         <img
-          className='w-40 h-40'
+          className='w-full max-w-[140px]'
           src='https://via.placeholder.com/160x160'
         />
         <img
-          className='w-40 h-40'
+          className='w-full max-w-[140px]'
           src='https://via.placeholder.com/160x160'
         />
         <img
-          className='w-40 h-40'
+          className='w-full max-w-[140px]'
           src='https://via.placeholder.com/160x160'
         />
         <img
-          className='w-40 h-40'
+          className='w-full max-w-[140px]'
           src='https://via.placeholder.com/160x160'
         />
       </div>

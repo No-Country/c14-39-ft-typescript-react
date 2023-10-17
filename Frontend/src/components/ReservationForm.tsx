@@ -2,19 +2,10 @@ import { useState } from 'react'
 import { Button } from './Button'
 import { MySelect } from './MySelect'
 import { COMMON_TWSTYLES } from '../data/consts'
-
-import mockData from '../data/mockdata.json'
+import { options } from '../services/manageData'
 
 export const ReservationForm = () => {
   const [selectedOption, setSelectedOption] = useState<Option | null>(null)
-
-  const options = mockData.map(cancha => {
-    const mappedOption: Option = {
-      title: cancha?.nombre,
-      id: Number(cancha?.id),
-    }
-    return mappedOption
-  })
 
   const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const selectedId = parseInt(event.target.value)
@@ -24,7 +15,7 @@ export const ReservationForm = () => {
   }
 
   return (
-    <article className='w-full max-w-6xl mx-auto my-0 px-7 font-body'>
+    <article className='wrapper font-body'>
       <form className='flex flex-col items-center gap-4 p-8 bg-white/60 rounded-3xl backdrop-blur-2xl'>
         {/*  */}
         <PreForm />
