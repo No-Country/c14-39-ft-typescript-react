@@ -1,20 +1,14 @@
 import { useState } from 'react'
 import { Button } from './Button'
 import { MySelect } from './MySelect'
-import { COMMON_TWSTYLES } from '../data/consts'
-
-import mockData from '../data/mockdata.json'
+import { COMMON_TWSTYLES, ROUTES } from '../data/consts'
+import { options } from '../services/manageData'
+import { useNavigate } from 'react-router-dom'
 
 export const ReservationForm = () => {
   const [selectedOption, setSelectedOption] = useState<Option | null>(null)
 
-  const options = mockData.map(cancha => {
-    const mappedOption: Option = {
-      title: cancha?.nombre,
-      id: Number(cancha?.id),
-    }
-    return mappedOption
-  })
+  const navigate = useNavigate()
 
   const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const selectedId = parseInt(event.target.value)
@@ -24,8 +18,10 @@ export const ReservationForm = () => {
   }
 
   return (
-    <article className='w-full max-w-6xl mx-auto my-0 px-7 font-body'>
-      <form className='flex flex-col items-center gap-4 p-8 bg-white/60 rounded-3xl backdrop-blur-2xl'>
+    <article className='wrapper font-body'>
+      <form
+        className='flex flex-col items-center gap-4 p-8 bg-white/60 rounded-3xl backdrop-blur-2xl'
+        onSubmit={() => navigate(ROUTES.FIELDS)}>
         {/*  */}
         <PreForm />
         {/*  */}

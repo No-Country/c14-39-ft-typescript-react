@@ -6,6 +6,7 @@ export default {
     extend: {
       fontFamily: {
         display: ['"Dela Gothic One", sans-serif'],
+        sans: ['Space Grotesk Variable, sans-serif'],
         body: ['Space Grotesk Variable, sans-serif'],
       },
       colors: {
@@ -26,6 +27,15 @@ export default {
         'sh-sm': 'var(--sh-sm)',
         'sh-xl': 'var(--sh-xl)',
         'sh-xs': 'var(--sh-xs)',
+      },
+      keyframes: {
+        'fade-in': {
+          '0%': { opacity: 0 },
+          '100%': { opacity: 1 },
+        },
+      },
+      animation: {
+        'fade-in': 'fade-in 0.3s ease-in-out',
       },
     },
   },

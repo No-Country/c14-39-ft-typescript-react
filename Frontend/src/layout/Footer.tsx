@@ -4,7 +4,7 @@ import { SocialIcon } from '../components/SocialIcon'
 const Footer = () => {
   return (
     <footer className='w-full text-sm bg-base-blue1 text-white/60 font-body'>
-      <section className='flex items-stretch justify-between w-full max-w-6xl gap-4 py-16 mx-auto my-0 px-7'>
+      <section className='flex items-stretch justify-between gap-4 py-16 wrapper'>
         <article className='flex flex-col justify-between w-1/5'>
           <h2 className='text-2xl leading-none text-base-green2 font-display'>{BUSINESS.name}</h2>
           <p>Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sintelit officia consequat</p>
