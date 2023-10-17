@@ -1,11 +1,14 @@
 import { useState } from 'react'
 import { Button } from './Button'
 import { MySelect } from './MySelect'
-import { COMMON_TWSTYLES } from '../data/consts'
+import { COMMON_TWSTYLES, ROUTES } from '../data/consts'
 import { options } from '../services/manageData'
+import { useNavigate } from 'react-router-dom'
 
 export const ReservationForm = () => {
   const [selectedOption, setSelectedOption] = useState<Option | null>(null)
+
+  const navigate = useNavigate()
 
   const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const selectedId = parseInt(event.target.value)
@@ -16,7 +19,9 @@ export const ReservationForm = () => {
 
   return (
     <article className='wrapper font-body'>
-      <form className='flex flex-col items-center gap-4 p-8 bg-white/60 rounded-3xl backdrop-blur-2xl'>
+      <form
+        className='flex flex-col items-center gap-4 p-8 bg-white/60 rounded-3xl backdrop-blur-2xl'
+        onSubmit={() => navigate(ROUTES.FIELDS)}>
         {/*  */}
         <PreForm />
         {/*  */}
