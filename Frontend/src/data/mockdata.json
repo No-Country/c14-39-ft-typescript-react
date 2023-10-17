@@ -1,7 +1,7 @@
 [
   {
     "id": 1,
-    "nombre": "Cancha 1",
+    "nombre": "El Parque de la Fútbol",
     "ubicacion": "Carrera 7 #10-20, Bogotá, Colombia",
     "tamano": 100,
     "superficie": "césped natural",
@@ -10,13 +10,37 @@
       "duchas",
       "baños"
     ],
-    "precio": 100000
+    "precio": 100000,
+    "anchor": [
+      4.660684,
+      -74.082878
+    ],
+    "canchas": [
+      {
+        "nombre": "La Verde",
+        "tamano": 100,
+        "superficie": "césped natural",
+        "anchor": null
+      },
+      {
+        "nombre": "La Sintética",
+        "tamano": 120,
+        "superficie": "césped sintético",
+        "anchor": null
+      },
+      {
+        "nombre": "La Tierra",
+        "tamano": 80,
+        "superficie": "tierra",
+        "anchor": null
+      }
+    ]
   },
   {
     "id": 2,
-    "nombre": "Cancha 2",
+    "nombre": "La Liga del Fútbol",
     "ubicacion": "Calle 10 #20-10, Bogotá, Colombia",
-    "tamano": 120,
+    "tamano": 100,
     "superficie": "césped sintético",
     "instalaciones": [
       "vestuarios",
@@ -24,11 +48,29 @@
       "baños",
       "cafeteria"
     ],
-    "precio": 150000
+    "precio": 150000,
+    "anchor": [
+      4.628684,
+      -74.089735
+    ],
+    "canchas": [
+      {
+        "nombre": "La Cancha Oficial",
+        "tamano": 120,
+        "superficie": "césped sintético",
+        "anchor": null
+      },
+      {
+        "nombre": "La Cancha Secundaria",
+        "tamano": 100,
+        "superficie": "césped sintético",
+        "anchor": null
+      }
+    ]
   },
   {
     "id": 3,
-    "nombre": "Cancha 3",
+    "nombre": "El Campamento del Fútbol",
     "ubicacion": "Avenida 100 #20-100, Bogotá, Colombia",
     "tamano": 80,
     "superficie": "tierra",
@@ -38,6 +80,24 @@
       "baños",
       "cancha de minifutbol"
     ],
-    "precio": 50000
+    "precio": 50000,
+    "anchor": [
+      4.575297,
+      -74.092592
+    ],
+    "canchas": [
+      {
+        "nombre": "La Cancha de la Comunidad",
+        "tamano": 80,
+        "superficie": "tierra",
+        "anchor": null
+      },
+      {
+        "nombre": "La Cancha de los Niños",
+        "tamano": 60,
+        "superficie": "tierra",
+        "anchor": null
+      }
+    ]
   }
 ]
