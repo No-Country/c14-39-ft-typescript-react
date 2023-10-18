@@ -1,5 +1,5 @@
-import { SportCenterData, SportCenterUpdateId } from "../interface";
-import { User, SportCenter, Country, Type } from '../models'
+import { SportCenterData, SportCenterUpdateId } from "../interface/sportCenter";
+import { User, SportCenter, Country } from '../models'
 
 export const getSportCenters = async () => {
   try {

@@ -1,5 +1,5 @@
 // validation sportCenter schema with zod
-import { z, ZodError } from "zod";
+import { z } from "zod";
 
 export const SportCenterSchemaValidator = z.object({
   name: z

@@ -5,12 +5,12 @@ export interface UserData {
   password: string;
   city: string;
   address: string;
-  image: string;
+  image?: string;
   country_id: string;
   type_id: string;
 }
 
-export interface UserUdpateId extends UserData {
+export interface UserDataWithId extends UserData {
   userId: string;
 }
 

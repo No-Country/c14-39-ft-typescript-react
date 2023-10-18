@@ -8,7 +8,7 @@ const userSchema = new Schema({
   passwordHash: { type: String, required: true },
   city: { type: String, required: true },
   address: { type: String, required: true },
-  image: { type: String, required: true },
+  image: { type: String, required: false },
   country_id: {
     type: Schema.Types.ObjectId,
     ref: "Country",

@@ -1,6 +1,7 @@
 import express from 'express'
 import { Country } from '../models'
-import { HttpCodes, validateCountry } from '../utils'
+import { HttpCodes } from '../utils/HTTPCodes.util'
+import { validateCountry } from '../utils/validateReq.util'
 
 const countryRouter = express.Router()
 

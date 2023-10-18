@@ -6,11 +6,8 @@ import {
   modifySportCenterById,
   deleteSportCenter,
 } from "../controllers/sportCenterControllers";
-import {
-  HttpCodes,
-  validateSportCenter,
-  validateUpdateSport
-} from '../utils'
+import { HttpCodes } from '../utils/HTTPCodes.util'
+import { validateSportCenter, validateUpdateSport } from '../utils/validateReq.util'
 
 const sportCenterRouter = express.Router();
 
@@ -31,9 +28,6 @@ sportCenterRouter
       const body = req.body;
 
       // validate se coloco en utils refactorizado
-
-      console.log(body)
-
       const { data } = validateSportCenter(body)
 
       // create user

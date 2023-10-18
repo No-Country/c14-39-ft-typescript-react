@@ -1,4 +1,4 @@
-import { UserData, UserUdpateId } from "../interface";
+import { UserData, UserDataWithId } from "../interface/user";
 import { User, Country, Type } from "../models";
 import bcrypt from "bcrypt";
 
@@ -61,7 +61,7 @@ export const deleteUser = async (userId: string) => {
   }
 };
 
-export const modifyUserById = async (data: Partial<UserUdpateId>) => {
+export const modifyUserById = async (data: Partial<UserDataWithId>) => {
   try {
     const { userId, ...restOfResult } = data;
     const user = await User.findByIdAndUpdate(

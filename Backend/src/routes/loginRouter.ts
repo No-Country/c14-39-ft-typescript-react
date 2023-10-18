@@ -1,6 +1,6 @@
 import express from 'express'
 import { loginUser } from '../controllers/loginControllers'
-import { HttpCodes } from '../utils'
+import { HttpCodes } from '../utils/HTTPCodes.util'
 
 const LoginRouter = express.Router()
 

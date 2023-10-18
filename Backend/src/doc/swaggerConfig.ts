@@ -1,8 +1,18 @@
 import swaggerJsdoc from "swagger-jsdoc";
-import { routeAPIPath, routeAPIValue } from "./api";
+import { components } from './api/schemas.doc';
+import {
+  routeAPIPath,
+  routeAPIValue,
+  routeUserAPIPath,
+  routeUserAPIValue,
+  routeUserByIdAPIPath,
+  routeUserByIdAPIValue
+} from "./api";
 
 const paths: Record<string, any> = {
   [routeAPIPath]: { ...routeAPIValue },
+  [routeUserAPIPath]: { ...routeUserAPIValue },
+  [routeUserByIdAPIPath]: { ...routeUserByIdAPIValue },
 };
 
 const options = {
@@ -21,6 +31,7 @@ const options = {
     paths: {
       ...paths,
     },
+    components,
   },
   apis: ["../src/routes/*.js"], // Ruta a tus archivos de definición de rutas
 };

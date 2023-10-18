@@ -1,6 +1,7 @@
 import express from 'express'
 import { Type } from '../models'
-import { HttpCodes, validateType } from '../utils'
+import { HttpCodes } from '../utils/HTTPCodes.util'
+import { validateType } from '../utils/validateReq.util'
 
 const TypeRouter = express.Router()
 

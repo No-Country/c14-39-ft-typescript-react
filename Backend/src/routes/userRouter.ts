@@ -6,7 +6,8 @@ import {
   getUsers,
   modifyUserById,
 } from "../controllers/usersControllers";
-import { HttpCodes, validateUser, validateUserUpdate } from '../utils'
+import { HttpCodes } from '../utils/HTTPCodes.util'
+import { validateUser, validateUserUpdate } from '../utils/validateReq.util'
 
 const userRouter = express.Router();
 

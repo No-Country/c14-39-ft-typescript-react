@@ -47,15 +47,17 @@ GET http://localhost:3000/api/users/65284aa094bf62b7a1ff788b
 POST http://localhost:3000/api/users
 Content-Type: application/json
 
+// SE PODRIA PASAR EL NOMBRE DEL COUNTRY Y EL TYPE EN VEZ DE ID
 {
-  "name": "Otro usuario 10",
+  "name": "Otro usuario 11",
   "lastname": "Otro apellido 10",
-  "email": "correo10@example.com",
+  "email": "correo11@example.com",
   "password": "111111",
   "city": "Buenos Aires",
   "address": "Av. Principal",
   "image": "imagen2",
-  "country_id": "65281e37b364c6c550d6647b"
+  "country_id": "652ff7625e95f355a0630cd9",
+  "type_id": "652ff8405e95f355a0630cdc"
 }
 
 ### DELETE USER BY ID
@@ -66,9 +68,9 @@ PUT http://localhost:3000/api/users
 Content-Type: application/json
 
 {
-  "name": "Otro nombre 9",
-  "email": "otrocorreo9@example.com",
-  "userId": "652ec81ea8b47f2baa0862b2"
+  "name": "Otro nombre 12",
+  "email": "otrocorreo12@example.com",
+  "userId": "652ff85a5e95f355a0630ce0"
 }
 
 ### LOGIN USER
