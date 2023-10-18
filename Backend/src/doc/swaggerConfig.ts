@@ -1,8 +1,10 @@
 import swaggerJsdoc from "swagger-jsdoc";
-import { routeAPIPath, routeAPIValue } from "./api";
+import { routeAPIPath, routeAPIValue, paths as authPaths } from "./api";
 
 const paths: Record<string, any> = {
   [routeAPIPath]: { ...routeAPIValue },
+  ...authPaths,
+
 };
 
 const options = {

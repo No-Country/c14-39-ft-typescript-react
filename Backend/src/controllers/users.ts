@@ -1,8 +1,6 @@
-import { UserData, UserDataWithId } from "../interface/user";
+import {  UserDataWithId } from "../interface/user";
 import User from "../models/User";
-import Country from "../models/Country";
-import Type from "../models/Type";
-import bcrypt from "bcrypt";
+
 
 export const getUsers = async () => {
   try {
@@ -28,31 +26,7 @@ export const getUserById = async (userId: string) => {
   }
 };
 
-export const createUser = async (data: UserData) => {
-  try {
-    const [country, type] = await Promise.all([
-      Country.findById(data.country_id),
-      Type.findById(data.type_id),
-    ]);
 
-    if (!country || !type) {
-      throw new Error("Country or type not found");
-    }
-
-    const saltRounds = 10;
-    const passwordHash = await bcrypt.hash(data.password, saltRounds);
-
-    const user = new User({
-      ...data,
-      passwordHash,
-    });
-
-    await user.save();
-    return user;
-  } catch (error) {
-    throw error;
-  }
-};
 
 export const deleteUser = async (userId: string) => {
   try {

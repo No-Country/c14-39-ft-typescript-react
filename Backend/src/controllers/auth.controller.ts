@@ -5,6 +5,7 @@ import { Request, Response } from "express";
 import { createToken } from "../libs/jwt";
 import {HttpCodes} from "../utils/HTTPCodes.util";
 import jwt from 'jsonwebtoken';
+import Country from "../models/Country";
 
 
 export const register = async (req: Request, res: Response) => {
@@ -17,7 +18,9 @@ export const register = async (req: Request, res: Response) => {
     if(userFound) return res.status(HttpCodes.CODE_BAD_REQUEST).json({message: "El email ya esta en uso"});
 
     //verificar la existencia del country
-    const countryFound = await User.findOne({country_id: data.country_id});
+    console.log(data.country_id)
+    const countryFound = await Country.findOne({_id: data.country_id});
+    console.log(countryFound)
     if(!countryFound) return res.status(HttpCodes.CODE_BAD_REQUEST).json({message: "Pais invalido"});
 
     //encriptar contraseña
@@ -33,18 +36,22 @@ export const register = async (req: Request, res: Response) => {
     //guardar usuario
     await newUser.save();
 
+
     //crear y guardar el token en una cookie
-    const token = await createToken(newUser._id);
+    const token = await createToken({userId: newUser._id.toString()});
 
     res.cookie("token", token);
+
 
    } catch (error: any) {
     res.status(HttpCodes.CODE_INTERNAL_SERVER_ERROR).json({message: `${error.message}`});
    }
     
 }
-export const login = async (req: Request, res: Response, {email, password}: UserLoginData) => {
+export const login = async (req: Request, res: Response) => {
     try {
+        const { email, password } = req.body as UserLoginData;
+
         const mailFound = await User.findOne({email});
 
         if(!mailFound) return res.status(HttpCodes.CODE_BAD_REQUEST).json({message: "Email incorrecto"});
@@ -55,7 +62,7 @@ export const login = async (req: Request, res: Response, {email, password}: User
 
         //crear y guardar el token en una cookie
 
-        const token = await createToken(mailFound._id);
+        const token = await createToken({userId: mailFound._id.toString()});
 
         res.cookie("token", token);
 

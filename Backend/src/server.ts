@@ -7,6 +7,7 @@ import { specs } from "./doc/swaggerConfig";
 // Rutas principal
 import indexRoutes from "../src/routes/indexRoutes";
 
+
 // dependencias node
 const app: Express = express();
 import cors from "cors";
