@@ -1,0 +1,18 @@
+[
+  {
+    "ocupado": false,
+    "hora": 10
+  },
+  {
+    "ocupado": true,
+    "hora": 11
+  },
+  {
+    "ocupado": false,
+    "hora": 12
+  },
+  {
+    "ocupado": false,
+    "hora": 13
+  }
+]
