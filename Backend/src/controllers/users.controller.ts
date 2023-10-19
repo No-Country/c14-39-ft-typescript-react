@@ -1,5 +1,6 @@
 import {  UserDataWithId } from "../interface/user";
-import User from "../models/User";
+import { User } from "../models";
+
 
 
 export const getUsers = async () => {

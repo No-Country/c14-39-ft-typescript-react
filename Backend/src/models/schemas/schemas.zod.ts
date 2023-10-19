@@ -58,17 +58,7 @@ export const UserSchemaValidator = z.object({
     invalid_type_error: "Tiene que ser un texto",
     required_error: "El tipo de usuario es requerido",
   }),
-}).refine(data => {
-  // Si el tipo es 'Owner' entonces la imagen es requerida
-  if (data.type_id === "Owner" && !data.image) {
-    return false;
-  }
-  return true;
-}, {
-  // Mensaje de error cuando la imagen es requerida y no está presente
-  message: "La imagen es requerida para el tipo de usuario Owner",
-  path: ["image"] // Este error se asocia al campo "image"
-});;
+})
 
 export const loginSchemaValidator = z.object({
   email: z
@@ -86,6 +76,16 @@ export const loginSchemaValidator = z.object({
       message: "La contraseña debe contener al menos 6 caracteres",
     }),
 });
+
+// user update schema validate
+export const UserUpdateSchema = UserSchemaValidator
+.partial()
+  .merge(z.object({
+    userId: z.string({
+      invalid_type_error: "El id debe ser un string",
+      required_error: "El id es requerido",
+    })
+  }));
 
 
 // country schema validate

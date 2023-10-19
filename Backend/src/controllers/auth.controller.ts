@@ -1,12 +1,10 @@
-import { Country, User } from "../models";
+import { User, Country } from "../models";
 import bcrypt from "bcrypt";
 import { UserData, UserLoginData } from "../interface/user";
 import { Request, Response } from "express";
 import { createToken } from "../libs/jwt";
 import { HttpCodes } from "../utils/HTTPCodes.util";
 import jwt from 'jsonwebtoken';
-
-
 
 export const register = async (req: Request, res: Response) => {
   const data: UserData = req.body;

@@ -1,6 +1,7 @@
 import {
   validateSchema,
   UserSchemaValidator,
+  UserUpdateSchema,
   CountrySchemaValidator,
   TypeUserSchemaValidator,
   SportCenterSchemaValidator,

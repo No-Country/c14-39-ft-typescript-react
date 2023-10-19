@@ -1,17 +1,3 @@
-
-export const routeAPIPath = "/api";
-export const routeAPIValue = {
-  get: {
-    summary: "Obtener datos",
-    description: "Obtener datos de la API",
-    responses: {
-      "200": {
-        description: "Respuesta exitosa",
-      },
-    },
-  },
-};
-
 export const routesAuthControllerAPIValue ={
   '/api/register': {
     post: {
@@ -200,41 +186,42 @@ export const routesAuthControllerAPIValue ={
   }
 };
 
-export const routeUserAPIPath = "/api/users";
 export const routeUserAPIValue = {
-  get: {
-    summary: "Obtener datos de los usuarios",
-    description: "Obtener datos de la API",
-    tags: ["User"],
-    responses: {
-      "200": {
-        description: "Respuesta exitosa",
-        content: {
-          "application/json": {
-            schema: {
-              type: "object",
-              properties: {
-                users: {
-                  type: "array",
-                  items: {
-                    $ref: "#/components/schemas/User",
-                  }
+  "/api/users": {
+    get: {
+      summary: "Obtener datos de los usuarios",
+      description: "Obtener datos de la API",
+      tags: ["User"],
+      responses: {
+        "200": {
+          description: "Respuesta exitosa",
+          content: {
+            "application/json": {
+              schema: {
+                type: "object",
+                properties: {
+                  users: {
+                    type: "array",
+                    items: {
+                      $ref: "#/components/schemas/User",
+                    }
+                  },
                 },
               },
             },
           },
         },
-      },
-      "404": {
-        description: "Error en la solicitud. No encontrado",
-        content: {
-          "application/json": {
-            schema: {
-              type: "object",
-              properties: {
-                message: {
-                  type: "string",
-                  example: "Not found",
+        "404": {
+          description: "Error en la solicitud. No encontrado",
+          content: {
+            "application/json": {
+              schema: {
+                type: "object",
+                properties: {
+                  message: {
+                    type: "string",
+                    example: "Not found",
+                  },
                 },
               },
             },
@@ -242,44 +229,48 @@ export const routeUserAPIValue = {
         },
       },
     },
-  },
-  put: {
-    summary: "Actualizar un usuario",
-    description: "Actualizar un usuario",
-    tags: ["User"],
-    requestBody: {
-      required: true,
-      content: {
-        "application/json": {
+    delete: {
+      summary: "Eliminar un usuario",
+      description: "Eliminar un usuario",
+      tags: ["User"],
+      parameters: [
+        {
+          name: "id",
+          in: "path",
           schema: {
-            $ref: "#/components/schemas/UserUpdate",
+            type: "string",
+          },
+          required: true,
+        }
+      ],
+      responses: {
+        "200": {
+          description: "Respuesta exitosa",
+          content: {
+            "application/json": {
+              schema: {
+                type: "object",
+                properties: {
+                  user: {
+                    type: "object",
+                    $ref: "#/components/schemas/User",
+                  },
+                },
+              },
+            },
           },
         },
-      }
-    },
-    responses: {
-      "200": {
-        description: "Respuesta exitosa",
-        content: {
-          "application/json": {
-            schema: {
-              type: "object",
-              $ref: "#/components/schemas/User",
-            }
-          }
-        }
-      },
-      "400": {
-        description: "Error en la solicitud. No encontrado",
-        content: {
-          "application/json": {
-            schema: {
-              type: "object",
-              properties: {
-                message: {
-                  type: "string",
-                  example:
-                    "Error en la solicitud",
+        "404": {
+          description: "Error en la solicitud. No encontrado",
+          content: {
+            "application/json": {
+              schema: {
+                type: "object",
+                properties: {
+                  message: {
+                    type: "string",
+                    example: "Not found",
+                  },
                 },
               },
             },
@@ -287,47 +278,44 @@ export const routeUserAPIValue = {
         },
       },
     },
-  },
-};
-
-export const routeUserByIdAPIPath = "/api/users/{id}";
-export const routeUserByIdAPIValue = {
-  get: {
-    summary: "Obtener datos de un usuario",
-    description: "Obtener datos de un usuario",
-    tags: ["User"],
-    parameters: [
-      {
-        name: "id",
-        in: "path",
-        schema: {
-          type: "string",
-        },
+    put: {
+      summary: "Actualizar un usuario",
+      description: "Actualizar un usuario",
+      tags: ["User"],
+      requestBody: {
         required: true,
-      }
-    ],
-    responses: {
-      "200": {
-        description: "Respuesta exitosa",
         content: {
           "application/json": {
             schema: {
-              type: "object",
-              $ref: "#/components/schemas/User",
-            }
-          }
+              $ref: "#/components/schemas/UserUpdate",
+            },
+          },
         }
       },
-      "404": {
-        description: "Error en la solicitud. No encontrado",
-        content: {
-          "application/json": {
-            schema: {
-              type: "object",
-              properties: {
-                message: {
-                  type: "string",
-                  example: "Not found",
+      responses: {
+        "200": {
+          description: "Respuesta exitosa",
+          content: {
+            "application/json": {
+              schema: {
+                type: "object",
+                $ref: "#/components/schemas/User",
+              }
+            }
+          }
+        },
+        "400": {
+          description: "Error en la solicitud. No encontrado",
+          content: {
+            "application/json": {
+              schema: {
+                type: "object",
+                properties: {
+                  message: {
+                    type: "string",
+                    example:
+                      "Error en la solicitud",
+                  },
                 },
               },
             },
@@ -336,4 +324,50 @@ export const routeUserByIdAPIValue = {
       },
     },
   },
+  "/api/users/{id}": {
+    get: {
+      summary: "Obtener datos de un usuario",
+      description: "Obtener datos de un usuario",
+      tags: ["User"],
+      parameters: [
+        {
+          name: "id",
+          in: "path",
+          schema: {
+            type: "string",
+          },
+          required: true,
+        }
+      ],
+      responses: {
+        "200": {
+          description: "Respuesta exitosa",
+          content: {
+            "application/json": {
+              schema: {
+                type: "object",
+                $ref: "#/components/schemas/User",
+              }
+            }
+          }
+        },
+        "404": {
+          description: "Error en la solicitud. No encontrado",
+          content: {
+            "application/json": {
+              schema: {
+                type: "object",
+                properties: {
+                  message: {
+                    type: "string",
+                    example: "Not found",
+                  },
+                },
+              },
+            },
+          },
+        },
+      },
+    },
+  }
 };
