@@ -27,7 +27,7 @@ export const RowItem = ({ proveedor, onClick }: { proveedor: Proveedor; onClick:
 
 export const RowTiempo = ({ title }: { title: string }) => {
   return (
-    <div className='flex items-center gap-2 px-2 py-4 rounded-2xl w-[375px] bg-white shadow-sh-sm cursor-pointer'>
+    <div className='flex items-center gap-2 px-2 py-4 bg-white cursor-pointer rounded-2xl shadow-sh-sm'>
       <div className='flex items-start flex-1 min-w-0 gap-2'>
         <ClockIcon className='w-6 text-base-blue2' />
         <div className='flex flex-col items-start justify-center flex-1 min-w-0 gap-1'>

@@ -8,7 +8,7 @@ import { PasswordInput } from '../components/form/PasswordInput'
 const Registro = () => {
   return (
     <section className='wrapper'>
-      <h1 className='text-6xl text-center font-display'>¡Bienvenido!</h1>
+      <h1 className='mb-6 text-4xl text-center md:text-6xl font-display'>¡Bienvenido!</h1>
       <div className='max-w-xs gap-8 mx-auto my-0'>
         <form className='flex flex-col gap-6 h-80 rounded-xl'>
           <EmailInput />

@@ -4,10 +4,10 @@ export function CanchaSelector({ cancha, selected, onSelectCancha }: { cancha: C
   const selectedClass = selected?.nombre === cancha?.nombre ? 'bg-base-blue2 text-white' : 'bg-white'
   return (
     <div
-      className={`grid grid-cols-[auto_1fr] gap-2 rounded-2xl min-h-14 h-full shadow-sh-sm cursor-pointer ${selectedClass}`}
+      className={`grid grid-cols-[auto_1fr] gap-2 rounded-2xl min-h-[96px] md:min-h-[48px] h-full shadow-sh-sm cursor-pointer ${selectedClass}`}
       onClick={onSelectCancha}>
       <img
-        className='object-cover w-12 h-full rounded-bl-2xl rounded-tl-2xl'
+        className='object-cover w-16 h-full md:w-12 rounded-bl-2xl rounded-tl-2xl'
         src={cancha.imagen}
         alt={cancha.nombre}
       />

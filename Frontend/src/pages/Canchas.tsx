@@ -22,9 +22,9 @@ const Canchas = () => {
 
   return (
     <section className='wrapper'>
-      <h1 className='w-full text-6xl mb-7 font-display'>Bogotá, Colombia</h1>
+      <h1 className='w-full text-4xl md:text-6xl mb-7 font-display'>Bogotá, Colombia</h1>
 
-      <div className='grid grid-cols-[40%_1fr]  gap-2 rounded-[2rem] backdrop-filter backdrop-blur-[20px] bg-white/60 mb-6'>
+      <div className='grid md:grid-cols-[40%_1fr]  gap-2 rounded-[2rem] backdrop-filter backdrop-blur-[20px] bg-white/60 mb-6'>
         <div className='flex flex-col h-full gap-2 p-4 overflow-x-hidden overflow-y-auto'>
           {options.map(proveedor => (
             <RowItem

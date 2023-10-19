@@ -20,17 +20,17 @@ export const ReservationForm = () => {
   return (
     <article className='wrapper font-body'>
       <form
-        className='flex flex-col items-center gap-4 p-8 bg-white/60 rounded-3xl backdrop-blur-2xl'
+        className='flex flex-col items-center gap-4 p-2 md:p-8 bg-white/60 rounded-3xl backdrop-blur-2xl'
         onSubmit={() => navigate(ROUTES.FIELDS)}>
         {/*  */}
         <PreForm />
         {/*  */}
 
-        <div className='flex flex-col gap-20 lg:flex-row'>
+        <div className='flex flex-wrap w-full gap-8 md:flex-nowrap md:gap-20'>
           {/*  */}
           <div>
             <p className='mb-3 text-lg'>Puedes empezar por tu ubicación</p>
-            <div className='flex items-end gap-3'>
+            <div className='flex flex-wrap items-end justify-center gap-3 md:flex-nowrap md:justify-start'>
               <MySelect
                 options={options}
                 value={selectedOption}
@@ -81,7 +81,7 @@ export const ReservationForm = () => {
           </div>
           {/*  */}
         </div>
-        <div className='flex justify-center px-4 py-1 mt-7'>
+        <div className='flex justify-center px-4 py-1 md:mt-7'>
           <Button
             label='Reserva'
             style='secondary'

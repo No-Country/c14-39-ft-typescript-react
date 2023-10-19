@@ -25,7 +25,7 @@ export function BookingSelector({ proveedor }: { proveedor: Proveedor | undefine
 
   return (
     <article className='wrapper'>
-      <div className='grid grid-cols-[auto_1fr_1fr] content-start gap-4 p-8 rounded-[2rem] backdrop-filter backdrop-blur-[20px] w-full bg-white/60'>
+      <div className='grid md:grid-cols-[auto_1fr_1fr] content-start gap-4 p-4 md:p-8 rounded-[2rem] backdrop-filter backdrop-blur-[20px] w-full bg-white/60'>
         <div className=''>
           <Calendario
             minDate={minDate}
@@ -35,7 +35,7 @@ export function BookingSelector({ proveedor }: { proveedor: Proveedor | undefine
         </div>
 
         <div className='px-2 py-4 rounded-lg bg-white/60'>
-          <div className='grid items-start grid-cols-2 gap-2'>
+          <div className='grid items-start w-full gap-2 md:w-auto md:grid-cols-2'>
             {selectedDate &&
               proveedor?.canchas.map(item => (
                 <CanchaSelector
@@ -49,7 +49,7 @@ export function BookingSelector({ proveedor }: { proveedor: Proveedor | undefine
         </div>
 
         <div className='flex flex-col gap-2'>
-          <div className='text-3xl '>{selectedCancha?.nombre}</div>
+          <div className='text-xl md:text-3xl '>{selectedCancha?.nombre}</div>
           {selectedCancha &&
             espaciosTiempo.map(item => (
               <RowTiempo
