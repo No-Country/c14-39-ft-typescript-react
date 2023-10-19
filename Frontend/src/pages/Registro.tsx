@@ -1,9 +1,9 @@
 import { NavLink } from 'react-router-dom'
 import { Button } from '../components/Button'
 import { ROUTES } from '../data/consts'
-import { GoogleBtn } from './form/GoogleBtn'
-import { EmailInput } from './form/EmailInput'
-import { PasswordInput } from './form/PasswordInput'
+import { GoogleBtn } from '../components/form/GoogleBtn'
+import { EmailInput } from '../components/form/EmailInput'
+import { PasswordInput } from '../components/form/PasswordInput'
 
 const Registro = () => {
   return (

@@ -2,8 +2,8 @@ import { useParams } from 'react-router-dom'
 import Stripes from '../components/stripes'
 
 import { options } from '../services/manageData'
-import { CanchaData } from './CanchaData'
-import { BookingSelector } from './BookingSelector'
+import { CanchaData } from '../components/CanchaData'
+import { BookingSelector } from '../components/bookingSection/BookingSelector'
 
 const Cancha = () => {
   const { cancha } = useParams()

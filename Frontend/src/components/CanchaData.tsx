@@ -1,4 +1,4 @@
-import { Button } from '../components/Button'
+import { Button } from './Button'
 import { Proveedor } from '../types/types'
 
 export function CanchaData({ proveedor }: { proveedor: Proveedor | undefined }) {

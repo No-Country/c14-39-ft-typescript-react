@@ -7,13 +7,13 @@ type ButtonProps = {
 }
 
 export const Button = ({ label = 'Button', style, type = 'button', onClick, override }: ButtonProps) => {
-  const buttonClass = style === 'secondary' ? 'bg-base-black text-base-green2' : 'bg-base-white text-base-black'
+  const buttonClass = style === 'secondary' ? 'bg-black text-base-green2 outline-black' : 'bg-white text-black outline-white'
 
   return (
     <button
       onClick={onClick}
       type={type}
-      className={`font-body text-xl px-4 py-1 rounded-full ${buttonClass} ${override}`}>
+      className={`font-body text-xl px-4 py-1 rounded-full outline outline-offset-0 transition-all duration-300 ease-in-out hover:outline-offset-4 outline-1  ${buttonClass} ${override}`}>
       {label}
     </button>
   )
