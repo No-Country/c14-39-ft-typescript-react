@@ -1,8 +1,9 @@
 import { COMMON_TWSTYLES } from '../data/consts'
+import { City } from '../types/types'
 
 type MySelectProps = {
-  options: Option[]
-  value: Option | null
+  options: City[]
+  value: City | null
   onChange: (event: React.ChangeEvent<HTMLSelectElement>) => void
 }
 
@@ -20,7 +21,7 @@ export function MySelect({ options, value, onChange }: MySelectProps) {
             key={option.id}
             value={option.id}
             className='p-2 text-base'>
-            {option.title}
+            {option.name}
           </option>
         ))}
       </select>

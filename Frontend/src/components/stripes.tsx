@@ -5,7 +5,7 @@ const Stripes = () => {
       fill='none'
       xmlns='http://www.w3.org/2000/svg'
       preserveAspectRatio='none'
-      className={`text-base-green1 absolute top-0 left-0 h-full w-3/5 -z-10`}>
+      className={`hidden md:block text-base-green1 absolute top-0 left-0 h-full w-3/5 -z-10`}>
       <g clipPath='url(#clip0_44_552)'>
         <path
           opacity='0.6'
