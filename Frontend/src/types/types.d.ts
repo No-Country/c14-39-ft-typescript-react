@@ -1,3 +1,8 @@
+type City = {
+  id: string
+  name: string
+}
+
 export type Anchor = [number, number]
 
 export interface Proveedor {

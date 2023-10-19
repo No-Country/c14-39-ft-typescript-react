@@ -1,104 +1,111 @@
 [
   {
     "id": 1,
-    "nombre": "El Parque de la Fútbol",
-    "ubicacion": "Carrera 7 #10-20, Bogotá, Colombia",
-    "tamano": 100,
-    "superficie": "césped natural",
+    "nombre": "Campos de Pelé",
+    "ubicacion": "Carrera 7 #156-60, Bogotá",
+    "tamano": 1000,
+    "superficie": "Césped natural",
     "imagen": "https://images.pexels.com/photos/399187/pexels-photo-399187.jpeg?cs=srgb&fm=jpg&w=640&h=426",
     "instalaciones": [
-      "vestuarios",
-      "duchas",
-      "baños"
+      "Camerinos",
+      "Servicios higiénicos"
     ],
-    "precio": 100000,
-    "anchor": [
-      4.603684,
-      -74.082878
+    "precio": 50000,
+    "coordenadas": [
+      4.6954,
+      -74.0626
     ],
     "canchas": [
       {
-        "nombre": "La Verde",
-        "tamano": 100,
-        "superficie": "césped natural",
+        "nombre": "La Bombonera",
+        "tamano": 500,
+        "superficie": "Césped sintético",
         "imagen": "https://images.pexels.com/photos/1378425/pexels-photo-1378425.jpeg?cs=srgb&fm=jpg&w=640&h=360"
       },
       {
-        "nombre": "La Sintética",
-        "tamano": 120,
-        "superficie": "césped sintético",
-        "imagen": "https://images.pexels.com/photos/1378425/pexels-photo-1378425.jpeg?cs=srgb&fm=jpg&w=640&h=360"
-      },
-      {
-        "nombre": "La Tierra",
-        "tamano": 80,
-        "superficie": "tierra",
+        "nombre": "La Doce",
+        "tamano": 300,
+        "superficie": "Césped natural",
         "imagen": "https://images.pexels.com/photos/1378425/pexels-photo-1378425.jpeg?cs=srgb&fm=jpg&w=640&h=360"
       }
     ]
   },
   {
     "id": 2,
-    "nombre": "La Liga del Fútbol",
-    "ubicacion": "Calle 10 #20-10, Bogotá, Colombia",
-    "tamano": 100,
-    "superficie": "césped natural",
+    "nombre": "Estadio Monumental",
+    "ubicacion": "Calle 26 #15-30, Bogotá",
+    "tamano": 800,
+    "superficie": "Césped sintético",
     "imagen": "https://images.pexels.com/photos/186239/pexels-photo-186239.jpeg?cs=srgb&fm=jpg&w=640&h=360",
     "instalaciones": [
-      "vestuarios",
-      "duchas",
-      "baños",
-      "cafeteria"
+      "Gimnasio",
+      "Confitería"
     ],
-    "precio": 150000,
-    "anchor": [
-      4.604733,
-      -74.083899
+    "precio": 40000,
+    "coordenadas": [
+      4.6484,
+      -74.0988
     ],
     "canchas": [
       {
-        "nombre": "La Cancha Oficial",
-        "tamano": 120,
-        "superficie": "césped sintético",
+        "nombre": "Cancha 1",
+        "tamano": 400,
+        "superficie": "Césped sintético",
         "imagen": "https://images.pexels.com/photos/1378425/pexels-photo-1378425.jpeg?cs=srgb&fm=jpg&w=640&h=360"
       },
       {
-        "nombre": "La Cancha Secundaria",
-        "tamano": 100,
-        "superficie": "césped sintético",
+        "nombre": "Cancha 2",
+        "tamano": 300,
+        "superficie": "Césped natural",
+        "imagen": "https://images.pexels.com/photos/1378425/pexels-photo-1378425.jpeg?cs=srgb&fm=jpg&w=640&h=360"
+      },
+      {
+        "nombre": "Cancha 3",
+        "tamano": 200,
+        "superficie": "Césped sintético",
         "imagen": "https://images.pexels.com/photos/1378425/pexels-photo-1378425.jpeg?cs=srgb&fm=jpg&w=640&h=360"
       }
     ]
   },
   {
     "id": 3,
-    "nombre": "El Campamento del Fútbol",
-    "ubicacion": "Avenida 100 #20-100, Bogotá, Colombia",
-    "tamano": 80,
-    "superficie": "tierra",
+    "nombre": "Complejo Deportivo El Campín",
+    "ubicacion": "Calle 57 #69-90, Bogotá",
+    "tamano": 1200,
+    "superficie": "Césped natural",
     "imagen": "https://images.pexels.com/photos/3448246/pexels-photo-3448246.jpeg?cs=srgb&fm=jpg&w=640&h=360",
     "instalaciones": [
-      "vestuarios",
-      "duchas",
-      "baños",
-      "cancha de minifutbol"
+      "Gimnasio",
+      "Piscina"
     ],
-    "precio": 50000,
-    "anchor": [
-      4.605782,
-      -74.084920
+    "precio": 60000,
+    "coordenadas": [
+      4.6234,
+      -74.1398
     ],
     "canchas": [
       {
-        "nombre": "La Cancha de la Comunidad",
-        "tamano": 80,
-        "superficie": "tierra",
+        "nombre": "Cancha Principal",
+        "tamano": 700,
+        "superficie": "Césped natural",
         "imagen": "https://images.pexels.com/photos/1378425/pexels-photo-1378425.jpeg?cs=srgb&fm=jpg&w=640&h=360"
       },
       {
-        "nombre": "La Cancha de los Niños",
-        "tamano": 60,
-        "superficie": "tierra",
+        "nombre": "Cancha Auxiliar 1",
+        "tamano": 300,
+        "superficie": "Césped sintético",
+        "imagen": "https://images.pexels.com/photos/1378425/pexels-photo-1378425.jpeg?cs=srgb&fm=jpg&w=640&h=360"
+      },
+      {
+        "nombre": "Cancha Auxiliar 2",
+        "tamano": 200,
+        "superficie": "Césped natural",
+        "imagen": "https://images.pexels.com/photos/1378425/pexels-photo-1378425.jpeg?cs=srgb&fm=jpg&w=640&h=360"
+      },
+      {
+        "nombre": "Cancha Auxiliar 3",
+        "tamano": 100,
+        "superficie": "Césped sintético",
         "imagen": "https://images.pexels.com/photos/1378425/pexels-photo-1378425.jpeg?cs=srgb&fm=jpg&w=640&h=360"
       }
     ]

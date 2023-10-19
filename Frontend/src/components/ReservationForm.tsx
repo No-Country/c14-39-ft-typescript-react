@@ -2,18 +2,22 @@ import { useState } from 'react'
 import { Button } from './Button'
 import { MySelect } from './MySelect'
 import { COMMON_TWSTYLES, ROUTES } from '../data/consts'
-import { options } from '../services/manageData'
 import { useNavigate } from 'react-router-dom'
+// import { options } from '../services/manageData'
+
+import { City } from '../types/types'
+
+import cities from '../data/mockdata_country.json'
 
 export const ReservationForm = () => {
-  const [selectedOption, setSelectedOption] = useState<Option | null>(null)
+  const [selectedOption, setSelectedOption] = useState<City | null>(null)
+  const options: City[] = cities.cities
 
   const navigate = useNavigate()
 
   const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    const selectedId = parseInt(event.target.value)
+    const selectedId = event.target.value
     const selectedOption = options.find(option => option.id === selectedId)
-    console.log(selectedOption)
     setSelectedOption(selectedOption || null)
   }
 
@@ -32,7 +36,7 @@ export const ReservationForm = () => {
             <p className='mb-3 text-lg'>Puedes empezar por tu ubicación</p>
             <div className='flex flex-wrap items-end justify-center gap-3 md:flex-nowrap md:justify-start'>
               <MySelect
-                options={options}
+                options={cities.cities}
                 value={selectedOption}
                 onChange={handleChange}
               />

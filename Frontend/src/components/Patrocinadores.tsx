@@ -5,23 +5,23 @@ const Patrocinadores = () => {
       <div className='flex flex-wrap justify-center gap-3 md:flex-row wrapper'>
         <img
           className='w-full max-w-[140px]'
-          src='https://via.placeholder.com/160x160'
+          src='./sponsor/sponsor1.svg'
         />
         <img
           className='w-full max-w-[140px]'
-          src='https://via.placeholder.com/160x160'
+          src='./sponsor/sponsor2.svg'
         />
         <img
           className='w-full max-w-[140px]'
-          src='https://via.placeholder.com/160x160'
+          src='./sponsor/sponsor3.svg'
         />
         <img
           className='w-full max-w-[140px]'
-          src='https://via.placeholder.com/160x160'
+          src='./sponsor/sponsor4.svg'
         />
         <img
           className='w-full max-w-[140px]'
-          src='https://via.placeholder.com/160x160'
+          src='./sponsor/sponsor5.svg'
         />
       </div>
     </section>

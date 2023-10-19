@@ -5,7 +5,7 @@ export const Logo = () => {
   return (
     <NavLink
       to='/'
-      className='w-40 text-xl leading-none text-black md:text-2xl font-display'>
+      className='w-40 text-xl leading-[0.8] md:leading-[0.8] text-black md:text-2xl font-display'>
       {BUSINESS.name}
     </NavLink>
   )
