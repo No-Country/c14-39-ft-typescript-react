@@ -1,4 +1,3 @@
-import { UserSchemaValidator } from "../../models/schemas";
 
 export const routeAPIPath = "/api";
 export const routeAPIValue = {

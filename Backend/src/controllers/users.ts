@@ -26,8 +26,6 @@ export const getUserById = async (userId: string) => {
   }
 };
 
-
-
 export const deleteUser = async (userId: string) => {
   try {
     const user = await User.findByIdAndDelete(userId);

@@ -78,7 +78,7 @@ export const login = async (req: Request, res: Response) => {
 export const logout = async (req: Request, res: Response) => {
     try {
 
-        if (!req.cookies || !req.cookies.token) {
+        if (!req.cookies?.token) {
             return res.status(HttpCodes.CODE_BAD_REQUEST).json({ message: "No hay ninguna sesion activa" });
         }
 
