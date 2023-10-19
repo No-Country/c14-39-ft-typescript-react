@@ -1,9 +1,9 @@
-export const routeUserAPIPath = "/api/users";
-export const routeUserAPIValue = {
+export const routeSportAPIPath = "/api/sportCenter";
+export const routeSportAPIValue = {
   get: {
-    summary: "Obtener datos de los usuarios",
+    summary: "Obtener datos de los sport centers",
     description: "Obtener datos de la API",
-    tags: ["User"],
+    tags: ["SportCenter"],
     responses: {
       "200": {
         description: "Respuesta exitosa",
@@ -15,7 +15,7 @@ export const routeUserAPIValue = {
                 users: {
                   type: "array",
                   items: {
-                    $ref: "#/components/schemas/User",
+                    $ref: "#/components/schemas/User/SportCenter",
                   }
                 },
               },
@@ -42,15 +42,15 @@ export const routeUserAPIValue = {
     },
   },
   post: {
-    summary: "Crear un usuario",
-    description: "Crear un usuario",
-    tags: ["User"],
+    summary: "Crear un sport center",
+    description: "Crear un sport center",
+    tags: ["SportCenter"],
     requestBody: {
       required: true,
       content: {
         "application/json": {
           schema: {
-            $ref: "#/components/schemas/UserData",
+            $ref: "#/components/schemas/SportCenterData",
           },
         },
       }
@@ -65,11 +65,11 @@ export const routeUserAPIValue = {
               properties: {
                 user: {
                   type: "object",
-                  $ref: "#/components/schemas/User",
+                  $ref: "#/components/schemas/SportCenter",
                 },
                 message: {
                   type: "string",
-                  example: "User Created",
+                  example: "Sport Center Created",
                 }
               }
             },
@@ -77,7 +77,7 @@ export const routeUserAPIValue = {
         }
       },
       "400": {
-        description: "Error en la solicitud. No encontrado",
+        description: "Error en la solicitud",
         content: {
           "application/json": {
             schema: {
@@ -96,15 +96,15 @@ export const routeUserAPIValue = {
     },
   },
   put: {
-    summary: "Actualizar un usuario",
-    description: "Actualizar un usuario",
-    tags: ["User"],
+    summary: "Actualizar un sport center",
+    description: "Actualizar un sport center",
+    tags: ["SportCenter"],
     requestBody: {
       required: true,
       content: {
         "application/json": {
           schema: {
-            $ref: "#/components/schemas/UserUpdate",
+            $ref: "#/components/schemas/SportCenterUpdate",
           },
         },
       }
@@ -116,13 +116,13 @@ export const routeUserAPIValue = {
           "application/json": {
             schema: {
               type: "object",
-              $ref: "#/components/schemas/User",
+              $ref: "#/components/schemas/SportCenter",
             }
           }
         }
       },
       "400": {
-        description: "Error en la solicitud. No encontrado",
+        description: "Error en la solicitud",
         content: {
           "application/json": {
             schema: {
@@ -142,12 +142,12 @@ export const routeUserAPIValue = {
   },
 };
 
-export const routeUserByIdAPIPath = "/api/users/{id}";
-export const routeUserByIdAPIValue = {
+export const routeSportByIdAPIPath = "/api/sportCenter/{id}";
+export const routeSportByIdAPIValue = {
   get: {
-    summary: "Obtener datos de un usuario",
-    description: "Obtener datos de un usuario",
-    tags: ["User"],
+    summary: "Obtener datos de un sport center",
+    description: "Obtener datos de un sport center",
+    tags: ["SportCenter"],
     parameters: [
       {
         name: "id",
@@ -165,7 +165,7 @@ export const routeUserByIdAPIValue = {
           "application/json": {
             schema: {
               type: "object",
-              $ref: "#/components/schemas/User",
+              $ref: "#/components/schemas/SportCenter",
             }
           }
         }
@@ -188,4 +188,49 @@ export const routeUserByIdAPIValue = {
       },
     },
   },
+  delete: {
+    summary: "Eliminar un sport center",
+    description: "Eliminar un sport center",
+    tags: ["SportCenter"],
+    parameters: [
+      {
+        name: "id",
+        in: "path",
+        schema: {
+          type: "string",
+        },
+        required: true,
+      }
+    ],
+    responses: {
+      "200": {
+        description: "Respuesta exitosa",
+        content: {
+          "application/json": {
+            schema: {
+              type: "object",
+              $ref: "#/components/schemas/SportCenter",
+            }
+          }
+        }
+      },
+      "400": {
+        description: "Error en la solicitud",
+        content: {
+          "application/json": {
+            schema: {
+              type: "object",
+              properties: {
+                message: {
+                  type: "string",
+                  example:
+                    "Error en la solicitud",
+                },
+              },
+            },
+          },
+        },
+      },
+    },
+  }
 };

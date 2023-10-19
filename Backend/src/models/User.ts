@@ -3,7 +3,6 @@ import { Schema, model } from "mongoose";
 const userSchema = new Schema({
   name: { type: String, required: true },
   lastname: { type: String, required: true },
-  // falta añadir validacion email unique true con mongoose-unique-validator o Unique Indexes de mongodb u otro
   email: { type: String, required: true, unique: true },
   passwordHash: { type: String, required: true },
   city: { type: String, required: true },

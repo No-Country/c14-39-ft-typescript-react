@@ -1,7 +1,6 @@
 import { Schema, model } from "mongoose";
 
 const sportCenterSchema = new Schema({
-  // falta añadir validacion name, email unique true con mongoose-unique-validator o Unique Indexes de mongodb u otro
   name: { type: String, required: true, unique: true },
   description: { type: String, required: true },
   phone: { type: Number, required: true },
