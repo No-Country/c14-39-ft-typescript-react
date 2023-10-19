@@ -70,7 +70,7 @@ export const UserSchemaValidator = z.object({
   path: ["image"] // Este error se asocia al campo "image"
 });;
 
-export const loginSchema = z.object({
+export const loginSchemaValidator = z.object({
   email: z
     .string({
       required_error: "El email es requerido",
@@ -122,3 +122,4 @@ export const validateSchema = ({
     throw error;
   }
 };
+

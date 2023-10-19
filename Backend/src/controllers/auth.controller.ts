@@ -42,6 +42,8 @@ export const register = async (req: Request, res: Response) => {
 
     res.cookie("token", token);
 
+    return res.status(HttpCodes.CODE_SUCCESS).json({message: "Usuario registrado con exito"});
+
 
    } catch (error: any) {
     res.status(HttpCodes.CODE_INTERNAL_SERVER_ERROR).json({message: `${error.message}`});
@@ -53,11 +55,11 @@ export const login = async (req: Request, res: Response) => {
         const { email, password } = req.body as UserLoginData;
 
         const mailFound = await User.findOne({email});
-
+        
         if(!mailFound) return res.status(HttpCodes.CODE_BAD_REQUEST).json({message: "Email incorrecto"});
-
+        
         const passwordCorrect = await bcrypt.compare(password, mailFound.passwordHash);
-
+        
         if(!passwordCorrect) return res.status(HttpCodes.CODE_BAD_REQUEST).json({message: "Contraseña incorrecta"});
 
         //crear y guardar el token en una cookie
@@ -75,26 +77,18 @@ export const login = async (req: Request, res: Response) => {
 
 export const logout = async (req: Request, res: Response) => {
     try {
+
+        if (!req.cookies || !req.cookies.token) {
+            return res.status(HttpCodes.CODE_BAD_REQUEST).json({ message: "No hay ninguna sesion activa" });
+        }
+
         res.cookie("token", "", {
             expires: new Date(0),
           });
-        res.status(HttpCodes.CODE_SUCCESS).json({message: "Logout correcto"});
+        res.status(HttpCodes.CODE_SUCCESS).json({message: "Logout exitoso"});
     } catch (error: any) {
         res.status(HttpCodes.CODE_INTERNAL_SERVER_ERROR).json({message: `${error.message}`});
     }
-}
-
-export const profile = async (req: Request, res: Response) => {
-    try {
-        const userFound = await User.findById(req.userId);
-        if (!userFound) {
-          return res.status(404).json({ message: "User not found." });
-        }
-    
-        res.json(userFound);
-      } catch (error: any) {
-        res.status(500).json({ message: error.message });
-      }
 }
 
 export const verifyToken = async (req: Request, res: Response) => {

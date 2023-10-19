@@ -10,7 +10,7 @@ export const validateSchema = <T>(schema: ZodSchema<T>) =>
             if (error instanceof ZodError) {
                 res.status(400).json(error.errors.map(e => e.message));
             } else {
-                next(error); // Pasa el error al manejador de errores de Express
+                next(error); 
             }
         }
     }
