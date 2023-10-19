@@ -14,4 +14,4 @@ export interface UserDataWithId extends UserData {
   userId: string;
 }
 
-export interface UserLoginData extends Pick<UserData, "email" | "password"> {}
+export interface UserLoginData extends Pick<UserData, "email" | "password"> { }

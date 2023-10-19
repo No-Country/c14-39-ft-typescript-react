@@ -1,5 +1,7 @@
 import express from 'express'
-import Country from '../models/Country'
+import { Country } from '../models'
+import { HttpCodes } from '../utils/HTTPCodes.util'
+import { validateCountry } from '../utils/validateReq.util'
 
 const countryRouter = express.Router()
 
@@ -7,23 +9,30 @@ countryRouter.route('/').
   get(async (_, res) => {
     try {
       const countries = await Country.find().select('-users')
-      res.status(201).json({ countries })
+      return res.status(HttpCodes.CODE_SUCCESS).json({ countries })
     } catch (error) {
-      throw error
+      return res.status(HttpCodes.CODE_NOT_FOUND).json({
+        message: `${error}`,
+      })
     }
   })
   .post(async (req, res) => {
     try {
-      const { name, image } = req.body
+      const body = req.body
+
+      // validate country
+      const { data } = validateCountry(body)
+
       const newCountry = new Country({
-        name,
-        image
+        ...data
       })
 
       await newCountry.save()
-      res.status(201).json({ country: newCountry, message: "country created" })
-    } catch (error: any) {
-      res.status(400).json({ error: error.message })
+      return res.status(HttpCodes.CODE_SUCCESS_CREATED).json({ type: newCountry, message: "Type created" })
+    } catch (error) {
+      return res.status(HttpCodes.CODE_BAD_REQUEST).json({
+        message: `${error}`,
+      })
     }
   })
 

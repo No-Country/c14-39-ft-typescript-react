@@ -1,4 +1,4 @@
-// validation user schema width zod
+// validation user schema with zod
 import { z, ZodError } from "zod";
 
 // user schema validate

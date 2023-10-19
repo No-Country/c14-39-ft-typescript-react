@@ -32,6 +32,64 @@ const properties = {
       example: "652ff8405e95f355a0630cdc"
     },
   }
+
+  const propSportCenter = {
+    name: {
+      type: "string",
+      example: "sportcenter 2"
+    },
+    description: {
+      type: "string",
+      example: "Description 2"
+    },
+    phone: {
+      type: "number",
+      example: 123456789
+    },
+    email: {
+      type: "string",
+      example: "email2@example.com"
+    },
+    address: {
+      type: "string",
+      example: "address1"
+    },
+    lat: {
+      type: "number",
+      example: 1
+    },
+    alt: {
+      type: "number",
+      example: 1
+    },
+    open: {
+      type: "boolean",
+      example: true
+    },
+    close: {
+      type: "boolean",
+      example: true
+    },
+    active: {
+      type: "boolean",
+      example: true
+    },
+    imgs: {
+      type: "array",
+      items: {
+        type: "string",
+        example: "https://donpotrero.com/img/posts/2/medidas_lg.jpg"
+      }
+    },
+    country_id: {
+      type: "string",
+      example: "652ff7625e95f355a0630cd9"
+    },
+    user_id: {
+      type: "string",
+      example: "652ff85a5e95f355a0630ce0"
+    }
+  }
   
   export const components = {
     "schemas": {
@@ -78,6 +136,34 @@ const properties = {
             example: "123456789"
           }
         },
+        SportCenter: {
+          type: "object",
+          properties: {
+            id: {
+              type: "string",
+              example: "652ff8775e95f355a0630ce4"
+            },
+            ...propSportCenter
+          },
+        },
+        SportCenterData: {
+          type: "object",
+          properties: {
+            ...propSportCenter,
+          },
+        },
+        SportCenterUpdate: {
+          type: "object",
+          properties: {
+            ...propSportCenter,
+            sportCenterId: {
+              type: "string",
+              example: "652ff8775e95f355a0630ce4"
+            },
+          },
+        }
       }
     }
   }
+
+

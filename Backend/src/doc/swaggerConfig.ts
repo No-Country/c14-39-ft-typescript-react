@@ -1,21 +1,24 @@
 import swaggerJsdoc from "swagger-jsdoc";
 import { components } from './api/schemas.doc';
 import {
-  routeAPIPath,
-  routeAPIValue,
   routeUserAPIPath,
   routeUserAPIValue,
   routeUserByIdAPIPath,
   routeUserByIdAPIValue,
   routesAuthControllerAPIValue,
+  routeSportAPIPath,
+  routeSportAPIValue,
+  routeSportByIdAPIPath,
+  routeSportByIdAPIValue
 } from "./api";
 
 const paths: Record<string, any> = {
-  [routeAPIPath]: { ...routeAPIValue  },
+  [routeSportAPIPath]: { ...routeSportAPIValue },
+  [routeSportByIdAPIPath]: { ...routeSportByIdAPIValue },
   [routeUserAPIPath]: { ...routeUserAPIValue },
   [routeUserByIdAPIPath]: { ...routeUserByIdAPIValue },
   ...routesAuthControllerAPIValue
-};
+} 
 
 const options = {
   definition: {
