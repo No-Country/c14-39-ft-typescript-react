@@ -17,6 +17,4 @@ typeSchema.set("toJSON", {
   },
 });
 
-const Type = model("Type", typeSchema);
-
-export default Type;
+export const Type = model("Type", typeSchema);

@@ -1,0 +1,93 @@
+### GET DOC
+GET http://localhost:3000/api-docs
+
+### GET COUNTRY
+GET http://localhost:3000/api/country
+
+### POST COUNTRY
+POST http://localhost:3000/api/country
+Content-Type: application/json
+
+// NO SE VA A CREAR, DIRECTO DE API.
+// PARA PRUEBA:
+{
+  "name": "Colombia",
+  "image": "imagen Colombia"
+}
+
+### GET TYPE
+GET http://localhost:3000/api/types
+
+### POST TYPE
+POST http://localhost:3000/api/types
+Content-Type: application/json
+
+# {
+#   "name": "Admin",
+#   "description": "Administrador del sistema"
+# }
+
+# {
+#   "name": "User",
+#   "description": "Usuario que solicita una cancha"
+# }
+
+{
+  "name": "Owner",
+  "description": "Propietario de la cancha"
+}
+
+### GET USERS
+GET http://localhost:3000/api/users
+
+### GET USER BY ID
+GET http://localhost:3000/api/users/65284aa094bf62b7a1ff788b
+
+### POST USER
+POST http://localhost:3000/api/users
+Content-Type: application/json
+
+// SE PODRIA PASAR EL NOMBRE DEL COUNTRY Y EL TYPE EN VEZ DE ID
+{
+  "name": "Otro usuario 11",
+  "lastname": "Otro apellido 10",
+  "email": "correo11@example.com",
+  "password": "111111",
+  "city": "Buenos Aires",
+  "address": "Av. Principal",
+  "image": "imagen2",
+  "country_id": "652ff7625e95f355a0630cd9",
+  "type_id": "652ff8405e95f355a0630cdc"
+}
+
+### DELETE USER BY ID
+DELETE  http://localhost:3000/api/users/652ec81ea8b47f2baa08b2
+
+### UPDATE USER
+PUT http://localhost:3000/api/users
+Content-Type: application/json
+
+{
+  "name": "Otro nombre 12",
+  "email": "otrocorreo12@example.com",
+  "userId": "652ff85a5e95f355a0630ce0"
+}
+
+### LOGIN USER
+POST http://localhost:3000/api/login
+Content-Type: application/json
+
+# {
+#   "email": "mmmmm@example.com",
+#   "password": "111111"
+# }
+
+{
+  "email": "mmmmm@example.com",
+  "password": "otracontraseña"
+}
+
+# {
+#   "email": "otrocorreo@example.com",
+#   "password": "otracontraseña"
+# }

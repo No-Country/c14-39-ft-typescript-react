@@ -1,4 +1,4 @@
-// validation user schema width zod
+// validation user schema with zod
 import { z, ZodError } from "zod";
 
 // user schema validate
@@ -36,6 +36,8 @@ export const UserSchemaValidator = z.object({
   password: z.string({
     invalid_type_error: "La contraseña debe ser un string",
     required_error: "La contraseña es requerida",
+  }).min(6, {
+    message: "La contraseña debe contener al menos 6 caracteres",
   }),
   city: z.string({
     invalid_type_error: "Tiene que ser un texto",
@@ -46,9 +48,8 @@ export const UserSchemaValidator = z.object({
     required_error: "La dirección es requerida",
   }),
   image: z.string({
-    invalid_type_error: "Tiene que ser un texto",
-    required_error: "La imagen es requerida",
-  }),
+    invalid_type_error: "Tiene que ser un texto"
+  }).optional(),
   country_id: z.string({
     invalid_type_error: "Tiene que ser un texto",
     required_error: "El país es requerido",
@@ -57,7 +58,35 @@ export const UserSchemaValidator = z.object({
     invalid_type_error: "Tiene que ser un texto",
     required_error: "El tipo de usuario es requerido",
   }),
+})
+
+export const loginSchemaValidator = z.object({
+  email: z
+    .string({
+      required_error: "El email es requerido",
+    })
+    .email({
+      message: "El email debe ser válido",
+    }),
+  password: z
+    .string({
+      required_error: "La contraseña es requerida",
+    })
+    .min(6, {
+      message: "La contraseña debe contener al menos 6 caracteres",
+    }),
 });
+
+// user update schema validate
+export const UserUpdateSchema = UserSchemaValidator
+.partial()
+  .merge(z.object({
+    userId: z.string({
+      invalid_type_error: "El id debe ser un string",
+      required_error: "El id es requerido",
+    })
+  }));
+
 
 // country schema validate
 export const CountrySchemaValidator = z.object({
@@ -93,3 +122,4 @@ export const validateSchema = ({
     throw error;
   }
 };
+

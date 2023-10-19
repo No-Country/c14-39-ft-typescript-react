@@ -1,13 +1,13 @@
 import express from "express";
 import {
-  createUser,
   deleteUser,
   getUserById,
   getUsers,
   modifyUserById,
-} from "../controllers/users";
-import { UserSchemaValidator, validateSchema } from "../models/schemas";
-import { HttpCodes } from "../utils/HTTPCodes.util";
+} from "../controllers/users.controller"
+import { HttpCodes } from '../utils/HTTPCodes.util'
+import { validateUserUpdate } from '../utils/validateReq.util';
+
 
 const userRouter = express.Router();
 
@@ -16,48 +16,30 @@ userRouter
   .get(async (_, res) => {
     try {
       const users = await getUsers();
-      res.status(200).json({ users });
+      res.status(HttpCodes.CODE_SUCCESS).json({ users });
     } catch (error) {
-      throw error;
-    }
-  })
-  .post(async (req, res) => {
-    try {
-      const body = req.body;
-
-      // validate
-      const { isValid, data, errors } = validateSchema({
-        data: body,
-        schema: UserSchemaValidator,
-      });
-
-      if (!isValid) {
-        const errorString = errors?.map((error: any) => error.message).join(",");
-        throw new Error(errorString);
-      }
-
-      const newUser = await createUser({
-        ...data,
-      });
-
-      res
-        .status(HttpCodes.CODE_SUCCESS_CREATED)
-        .json({ user: newUser, message: "User Created" });
-    } catch (error) {
-      console.log(error);
-
-      return res.status(HttpCodes.CODE_BAD_REQUEST).json({
+      return res.status(HttpCodes.CODE_NOT_FOUND).json({
         message: `${error}`,
-      });
+      })
     }
   })
   .put(async (req, res) => {
     try {
-      // faltaria validation del req.body
-      const user = await modifyUserById(req.body);
-      res.status(200).json(user);
+      // validate
+      const body = req.body
+
+      // validate
+      const { data } = validateUserUpdate(body)
+
+      // update user
+      const user = await modifyUserById({
+        ...data
+      });
+      res.status(HttpCodes.CODE_SUCCESS).json(user);
     } catch (error) {
-      throw error;
+      return res.status(HttpCodes.CODE_BAD_REQUEST).json({
+        message: `${error}`,
+      })
     }
   });
 
@@ -67,9 +49,11 @@ userRouter
     try {
       const { userId } = req.params;
       const user = await getUserById(userId);
-      res.status(200).json(user);
+      res.status(HttpCodes.CODE_SUCCESS).json(user);
     } catch (error) {
-      throw error;
+      return res.status(HttpCodes.CODE_NOT_FOUND).json({
+        message: `${error}`,
+      })
     }
   })
   .delete(async (req, res) => {
@@ -78,7 +62,9 @@ userRouter
       const user = await deleteUser(userId);
       res.status(200).json(user);
     } catch (error) {
-      throw error;
+      return res.status(HttpCodes.CODE_BAD_REQUEST).json({
+        message: `${error}`,
+      })
     }
   });
 

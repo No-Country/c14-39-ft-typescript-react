@@ -2,7 +2,9 @@ import express from "express";
 import userRouter from "../routes/userRouter";
 import countryRouter from "../routes/countryRouter";
 import typeRouter from "../routes/typeRouter";
-import loginRouter from "../routes/loginRouter";
+import authRouter from "./authRouter";
+import sportCenterRouter from "../routes/sportCenterRouter";
+import { authRequired } from "../../middlewares/validateToken";
 
 const app = express();
 const server = express.Router();
@@ -18,6 +20,7 @@ app.use("/", server);
 app.use("/users", userRouter);
 app.use("/country", countryRouter);
 app.use("/types", typeRouter);
-app.use("/login", loginRouter);
+app.use("/", authRouter);  // Las rutas de autenticación están directamente en el nivel raíz
+app.use("/sportCenter", authRequired, sportCenterRouter);
 
 export default app;
