@@ -1,4 +1,4 @@
-import { RowItem } from '../components/RowItem'
+import { RowItem } from '../components/form/RowItem'
 import { Map, Marker, Overlay } from 'pigeon-maps'
 import { options } from '../services/manageData'
 import { calculateAverageLatLng } from '../utils/utils'

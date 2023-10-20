@@ -18,6 +18,7 @@ export default {
         'base-green3': 'var(--base-green3)',
         'base-white': 'var(--base-white)',
         'base-white-60': 'var(--base-white-60)',
+        'base-green1-60': 'var(--base-green1-60)',
       },
       boxShadow: {
         'sh-2xl': 'var(--sh-2xl)',

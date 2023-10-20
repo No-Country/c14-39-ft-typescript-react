@@ -1,13 +1,13 @@
 import { useState } from 'react'
-import { Button } from './Button'
-import { MySelect } from './MySelect'
-import { COMMON_TWSTYLES, ROUTES } from '../data/consts'
+import { Button } from '../Button'
+import { MySelect } from '../form/MySelect'
+import { COMMON_TWSTYLES, ROUTES } from '../../data/consts'
 import { useNavigate } from 'react-router-dom'
 // import { options } from '../services/manageData'
 
-import { City } from '../types/types'
+import { City } from '../../types/types'
 
-import cities from '../data/mockdata_country.json'
+import cities from '../../data/mockdata_country.json'
 
 export const ReservationForm = () => {
   const [selectedOption, setSelectedOption] = useState<City | null>(null)

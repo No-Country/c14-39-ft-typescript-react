@@ -1,7 +1,7 @@
 import { ClockIcon } from '@heroicons/react/24/outline'
 import { ChevronRightIcon } from '@heroicons/react/24/outline'
 import { MapPinIcon } from '@heroicons/react/24/outline'
-import { Proveedor } from '../types/types'
+import { Proveedor } from '../../types/types'
 
 export const RowItem = ({ proveedor, onClick }: { proveedor: Proveedor; onClick: () => void }) => {
   const proveedorInfo = `${proveedor?.canchas.length} canchas | ${proveedor?.instalaciones.join(', ')}`

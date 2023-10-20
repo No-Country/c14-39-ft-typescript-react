@@ -1,4 +1,4 @@
-import { BUSINESS } from '../data/consts'
+import { BUSINESS } from '../../data/consts'
 
 export const HeroContent = () => {
   return (

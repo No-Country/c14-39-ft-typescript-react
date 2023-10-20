@@ -5,7 +5,7 @@ import espaciosTiempo from '../../data/mockdata_timepo.json'
 import { Cancha, Proveedor } from '../../types/types'
 
 import { Calendario } from './Calendario'
-import { RowTiempo } from '../RowItem'
+import { RowTiempo } from '../form/RowItem'
 import { CanchaSelector } from './CanchaSelector'
 import { useNavigate } from 'react-router-dom'
 import { ROUTES } from '../../data/consts'
