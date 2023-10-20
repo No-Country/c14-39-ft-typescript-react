@@ -1,4 +1,3 @@
-//app contetx
 import { createContext, ReactNode, useState } from 'react'
 
 interface AppContextProps {
@@ -6,12 +5,38 @@ interface AppContextProps {
 }
 interface AppContextData {
   isLogged: boolean
-  setIsLogged: (isLogged: boolean) => void
+  userIslogged: () => void
+  userIsNotlogged: () => void
+  bookingData: BookData | null
+  saveBooking: (bookingData: BookData) => void
 }
 
-const AppContext = createContext<AppContextData>({} as AppContextData)
+type BookData = {
+  id: string
+  cancha: string
+  fecha: Date
+  hora: number
+  precio: number
+}
+
+export const AppContext = createContext<AppContextData>({} as AppContextData)
 
 export const AppProvider = ({ children }: AppContextProps) => {
   const [isLogged, setIsLogged] = useState(false)
-  return <AppContext.Provider value={{ isLogged, setIsLogged }}>{children}</AppContext.Provider>
+  const [bookingData, setBookingData] = useState<BookData | null>(null)
+
+  const userIslogged = () => {
+    setIsLogged(true)
+  }
+  const userIsNotlogged = () => {
+    setIsLogged(false)
+  }
+
+  const saveBooking = ({ id, cancha, fecha, hora, precio }: BookData) => {
+    setBookingData(prevState => {
+      return { ...prevState, id, cancha, fecha, hora, precio }
+    })
+  }
+
+  return <AppContext.Provider value={{ isLogged, userIslogged, userIsNotlogged, bookingData, saveBooking }}>{children}</AppContext.Provider>
 }
