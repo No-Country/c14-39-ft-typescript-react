@@ -5,7 +5,7 @@ dotenv.config();
 
 const { DB_USER, DB_PASSWORD } = process.env;
 
-const connectionString = `mongodb+srv://${DB_USER}:${DB_PASSWORD}@nocountry.0obnwbo.mongodb.net/nocountry?retryWrites=true&w=majority`;
+const connectionString = `mongodb+srv://${DB_USER}:${DB_PASSWORD}@nocountry.0obnwbo.mongodb.net/reservatucampo?retryWrites=true&w=majority`
 
 const PORT: string | number = process.env.PORT ?? 3000;
 
