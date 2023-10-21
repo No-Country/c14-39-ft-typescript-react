@@ -1,7 +1,7 @@
 import { ClockIcon } from '@heroicons/react/24/outline'
 import { ChevronRightIcon } from '@heroicons/react/24/outline'
 import { MapPinIcon } from '@heroicons/react/24/outline'
-import { Proveedor } from '../types/types'
+import { Proveedor } from '../../types/types'
 
 export const RowItem = ({ proveedor, onClick }: { proveedor: Proveedor; onClick: () => void }) => {
   const proveedorInfo = `${proveedor?.canchas.length} canchas | ${proveedor?.instalaciones.join(', ')}`
@@ -25,9 +25,11 @@ export const RowItem = ({ proveedor, onClick }: { proveedor: Proveedor; onClick:
   )
 }
 
-export const RowTiempo = ({ title }: { title: string }) => {
+export const RowTiempo = ({ title, onClick }: { title: string; onClick: () => void }) => {
   return (
-    <div className='flex items-center gap-2 px-2 py-4 bg-white cursor-pointer rounded-2xl shadow-sh-sm'>
+    <div
+      className='flex items-center gap-2 px-2 py-4 bg-white cursor-pointer rounded-2xl shadow-sh-sm'
+      onClick={onClick}>
       <div className='flex items-start flex-1 min-w-0 gap-2'>
         <ClockIcon className='w-6 text-base-blue2' />
         <div className='flex flex-col items-start justify-center flex-1 min-w-0 gap-1'>

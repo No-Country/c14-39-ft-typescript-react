@@ -1,5 +1,5 @@
-import { COMMON_TWSTYLES } from '../data/consts'
-import { City } from '../types/types'
+import { COMMON_TWSTYLES } from '../../data/consts'
+import { City } from '../../types/types'
 
 type MySelectProps = {
   options: City[]

@@ -10,7 +10,7 @@ export const ROUTES = {
 
   FIELDS: '/canchas',
   FIELDS_DETAIL: '/canchas/:cancha',
-  CONFIRM: '/canchas/:cancha/confirm',
+  CONFIRM: '/confirm',
 
   ADMIN: '/admin',
   ANY: '*',

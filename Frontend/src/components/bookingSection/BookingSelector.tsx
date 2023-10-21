@@ -1,15 +1,22 @@
-import { useState } from 'react'
+import { useContext, useState } from 'react'
+import { AppContext } from '../../context/appcontext'
 
 import espaciosTiempo from '../../data/mockdata_timepo.json'
 import { Cancha, Proveedor } from '../../types/types'
 
 import { Calendario } from './Calendario'
-import { RowTiempo } from '../RowItem'
+import { RowTiempo } from '../form/RowItem'
 import { CanchaSelector } from './CanchaSelector'
+import { useNavigate } from 'react-router-dom'
+import { ROUTES } from '../../data/consts'
 
 export function BookingSelector({ proveedor }: { proveedor: Proveedor | undefined }) {
   const [selectedDate, setSelectedDate] = useState<Date | null>(null)
   const [selectedCancha, setSelectedCancha] = useState<Cancha | null>(null)
+
+  const { saveBooking } = useContext(AppContext)
+
+  const navigate = useNavigate()
 
   const today = new Date()
   const minDate = new Date(today)
@@ -21,6 +28,22 @@ export function BookingSelector({ proveedor }: { proveedor: Proveedor | undefine
 
   function selectCancha(cancha: Cancha) {
     setSelectedCancha(cancha)
+  }
+
+  // function reset() {
+  //   setSelectedDate(null)
+  //   setSelectedCancha(null)
+  // }
+
+  function ConfirmBooking(hora: number) {
+    saveBooking({
+      id: String(proveedor?.id),
+      fecha: selectedDate as Date,
+      cancha: selectedCancha?.nombre as string,
+      precio: proveedor?.precio as number,
+      hora,
+    })
+    navigate(ROUTES.CONFIRM)
   }
 
   return (
@@ -55,6 +78,7 @@ export function BookingSelector({ proveedor }: { proveedor: Proveedor | undefine
               <RowTiempo
                 key={item.hora}
                 title={String(`${item.hora}:00`)}
+                onClick={() => ConfirmBooking(item.hora)}
               />
             ))}
         </div>

@@ -1,6 +1,6 @@
 import { HeroContent } from './HeroContent'
 import { ReservationForm } from './ReservationForm'
-import Stripes from './stripes'
+import Stripes from '../stripes'
 
 const Hero = () => {
   return (

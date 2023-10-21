@@ -10,6 +10,7 @@
   --base-green2: rgba(161, 254, 206, 1);
   --base-green3: rgba(43, 161, 143, 1);
   --base-white: rgba(255, 255, 255, 1);
+  --base-green1-60: rgba(125, 228, 137, 0.6);
   --base-white-60: rgba(255, 255, 255, 0.6);
   --sh-2xl: 0px 24px 48px -12px rgba(16, 24, 40, 0.18);
   --sh-3xl: 0px 32px 64px -12px rgba(16, 24, 40, 0.14);
@@ -40,4 +41,33 @@ body {
 
 .wrapper {
   @apply w-full max-w-6xl px-4 mx-auto my-0 md:px-7;
+}
+
+@keyframes appear {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes disappear {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+.appear-scroll {
+  animation: appear linear both;
+  animation-timeline: scroll();
+  animation-range: 80px 160px;
+}
+.disappear-scroll {
+  animation: disappear linear both;
+  animation-timeline: scroll();
+  animation-range: 80px 160px;
 }
