@@ -5,6 +5,7 @@ import typeRouter from "../routes/typeRouter";
 import authRouter from "./authRouter";
 import sportCenterRouter from "../routes/sportCenterRouter";
 import { authRequired } from "../../middlewares/validateToken";
+import reservationRouter from "./reservationRouter";
 
 const app = express();
 const server = express.Router();
@@ -17,10 +18,11 @@ server.get("/", (_, res) => {
 
 app.use("/", server);
 
+app.use("/", authRouter); // Las rutas de autenticación están directamente en el nivel raíz
 app.use("/users", userRouter);
 app.use("/country", countryRouter);
 app.use("/types", typeRouter);
-app.use("/", authRouter);  // Las rutas de autenticación están directamente en el nivel raíz
+app.use("/reservation", reservationRouter);
 app.use("/sportCenter", authRequired, sportCenterRouter);
 
 export default app;

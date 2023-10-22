@@ -5,7 +5,7 @@ import {
   CountrySchemaValidator,
   TypeUserSchemaValidator,
   SportCenterSchemaValidator,
-  SportCenterUpdateSchema
+  SportCenterUpdateSchema,
 } from "../models/schemas";
 
 // refactorizado validacion
@@ -18,20 +18,20 @@ const validate = (schema: any) => {
 
     if (!isValid || errors) {
       const errorString: string | any = errors
-        ?.map((error) => error.message)
+        ?.map((error: any) => error.message)
         .join(" , ");
       throw new Error(errorString);
     }
 
     return {
-      data
+      data,
     };
-  }
-}
+  };
+};
 
-export const validateUser = validate(UserSchemaValidator)
-export const validateUserUpdate = validate(UserUpdateSchema)
-export const validateCountry = validate(CountrySchemaValidator)
-export const validateType = validate(TypeUserSchemaValidator)
-export const validateSportCenter = validate(SportCenterSchemaValidator)
-export const validateUpdateSport = validate(SportCenterUpdateSchema)
+export const validateUser = validate(UserSchemaValidator);
+export const validateUserUpdate = validate(UserUpdateSchema);
+export const validateCountry = validate(CountrySchemaValidator);
+export const validateType = validate(TypeUserSchemaValidator);
+export const validateSportCenter = validate(SportCenterSchemaValidator);
+export const validateUpdateSport = validate(SportCenterUpdateSchema);
