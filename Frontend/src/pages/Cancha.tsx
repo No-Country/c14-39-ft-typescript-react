@@ -13,7 +13,7 @@ const Cancha = () => {
 
   return (
     <section
-      className={`min-h-screen z-0 relative bg-top bg-base-green1  bg-fixed bg-cover py-24 -mt-24 flex flex-col justify-center gap-6 `}
+      className='relative z-0 flex flex-col justify-center min-h-screen gap-6 py-24 -mt-24 bg-fixed bg-top bg-cover bg-base-green1 animate-fade-in'
       style={{ backgroundImage: `url(${proveedor?.imagen})` }}>
       <Stripes />
       {proveedor ? (
