@@ -9,6 +9,7 @@ import { RowTiempo } from '../form/RowItem'
 import { CanchaSelector } from './CanchaSelector'
 import { useNavigate } from 'react-router-dom'
 import { ROUTES } from '../../data/consts'
+import { Stepper } from './Stepper'
 
 export function BookingSelector({ proveedor }: { proveedor: Proveedor | undefined }) {
   const [selectedDate, setSelectedDate] = useState<Date | null>(null)
@@ -48,7 +49,13 @@ export function BookingSelector({ proveedor }: { proveedor: Proveedor | undefine
 
   return (
     <article className='wrapper'>
-      <div className='grid md:grid-cols-[auto_1fr_1fr] content-start gap-4 p-4 md:p-8 rounded-[2rem] backdrop-filter backdrop-blur-[20px] w-full bg-white/60'>
+      <div className='grid md:grid-cols-[auto_1fr_1fr]  content-start gap-4 p-4 md:p-8 rounded-[2rem] backdrop-filter backdrop-blur-[20px] w-full bg-white/60'>
+        <Stepper
+          paso={3}
+          total={3}
+          mensaje='Confirma fecha, cancha y hora.'
+          overrideClasses='col-span-3'
+        />
         <div className=''>
           <Calendario
             minDate={minDate}

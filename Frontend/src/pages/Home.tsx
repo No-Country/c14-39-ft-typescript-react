@@ -5,12 +5,12 @@ import PromoSection from '../components/home/PromoSection'
 
 const Home = () => {
   return (
-    <>
+    <section className='animate-fade-in'>
       <Hero />
       <Beneficios />
       <Patrocinadores />
       <PromoSection />
-    </>
+    </section>
   )
 }
 

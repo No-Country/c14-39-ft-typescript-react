@@ -19,7 +19,7 @@ export const NavBar = () => {
 
   return (
     <div className={`w-full max-w-6xl flex items-center px-4 md:px-7 h-20 justify-between`}>
-      <Logo />
+      <Logo inHome={thisIsHome} />
 
       <div className='items-center hidden gap-3 p-2 rounded-full md:flex bg-base-green1'>
         <ul className='flex gap-6 px-4 py-0'>

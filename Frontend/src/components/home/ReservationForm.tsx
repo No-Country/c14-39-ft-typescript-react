@@ -3,7 +3,6 @@ import { Button } from '../Button'
 import { MySelect } from '../form/MySelect'
 import { COMMON_TWSTYLES, ROUTES } from '../../data/consts'
 import { useNavigate } from 'react-router-dom'
-// import { options } from '../services/manageData'
 
 import { City } from '../../types/types'
 
@@ -29,6 +28,8 @@ export const ReservationForm = () => {
         {/*  */}
         <PreForm />
         {/*  */}
+
+        <h2 className='w-full mt-2 mb-0'>Paso 1 de 3: Busca por ciudad, fecha y hora.</h2>
 
         <div className='flex flex-wrap w-full gap-8 md:flex-nowrap md:gap-20'>
           {/*  */}
