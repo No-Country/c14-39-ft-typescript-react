@@ -6,6 +6,7 @@ import Cancha from '../pages/Cancha'
 import Confirm from '../pages/Confirm'
 import Canchas from '../pages/Canchas'
 import Registro from '../pages/Registro'
+import NotFound from '../pages/NotFound'
 
 export const AppRoutes = () => {
   const routes = useRoutes([
@@ -18,7 +19,7 @@ export const AppRoutes = () => {
     { path: ROUTES.CONFIRM, element: <Confirm /> },
 
     { path: ROUTES.ADMIN, element: <Navigate to='/login' /> },
-    { path: ROUTES.ANY, element: <Navigate to='/' /> },
+    { path: ROUTES.ANY, element: <NotFound /> },
   ])
 
   return routes

@@ -71,3 +71,7 @@ body {
   animation-timeline: scroll();
   animation-range: 60px 100px;
 }
+
+.text-balance {
+  text-wrap: balance;
+}
