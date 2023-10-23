@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom'
 import { City } from '../../types/types'
 
 import cities from '../../data/mockdata_country.json'
+import { Stepper } from '../bookingSection/Stepper'
 
 export const ReservationForm = () => {
   const [selectedOption, setSelectedOption] = useState<City | null>(null)
@@ -29,7 +30,12 @@ export const ReservationForm = () => {
         <PreForm />
         {/*  */}
 
-        <h2 className='w-full mt-2 mb-0'>Paso 1 de 3: Busca por ciudad, fecha y hora.</h2>
+        <Stepper
+          paso={1}
+          total={3}
+          mensaje='Busca por ciudad, fecha y hora.'
+          overrideClasses='mb-2'
+        />
 
         <div className='flex flex-wrap w-full gap-8 md:flex-nowrap md:gap-20'>
           {/*  */}

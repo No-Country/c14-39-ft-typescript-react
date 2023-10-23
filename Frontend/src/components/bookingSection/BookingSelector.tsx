@@ -54,7 +54,7 @@ export function BookingSelector({ proveedor }: { proveedor: Proveedor | undefine
           paso={3}
           total={3}
           mensaje='Confirma fecha, cancha y hora.'
-          overrideClasses='col-span-3'
+          overrideClasses='col-span-1 md:col-span-3'
         />
         <div className=''>
           <Calendario
