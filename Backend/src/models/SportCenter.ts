@@ -14,15 +14,15 @@ const sportCenterSchema = new Schema({
   imgs: [
     {
       type: String,
-      required: true
-    }
+      required: true,
+    },
   ],
   camps_id: [
     {
       type: Schema.Types.ObjectId,
       ref: "Camp",
       required: true,
-    }
+    },
   ],
   country_id: {
     type: Schema.Types.ObjectId,
@@ -33,7 +33,7 @@ const sportCenterSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: "User",
     required: true,
-  }
+  },
 });
 
 sportCenterSchema.set("toJSON", {
