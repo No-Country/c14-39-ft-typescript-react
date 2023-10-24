@@ -6,7 +6,7 @@ export function CanchaData({ proveedor }: { proveedor: Proveedor | undefined }) 
   return (
     <article className='flex items-center py-0 font-body wrapper'>
       <div className='flex flex-col gap-3 p-4 md:p-0 rounded-[2rem] md:rounded-none md:w-1/2 bg-base-green1 md:bg-transparent'>
-        <h1 className='text-3xl md:text-6xl font-display '>{proveedor?.nombre}</h1>
+        <h1 className='text-2xl md:text-4xl font-display '>{proveedor?.nombre}</h1>
         <p>
           <strong>Ubicación:</strong> {proveedor?.ubicacion}
         </p>

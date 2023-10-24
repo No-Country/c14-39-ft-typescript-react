@@ -64,10 +64,14 @@ body {
 .appear-scroll {
   animation: appear linear both;
   animation-timeline: scroll();
-  animation-range: 80px 160px;
+  animation-range: 60px 100px;
 }
 .disappear-scroll {
   animation: disappear linear both;
   animation-timeline: scroll();
-  animation-range: 80px 160px;
+  animation-range: 60px 100px;
+}
+
+.text-balance {
+  text-wrap: balance;
 }

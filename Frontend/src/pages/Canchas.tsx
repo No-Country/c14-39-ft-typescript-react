@@ -21,8 +21,9 @@ const Canchas = () => {
   }
 
   return (
-    <section className='wrapper'>
-      <h1 className='w-full text-4xl md:text-6xl mb-7 font-display'>Bogotá, Colombia</h1>
+    <section className='wrapper animate-fade-in'>
+      <h1 className='w-full mb-4 text-2xl md:text-4xl font-display'>Bogotá, Colombia</h1>
+      <h2 className='mb-2'>Paso 2 de 3: Escoge tu cancha favorita.</h2>
 
       <div className='grid md:grid-cols-[40%_1fr]  gap-2 rounded-[2rem] backdrop-filter backdrop-blur-[20px] bg-white/60 mb-6'>
         <div className='flex flex-col h-full gap-2 p-4 overflow-x-hidden overflow-y-auto'>

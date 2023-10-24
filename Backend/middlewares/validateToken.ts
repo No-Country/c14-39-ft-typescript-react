@@ -1,6 +1,7 @@
 import jwt from "jsonwebtoken";
 import { Request, Response, NextFunction } from "express";
 import * as dotenv from "dotenv";
+import { HttpCodes } from "../src/utils";
 
 dotenv.config();
 
@@ -22,7 +23,10 @@ export const authRequired = (
     token,
     TOKEN_SECRET as string,
     (err: jwt.JsonWebTokenError | null, user: any) => {
-      if (err) return res.status(403).json({ message: "Invalid token" });
+      if (err)
+        return res
+          .status(HttpCodes.CODE_BAD_REQUEST)
+          .json({ message: "Invalid token" });
 
       req.userId = user;
       next();

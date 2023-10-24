@@ -35,11 +35,11 @@ const ResevationSchema = new Schema({
   },
   sca_id: {
     type: Schema.Types.ObjectId,
-    ref: "SportCenterArea",
+    ref: "Camp",
     required: true,
   },
 });
 
 export const ReservationModel =
-  mongoose.models.reservations ||
-  mongoose.model("reservatios", ResevationSchema);
+  mongoose.models.Reservations ||
+  mongoose.model("Reservatios", ResevationSchema);
