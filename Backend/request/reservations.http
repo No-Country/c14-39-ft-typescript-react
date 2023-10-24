@@ -1,0 +1,16 @@
+# CREATE RESERVATION
+POST http://localhost:3000/api/reservation
+Content-Type: application/json
+
+{
+  "fr_date_reservation": "2023-10-22T17:14:46.360Z",
+  "fr_date_reserved": "23-10-2023",
+  "fr_status": "RESERVADO",
+  "fr_schedule": {
+    "s_start": "16:00:00",
+    "s_end":"17:00:00"
+  },
+  "user_id":"652ff85a5e95f355a0630ce0",
+  "sc_id": "652ff85a5e95f355a0630ce0",
+  "sca_id": "652ff85a5e95f355a0630ce0"
+}

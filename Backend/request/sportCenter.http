@@ -1,0 +1,51 @@
+### GET SPORTCENTER
+GET http://localhost:3000/api/sportCenter
+
+### GET SPORTCENTER BY ID
+GET http://localhost:3000/api/sportCenter/65370b542b617a35521a4389
+
+### POST SPORTCENTER
+POST http://localhost:3000/api/sportcenter
+Content-Type: application/json
+
+
+// SE PODRIA PASAR EL NOMBRE DEL COUNTRY EN VEZ DE ID
+{
+  "sc_name": "Villa Niza Sports Hub",
+  "sc_description": "Un centro deportivo con campos de fútbol, canchas de baloncesto y una pista de atletismo, perfecto para atletas de todas las edades y niveles de habilidad.",
+  "sc_phone": "+57 3135348910",
+  "sc_info": {
+    "sc_address": "Villa Niza, Medellín, Santa Cruz, Medellín, Antioquia, Colombia",
+    "sc_lat": 6.295708,
+    "sc_alt": -75.559366,
+    "sc_open": "08:00:00",
+    "sc_close": "22:00:00",
+    "sc_email": "info@villanizasportshub.co"
+  },
+  "sc_active": true,
+  "sc_imgs": [
+    "https://www.google.com/imgres?imgurl=https%3A%2F%2Fimages.adsttc.com%2Fmedia%2Fimages%2F512a%2F1a8d%2Fb3fc%2F4b11%2Fa700%2F8730%2Flarge_jpg%2F1301617467-00a-centro-de-deportes.jpg%3F1414319849&tbnid=qAo1Mmv3VkmhhM&vet=12ahUKEwj-q9zpno2CAxW9uZUCHb7pBOMQMygDegQIARBR..i&imgrefurl=https%3A%2F%2Fwww.archdaily.pe%2Fpe%2F02-82272%2Fcentro-de-deportes-aberdeen-reiach-and-hall-architects&docid=sF-zDpRfjW8bYM&w=1000&h=779&q=imagenes%20random%20centros%20deportivos&ved=2ahUKEwj-q9zpno2CAxW9uZUCHb7pBOMQMygDegQIARBR",
+    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ0RHO8lL4ObGnxwgzCKyqKk3mQo_KaFtXNlq-wzj9GXn0kzEBR7iO6BFPBrTjc9y1Oueo&usqp=CAU"
+  ],
+  "country_id": "6536f883f0484362d2ba2fdb",
+  "user_id": "65302b877d83d01c2fa0388d"
+}
+
+
+
+
+
+
+
+### DELETE SPORTCENTER BY ID
+DELETE  http://localhost:3000/api/sportCenter/652ff8775e95f355a0630ce4
+
+### UPDATE SPORTCENTER
+PUT http://localhost:3000/api/sportCenter
+Content-Type: application/json
+
+{
+  "name": "Otro sportcenter 4",
+  "email": "otrocorreo4@example.com",
+  "sportCenterId": "653153b6f4909b401907da4b"
+}
