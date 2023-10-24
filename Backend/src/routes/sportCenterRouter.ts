@@ -7,7 +7,8 @@ import {
   deleteSportCenter,
 } from "../controllers/sportCenterControllers";
 import { HttpCodes } from '../utils/HTTPCodes.util'
-import { validateSportCenter, validateUpdateSport } from '../utils/validateReq.util'
+import { validateSchema } from '../../middlewares/validatorMiddleware'
+import { SportCenterSchemaValidator, SportCenterUpdateSchema } from "../models/schemas/sportCenter.zod"
 
 const sportCenterRouter = express.Router();
 
@@ -25,14 +26,9 @@ sportCenterRouter
   })
   .post(async (req, res) => {
     try {
-      const body = req.body;
-
-      // validate se coloco en utils refactorizado
-      const { data } = validateSportCenter(body)
-
       // create user
       const newSportCenter = await registerSportCenter({
-        ...data,
+        ...req.body,
       });
 
       res
@@ -47,15 +43,9 @@ sportCenterRouter
   })
   .put(async (req, res) => {
     try {
-      // validate
-      const body = req.body
-
-      // validate se coloco en utils refactorizado
-      const { data } = validateUpdateSport(body)
-
       // update sportCenter
       const sportCenter = await modifySportCenterById({
-        ...data
+        ...req.body
       });
       res.status(HttpCodes.CODE_SUCCESS).json(sportCenter);
     } catch (error) {

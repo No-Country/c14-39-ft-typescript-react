@@ -3,8 +3,10 @@ import userRouter from "../routes/userRouter";
 import countryRouter from "../routes/countryRouter";
 import typeRouter from "../routes/typeRouter";
 import authRouter from "./authRouter";
-import sportCenterRouter from "../routes/sportCenterRouter";
+// import campRouter from "./campRouter";
+import sportCenterRouter from "./sportCenterRouter"
 import { authRequired } from "../../middlewares/validateToken";
+import paymentRouter from "./paymentRouter"
 
 const app = express();
 const server = express.Router();
@@ -22,5 +24,6 @@ app.use("/country", countryRouter);
 app.use("/types", typeRouter);
 app.use("/", authRouter);  // Las rutas de autenticación están directamente en el nivel raíz
 app.use("/sportCenter", authRequired, sportCenterRouter);
+app.use("/payment", paymentRouter);
 
 export default app;

@@ -1,7 +1,8 @@
 import express from 'express'
 import { Country } from '../models'
 import { HttpCodes } from '../utils/HTTPCodes.util'
-import { validateCountry } from '../utils/validateReq.util'
+import { validateSchema } from '../../middlewares/validatorMiddleware'
+import { CountrySchemaValidator } from '../models/schemas/schemas.zod'
 
 const countryRouter = express.Router()
 
@@ -16,15 +17,10 @@ countryRouter.route('/').
       })
     }
   })
-  .post(async (req, res) => {
+  .post(validateSchema(CountrySchemaValidator), async (req, res) => {
     try {
-      const body = req.body
-
-      // validate country
-      const { data } = validateCountry(body)
-
       const newCountry = new Country({
-        ...data
+        ...req.body
       })
 
       await newCountry.save()
