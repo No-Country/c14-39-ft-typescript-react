@@ -3,7 +3,12 @@ import { Country, SportCenterModel, User } from "../models";
 
 export const getSportCenters = async () => {
   try {
-    const sportCenters = await SportCenterModel.find();
+    const sportCenters = await SportCenterModel.find()
+      .populate("user_id")
+      .populate("list_sport_camps", {
+        sca_num: 1,
+        _id: 1,
+      });
     return sportCenters;
   } catch (error) {
     throw error;
@@ -13,14 +18,10 @@ export const getSportCenters = async () => {
 export const getSportCenterById = async (sportCenterId: string) => {
   try {
     const sportCenter = await SportCenterModel.findById(sportCenterId)
-      .populate("country_id", {
-        name: 1,
-      })
-      .populate("user_id", {
-        name: 1,
-      })
-      .populate("camps_id", {
-        num: 1,
+      .populate("user_id")
+      .populate("list_sport_camps", {
+        sca_num: 1,
+        _id: 1,
       });
     return sportCenter;
   } catch (error) {

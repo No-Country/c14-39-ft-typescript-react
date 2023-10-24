@@ -24,7 +24,7 @@ reservationRouter
       }: {
         isValid: boolean;
         data?: IReservation | any;
-        errors?: string[] | any;
+        errors?: string | any;
       } = validateSchema({
         data: body,
         schema: fieldReservationSchemaValidator,
@@ -33,7 +33,7 @@ reservationRouter
       if (!isValid) {
         console.log({ errors });
 
-        throw new Error(errors?.join(" , "));
+        throw new Error(errors);
       }
 
       const dataResponse = await controller.createReservation(data);

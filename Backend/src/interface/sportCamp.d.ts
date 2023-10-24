@@ -8,7 +8,8 @@ export interface ISportCamp {
   sca_height: number;
   sca_active: boolean;
   sca_imgs: [string];
-  sca_type_id: ObjectId;
+  camp_type_id: ObjectId;
+  sport_center_id: ObjectId;
   user_id: ObjectId;
 }
 
@@ -18,4 +19,6 @@ export interface ISportCampResponse extends ISportCamp {
 
 export interface ISportCampController {
   createSportCamp(reservationData: ISportCamp): Promise<ISportCampResponse>;
+  getAllSportCamps(): Promise<ISportCampResponse[]>;
+  getByIdSportCamps(id: string);
 }

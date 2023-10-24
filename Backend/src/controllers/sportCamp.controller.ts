@@ -4,31 +4,66 @@ import {
   ISportCampResponse,
 } from "../interface/sportCamp";
 import { SportCenterData, SportCenterUpdateId } from "../interface/sportCenter";
-import { User, SportCenterModel, Country, Camp } from "../models";
+import { User, SportCenterModel, Country, Camp, CampType } from "../models";
 
 export class SportCampController implements ISportCampController {
+  public async getAllSportCamps(): Promise<ISportCampResponse[]> {
+    try {
+      const sportCamps: ISportCampResponse[] = await Camp.find()
+        .populate("sport_center_id", {
+          _id: 1,
+          sc_name: 1,
+          sc_description: 1,
+          sc_info: 1,
+          sc_active: 1,
+        })
+        .populate("camp_type_id")
+        .populate("user_id");
+      return sportCamps;
+    } catch (error: any) {
+      throw new Error(error);
+    }
+  }
+
+  public async getByIdSportCamps(id: string) {
+    try {
+      const sportCamp = await Camp.findById(id)
+        .populate("sport_center_id", {
+          _id: 1,
+          sc_name: 1,
+          sc_description: 1,
+          sc_info: 1,
+          sc_active: 1,
+        })
+        .populate("camp_type_id")
+        .populate("user_id");
+      return sportCamp;
+    } catch (error: any) {
+      throw new Error(error);
+    }
+  }
+
   public async createSportCamp(
     sportCampData: ISportCamp
   ): Promise<ISportCampResponse> {
-    const [type, user] = await Promise.all([
-      Country.findById(sportCampData.sca_capacity),
+    const [type, user, sportCenter] = await Promise.all([
+      CampType.findById(sportCampData.camp_type_id),
       User.findById(sportCampData.user_id),
+      SportCenterModel.findById(sportCampData.sport_center_id),
     ]);
 
-    if (!type || !user) {
+    if (!type || !user || !sportCenter) {
       throw new Error("Country or User not found");
     }
 
-    const sportCamp = new Camp({
-      ...sportCampData,
-    });
-
+    const sportCamp = new Camp(sportCampData);
     await sportCamp.save();
 
-    return {
-      _id: "afdsad",
-      ...sportCampData,
-    };
+    await SportCenterModel.findByIdAndUpdate(sportCampData.sport_center_id, {
+      $push: { list_sport_camps: sportCamp._id },
+    });
+
+    return sportCamp;
   }
 }
 

@@ -1,11 +1,8 @@
-### GET DOC
-GET http://localhost:3000/api-docs
-
 ### GET SPORTCENTER
 GET http://localhost:3000/api/sportCenter
 
 ### GET SPORTCENTER BY ID
-GET http://localhost:3000/api/sportCenter/653145196a0d93faa5231045
+GET http://localhost:3000/api/sportCenter/65370b542b617a35521a4389
 
 ### POST SPORTCENTER
 POST http://localhost:3000/api/sportcenter

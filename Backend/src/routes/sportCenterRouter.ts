@@ -60,7 +60,12 @@ sportCenterRouter
       const sportCenter = await modifySportCenterById({
         ...data,
       });
-      res.status(HttpCodes.CODE_SUCCESS).json(sportCenter);
+      res
+        .status(HttpCodes.CODE_SUCCESS)
+        .json({
+          message: "Centros deportivos obtenidos de manera correcta",
+          data: sportCenter,
+        });
     } catch (error) {
       return res.status(HttpCodes.CODE_BAD_REQUEST).json({
         message: `${error}`,
@@ -69,12 +74,15 @@ sportCenterRouter
   });
 
 sportCenterRouter
-  .route("/:sportCenterId")
+  .route("/:sport_center_id")
   .get(async (req, res) => {
     try {
-      const { sportCenterId } = req.params;
-      const sportCenter = await getSportCenterById(sportCenterId);
-      res.status(HttpCodes.CODE_SUCCESS).json(sportCenter);
+      const { sport_center_id } = req.params;
+      const sportCenter = await getSportCenterById(sport_center_id);
+      res.status(HttpCodes.CODE_SUCCESS).json({
+        message: "centro deportivo obtenido de manera correcta",
+        data: sportCenter,
+      });
     } catch (error) {
       return res.status(HttpCodes.CODE_NOT_FOUND).json({
         message: `${error}`,
@@ -83,8 +91,8 @@ sportCenterRouter
   })
   .delete(async (req, res) => {
     try {
-      const { sportCenterId } = req.params;
-      const sportCenter = await deleteSportCenter(sportCenterId);
+      const { sport_center_id } = req.params;
+      const sportCenter = await deleteSportCenter(sport_center_id);
       res.status(200).json(sportCenter);
     } catch (error) {
       return res.status(HttpCodes.CODE_BAD_REQUEST).json({

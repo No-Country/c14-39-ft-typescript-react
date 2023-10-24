@@ -1,5 +1,4 @@
 import express from "express";
-import { Country } from "../models";
 import { HttpCodes } from "../utils/HTTPCodes.util";
 import { validateCountry } from "../utils/validateReq.util";
 import { CountryController } from "../controllers/country.controller";
@@ -41,5 +40,20 @@ countryRouter
       });
     }
   });
+
+countryRouter.route("/:country_id").get(async (req, res) => {
+  try {
+    const { country_id } = req.params;
+    const country = await controller.getByIdCountry(country_id);
+    return res.status(HttpCodes.CODE_SUCCESS).json({
+      message: "La informacion  se obtuvo de manera exitosa",
+      data: country,
+    });
+  } catch (error) {
+    return res.status(HttpCodes.CODE_NOT_FOUND).json({
+      message: `${error}`,
+    });
+  }
+});
 
 export default countryRouter;

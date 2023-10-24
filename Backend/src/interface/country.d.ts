@@ -9,7 +9,7 @@ export interface ICountry {
 
 export interface ICountryResponseGet extends ICountry {
   _id: Schema.Types.ObjectId | any;
-  list_sport_centers?: SportCenterResponse[];
+  list_sport_centers?: SportCenterResponse[] | Schema.Types.ObjectId[];
 }
 
 export interface ICountryResponseCreate extends ICountry {
@@ -19,5 +19,6 @@ export interface ICountryResponseCreate extends ICountry {
 
 export interface ICountryController {
   getAllCountries(): Promise<ICountryResponseGet[]>;
-  createCountry(country: ICountry): Promise<ICountryResponseCreate>;
+  getByIdCountry(id: string): Promise<ICountryResponseGet>;
+  createCountry(country: ICountry): Promise<any>;
 }

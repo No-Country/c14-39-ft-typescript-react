@@ -18,6 +18,18 @@ export class CountryController implements ICountryController {
     }
   }
 
+  public async getByIdCountry(id: string) {
+    try {
+      const country: any = await Country.findById(id).populate(
+        "list_sport_centers"
+      );
+
+      return country;
+    } catch (error: any) {
+      throw new Error(error);
+    }
+  }
+
   public async createCountry(
     country: ICountry
   ): Promise<ICountryResponseCreate> {
