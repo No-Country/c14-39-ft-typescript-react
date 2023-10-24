@@ -4,14 +4,18 @@ import { fieldReservationSchemaValidator } from "../models/schemas/reservation.z
 import { HttpCodes } from "../utils";
 import { IReservation } from "../interface";
 import { ReservationController } from "../controllers/reservation.controller";
+import { sportCampTypeSchemaValidator } from "../models/schemas/scaType.zod";
+import { ScaTypeController } from "../controllers/scaType.controller";
+import { campSchemaValidation } from "../models/schemas/sportCamp.zod";
+import { IScaType } from "../interface/scaType";
 
-const reservationRouter = express.Router();
-const controller = new ReservationController();
+const sca_type_router = express.Router();
+const controller = new ScaTypeController();
 
-reservationRouter
+sca_type_router
   .route("/")
   .get((_, res) => {
-    res.send("pagina de reservas");
+    res.send("pagina de tipos");
   })
   .post(async (req: Request, res: Response) => {
     try {
@@ -23,24 +27,24 @@ reservationRouter
         errors,
       }: {
         isValid: boolean;
-        data?: IReservation | any;
-        errors?: string | any;
+        data?: IScaType | any;
+        errors?: string[] | any;
       } = validateSchema({
         data: body,
-        schema: fieldReservationSchemaValidator,
+        schema: sportCampTypeSchemaValidator,
       });
 
       if (!isValid) {
-        console.log({ errors });
-
-        throw new Error(errors);
+        return;
       }
 
-      const dataResponse = await controller.createReservation(data);
+      const dataResponse = await controller.createSportCampType(data);
 
       res.status(HttpCodes.CODE_SUCCESS).json({
-        message: "Reserva realizada con éxito",
-        data,
+        message: "El tipo de campo fue creado exitosamente",
+        data: {
+          data: dataResponse,
+        },
       });
     } catch (error: String | any) {
       console.log(error);
@@ -48,4 +52,4 @@ reservationRouter
     }
   });
 
-export default reservationRouter;
+export default sca_type_router;

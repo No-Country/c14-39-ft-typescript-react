@@ -17,6 +17,8 @@ const validate = (schema: any) => {
     });
 
     if (!isValid || errors) {
+      console.log(errors);
+
       const errorString: string | any = errors
         ?.map((error: any) => error.message)
         .join(" , ");
