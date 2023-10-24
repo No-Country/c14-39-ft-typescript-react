@@ -4,7 +4,7 @@ import {
   ISportCampResponse,
 } from "../interface/sportCamp";
 import { SportCenterData, SportCenterUpdateId } from "../interface/sportCenter";
-import { User, SportCenter, Country, Camp } from "../models";
+import { User, SportCenterModel, Country, Camp } from "../models";
 
 export class SportCampController implements ISportCampController {
   public async createSportCamp(
@@ -34,7 +34,7 @@ export class SportCampController implements ISportCampController {
 
 export const getSportCenters = async () => {
   try {
-    const sportCenters = await SportCenter.find();
+    const sportCenters = await SportCenterModel.find();
     return sportCenters;
   } catch (error) {
     throw error;
@@ -43,7 +43,7 @@ export const getSportCenters = async () => {
 
 export const getSportCenterById = async (sportCenterId: string) => {
   try {
-    const sportCenter = await SportCenter.findById(sportCenterId)
+    const sportCenter = await SportCenterModel.findById(sportCenterId)
       .populate("country_id", {
         name: 1,
       })
@@ -70,7 +70,7 @@ export const registerSportCenter = async (data: SportCenterData) => {
       throw new Error("Country or User not found");
     }
 
-    const sportCenter = new SportCenter({
+    const sportCenter = new SportCenterModel({
       ...data,
     });
 
@@ -83,7 +83,7 @@ export const registerSportCenter = async (data: SportCenterData) => {
 
 export const deleteSportCenter = async (sportCenterId: string) => {
   try {
-    const sportCenter = await SportCenter.findByIdAndDelete(sportCenterId);
+    const sportCenter = await SportCenterModel.findByIdAndDelete(sportCenterId);
     return sportCenter;
   } catch (error) {
     throw error;
@@ -95,7 +95,7 @@ export const modifySportCenterById = async (
 ) => {
   try {
     const { sportCenterId, ...restOfResult } = data;
-    const sportCenter = await SportCenter.findByIdAndUpdate(
+    const sportCenter = await SportCenterModel.findByIdAndUpdate(
       sportCenterId,
       { $set: restOfResult },
       { new: true }

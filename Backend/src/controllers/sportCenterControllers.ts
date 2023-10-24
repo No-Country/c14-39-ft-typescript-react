@@ -1,9 +1,9 @@
-import { SportCenterData, SportCenterUpdateId } from "../interface/sportCenter";
-import { User, SportCenter, Country } from '../models'
+import { SportCenterData, SportCenterUpdateId } from "../interface";
+import { Country, SportCenterModel, User } from "../models";
 
 export const getSportCenters = async () => {
   try {
-    const sportCenters = await SportCenter.find();
+    const sportCenters = await SportCenterModel.find();
     return sportCenters;
   } catch (error) {
     throw error;
@@ -12,7 +12,7 @@ export const getSportCenters = async () => {
 
 export const getSportCenterById = async (sportCenterId: string) => {
   try {
-    const sportCenter = await SportCenter.findById(sportCenterId)
+    const sportCenter = await SportCenterModel.findById(sportCenterId)
       .populate("country_id", {
         name: 1,
       })
@@ -21,14 +21,14 @@ export const getSportCenterById = async (sportCenterId: string) => {
       })
       .populate("camps_id", {
         num: 1,
-      })
+      });
     return sportCenter;
   } catch (error) {
     throw error;
   }
 };
 
-export const registerSportCenter = async (data: SportCenterData) => {
+export const createSportCenter = async (data: SportCenterData) => {
   try {
     const [country, user] = await Promise.all([
       Country.findById(data.country_id),
@@ -39,30 +39,39 @@ export const registerSportCenter = async (data: SportCenterData) => {
       throw new Error("Country or User not found");
     }
 
-    const sportCenter = new SportCenter({
-      ...data,
+    const { country_id, ...dataSport } = data;
+
+    const sportCenter = new SportCenterModel(dataSport);
+    await sportCenter.save();
+
+    // Update country property list_sport_centers
+    await Country.findByIdAndUpdate(country_id, {
+      $push: { list_sport_centers: sportCenter._id },
     });
 
-    await sportCenter.save();
     return sportCenter;
   } catch (error) {
+    console.log(error);
+
     throw error;
   }
 };
 
 export const deleteSportCenter = async (sportCenterId: string) => {
   try {
-    const sportCenter = await SportCenter.findByIdAndDelete(sportCenterId);
+    const sportCenter = await SportCenterModel.findByIdAndDelete(sportCenterId);
     return sportCenter;
   } catch (error) {
     throw error;
   }
 };
 
-export const modifySportCenterById = async (data: Partial<SportCenterUpdateId>) => {
+export const modifySportCenterById = async (
+  data: Partial<SportCenterUpdateId>
+) => {
   try {
     const { sportCenterId, ...restOfResult } = data;
-    const sportCenter = await SportCenter.findByIdAndUpdate(
+    const sportCenter = await SportCenterModel.findByIdAndUpdate(
       sportCenterId,
       { $set: restOfResult },
       { new: true }

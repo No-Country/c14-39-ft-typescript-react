@@ -30,7 +30,7 @@ export const campSchemaValidation = z.object({
     required_error: "La altura es requerida.",
   }),
   sca_active: z
-    .string({
+    .boolean({
       invalid_type_error: "El campo activo debe ser un texto.",
       required_error: "El campo activo es requerido.",
     })
@@ -45,12 +45,19 @@ export const campSchemaValidation = z.object({
         message: "Las imagenes deben ser una URL.",
       })
   ),
-  sportCenter_id: z
+  sport_center_id: z
     .string({
       invalid_type_error: "El campo tipo debe ser un texto.",
     })
     .refine(isValidObjectId, {
       message: "id del centro deportivo es invalido",
+    }),
+  camp_type_id: z
+    .string({
+      invalid_type_error: "El tipo de campo debe ser un texto.",
+    })
+    .refine(isValidObjectId, {
+      message: "id del tipo de campo  tiene que ser invalido",
     }),
   user_id: z
     .string({

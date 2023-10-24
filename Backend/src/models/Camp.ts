@@ -1,4 +1,4 @@
-import { Schema, model } from "mongoose";
+import mongoose, { Schema, model } from "mongoose";
 
 const campSchema = new Schema({
   sca_num: { type: Number, required: true },
@@ -6,16 +6,21 @@ const campSchema = new Schema({
   sca_capacity: { type: Number, required: true },
   sca_width: { type: Number, required: true },
   sca_height: { type: Number, required: true },
-  sca_active: { type: String, required: true },
+  sca_active: { type: Boolean, required: true },
   sca_imgs: [
     {
       type: String,
       required: true,
     },
   ],
-  campType_id: {
+  camp_type_id: {
     type: Schema.Types.ObjectId,
     ref: "CampType",
+    required: true,
+  },
+  sport_center_id: {
+    type: Schema.Types.ObjectId,
+    ref: "sportcenters",
     required: true,
   },
   user_id: {
@@ -27,10 +32,8 @@ const campSchema = new Schema({
 
 campSchema.set("toJSON", {
   transform: (document: any, returnedObject: any) => {
-    returnedObject.id = returnedObject._id;
-    delete returnedObject._id;
     delete returnedObject.__v;
   },
 });
 
-export const Camp = model("Camp", campSchema);
+export const Camp = mongoose.models.camps || model("camps", campSchema);

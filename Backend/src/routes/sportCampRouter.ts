@@ -2,9 +2,9 @@ import express from "express";
 import {
   getSportCenters,
   getSportCenterById,
-  registerSportCenter,
   modifySportCenterById,
   deleteSportCenter,
+  createSportCenter,
 } from "../controllers/sportCenterControllers";
 import { HttpCodes } from "../utils/HTTPCodes.util";
 import {
@@ -34,7 +34,7 @@ sportCampRouter
       const { data } = validateSportCenter(body);
 
       // create user
-      const newSportCenter = await registerSportCenter({
+      const newSportCenter = await createSportCenter({
         ...data,
       });
 
