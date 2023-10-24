@@ -4,7 +4,7 @@ import countryRouter from "../routes/countryRouter";
 import typeRouter from "../routes/typeRouter";
 import authRouter from "./authRouter";
 import sportCenterRouter from "../routes/sportCenterRouter";
-import { authRequired } from "../../middlewares/validateToken";
+import { authRequired } from "../middlewares/validateToken";
 import reservationRouter from "./reservationRouter";
 
 const app = express();

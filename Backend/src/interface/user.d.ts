@@ -3,11 +3,11 @@ export interface UserData {
   lastname: string;
   email: string;
   password: string;
-  city: string;
-  address: string;
+  city?: string;
+  address?: string;
   image?: string;
-  country_id: string;
-  type_id: string;
+  country_id?: string;
+  type_id?: string;
 }
 
 export interface UserDataWithId extends UserData {

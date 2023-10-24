@@ -43,11 +43,11 @@ export const UserSchemaValidator = z.object({
     }),
   city: z.string({
     invalid_type_error: "Tiene que ser un texto",
-    required_error: "La ciudad es requerida",
+    // required_error: "La ciudad es requerida",
   }),
   address: z.string({
     invalid_type_error: "Tiene que ser un texto",
-    required_error: "La dirección es requerida",
+    // required_error: "La dirección es requerida",
   }),
   image: z
     .string({
@@ -56,29 +56,19 @@ export const UserSchemaValidator = z.object({
     .optional(),
   country_id: z.string({
     invalid_type_error: "Tiene que ser un texto",
-    required_error: "El país es requerido",
+    // required_error: "El país es requerido",
   }),
   type_id: z.string({
     invalid_type_error: "Tiene que ser un texto",
-    required_error: "El tipo de usuario es requerido",
+    // required_error: "El tipo de usuario es requerido",
   }),
 });
 
 export const loginSchemaValidator = z.object({
-  email: z
-    .string({
-      required_error: "El email es requerido",
-    })
-    .email({
-      message: "El email debe ser válido",
-    }),
-  password: z
-    .string({
-      required_error: "La contraseña es requerida",
-    })
-    .min(6, {
-      message: "La contraseña debe contener al menos 6 caracteres",
-    }),
+  email: z.string()
+    .nonempty("El email es requerido"),
+  password: z.string()
+    .nonempty("La contraseña es requerida"),
 });
 
 // user update schema validate

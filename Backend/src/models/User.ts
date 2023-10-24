@@ -5,19 +5,22 @@ const userSchema = new Schema({
   lastname: { type: String, required: true },
   email: { type: String, required: true, unique: true },
   passwordHash: { type: String, required: true },
-  city: { type: String, required: true },
-  address: { type: String, required: true },
+  //Porque seria necesario el city_id?
+  city: { type: String },
+  //Porque seria necesario el address_id?
+  address: { type: String },
   image: { type: String},
+  //Porque seria necesario el country_id?
   country_id: {
     type: Schema.Types.ObjectId,
     ref: "Country",
-    required: true,
+    
   },
   type_id: {
     type: Schema.Types.ObjectId,
     ref: "Type",
-    required: true,
   },
+  //Porque seria necesario el sporcenter_id?
   sportCenter_id: {
     type: Schema.Types.ObjectId,
     ref: "SportCenter",
