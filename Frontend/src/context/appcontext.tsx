@@ -4,9 +4,6 @@ interface AppContextProps {
   children: ReactNode
 }
 interface AppContextData {
-  isLogged: boolean
-  userIslogged: () => void
-  userIsNotlogged: () => void
   bookingData: BookData | null
   saveBooking: (bookingData: BookData) => void
 }
@@ -22,15 +19,8 @@ type BookData = {
 export const AppContext = createContext<AppContextData>({} as AppContextData)
 
 export const AppProvider = ({ children }: AppContextProps) => {
-  const [isLogged, setIsLogged] = useState(false)
   const [bookingData, setBookingData] = useState<BookData | null>(null)
 
-  const userIslogged = () => {
-    setIsLogged(true)
-  }
-  const userIsNotlogged = () => {
-    setIsLogged(false)
-  }
 
   const saveBooking = ({ id, cancha, fecha, hora, precio }: BookData) => {
     setBookingData(prevState => {
@@ -38,5 +28,5 @@ export const AppProvider = ({ children }: AppContextProps) => {
     })
   }
 
-  return <AppContext.Provider value={{ isLogged, userIslogged, userIsNotlogged, bookingData, saveBooking }}>{children}</AppContext.Provider>
+  return <AppContext.Provider value={{  bookingData, saveBooking }}>{children}</AppContext.Provider>
 }
