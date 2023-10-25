@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { Camp, City, Datum, ListSportCenter, Main } from '../types/types'
+import { Camp, Center, City, Datum, Main } from '../types/types'
 import axios from 'axios'
 import { API_URL } from './consts'
 
@@ -104,7 +104,7 @@ export const useCity = (cityId: string) => {
 export const useSportCenter = (sporCenterId: string) => {
   const reqURL = `${API_URL.SPORTCENTER}${sporCenterId}`
 
-  const [sportCenterInfo, setSportCenterInfo] = useState<ListSportCenter | null>()
+  const [sportCenterInfo, setSportCenterInfo] = useState<Center | null>()
   const [isLoading, setIsLoading] = useState(false)
   const [isError, setIsError] = useState(false)
   const [errorMessage, setErrorMessage] = useState('')
@@ -143,7 +143,7 @@ export const useSportCamp = (sporCampId: string) => {
     fetcherInstance
       .get(reqURL)
       .then(response => {
-        setSportCampInfo(response.data)
+        setSportCampInfo(response.data.data)
       })
       .catch(error => {
         setIsError(true)

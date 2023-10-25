@@ -1,5 +1,5 @@
 import { createContext, ReactNode, useState } from 'react'
-import { City } from '../types/types'
+import { Camp, City } from '../types/types'
 
 interface AppContextProps {
   children: ReactNode
@@ -17,7 +17,7 @@ interface AppContextData {
 
 type BookData = {
   id: string
-  cancha: string
+  cancha: Camp
   fecha: Date
   hora: number
   // precio: number

@@ -1,3 +1,4 @@
+import { FALLBACKS } from '../../data/consts'
 import { useSportCamp } from '../../data/useSportData'
 import { Camp } from '../../types/types'
 
@@ -15,12 +16,13 @@ export function CanchaSelector({ canchaId, selected, onSelectCancha }: { canchaI
           onClick={() => onSelectCancha(sportCampInfo)}>
           <img
             className='object-cover w-16 h-full md:w-12 rounded-bl-2xl rounded-tl-2xl'
-            src={sportCampInfo?.sca_imgs[0]}
+            // src={sportCampInfo?.sca_imgs[0] ?? FALLBACKS.SPORT_CAMP}
+            src={FALLBACKS.SPORT_CAMP}
             alt={sportCampInfo?.camp_type_id.sca_type_name}
           />
           <div className='flex flex-col justify-center flex-1 py-2 pr-2'>
             <p className='text-lg font-bold leading-[1.11em]'>{sportCampInfo?.camp_type_id.sca_type_name}</p>
-            <p className='text-sm font-normal tracking-[0.02em] leading-[18px]'>{sportCampInfo?.sca_capacity}</p>
+            <p className='text-sm font-normal tracking-[0.02em] leading-[18px]'>{sportCampInfo?.camp_type_id.sca_type_description}</p>
           </div>
         </div>
       )}

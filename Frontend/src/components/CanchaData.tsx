@@ -1,8 +1,8 @@
 import { Button } from './Button'
-import { ListSportCenter } from '../types/types'
+import { Center } from '../types/types'
 import { useState } from 'react'
 
-export function CanchaData({ proveedor }: { proveedor: ListSportCenter | undefined }) {
+export function CanchaData({ proveedor }: { proveedor: Center | undefined }) {
   const [moreInfo, setMoreInfo] = useState<boolean>(false)
 
   const provInfo = `${proveedor?.sc_info.sc_email}`
@@ -14,7 +14,7 @@ export function CanchaData({ proveedor }: { proveedor: ListSportCenter | undefin
 
   return (
     <article className='flex items-center py-0 font-body wrapper'>
-      <div className='flex flex-col gap-3 p-4 md:p-0 rounded-[2rem] md:rounded-none md:w-1/2 bg-base-green1 md:bg-transparent'>
+      <div className='w-full flex flex-col gap-3 p-4 md:p-0 rounded-[2rem] md:rounded-none md:w-1/2 bg-base-green1 md:bg-transparent'>
         <h1 className='text-2xl md:text-4xl font-display '>{proveedor?.sc_name}</h1>
         <p>
           <strong>Ubicación:</strong> {proveedor?.sc_info.sc_address}

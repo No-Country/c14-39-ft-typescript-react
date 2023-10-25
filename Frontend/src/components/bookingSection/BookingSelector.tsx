@@ -2,7 +2,7 @@ import { useContext, useState } from 'react'
 import { AppContext } from '../../context/appcontext'
 
 import espaciosTiempo from '../../data/mockdata_timepo.json'
-import { Camp, ListSportCenter } from '../../types/types'
+import { Camp, Center } from '../../types/types'
 
 import { Calendario } from './Calendario'
 import { RowTiempo } from '../form/RowItem'
@@ -11,7 +11,7 @@ import { useNavigate } from 'react-router-dom'
 import { ROUTES } from '../../data/consts'
 import { Stepper } from './Stepper'
 
-export function BookingSelector({ proveedor }: { proveedor: ListSportCenter | undefined }) {
+export function BookingSelector({ proveedor }: { proveedor: Center | undefined }) {
   const [selectedDate, setSelectedDate] = useState<Date | null>(null)
   const [selectedCancha, setSelectedCancha] = useState<Camp | null>(null)
 
@@ -40,7 +40,7 @@ export function BookingSelector({ proveedor }: { proveedor: ListSportCenter | un
     saveBooking({
       id: String(proveedor?._id),
       fecha: selectedDate as Date,
-      cancha: selectedCancha?.camp_type_id.sca_type_name as string,
+      cancha: selectedCancha as Camp,
       // precio: proveedor?.price as number,
       hora,
     })
@@ -67,11 +67,11 @@ export function BookingSelector({ proveedor }: { proveedor: ListSportCenter | un
         <div className='px-2 py-4 rounded-lg bg-white/60'>
           <div className='grid items-start w-full gap-2 md:w-auto md:grid-cols-2'>
             {selectedDate &&
-              proveedor?.list_sport_camps.map(item => (
+              proveedor?.list_sport_camps?.map(item => (
                 <CanchaSelector
-                  canchaId={item}
+                  canchaId={item._id}
                   selected={selectedCancha as Camp}
-                  key={`cselector${item}`}
+                  key={`cselector${item._id}`}
                   onSelectCancha={p => selectCancha(p)}
                 />
               ))}

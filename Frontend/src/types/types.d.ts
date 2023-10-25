@@ -97,3 +97,20 @@ export interface UserID {
   type_id: string
   id: string
 }
+
+export interface Center {
+  sc_info: ScInfo
+  _id: string
+  sc_name: string
+  sc_description: string
+  sc_phone: string
+  sc_active: boolean
+  sc_imgs: string[]
+  user_id: UserID
+  list_sport_camps: ListSportCamp[]
+}
+
+export interface ListSportCamp {
+  _id: string
+  sca_num: number
+}
