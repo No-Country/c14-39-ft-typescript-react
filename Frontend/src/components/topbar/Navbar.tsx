@@ -2,16 +2,16 @@ import { useContext } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 
 import { ROUTES } from '../../data/consts'
-import { AppContext } from '../../context/appcontext'
 
 import { Button } from '../Button'
 import { Logo } from './Logo'
 import { NavbarItem } from './NavbarItem'
 import { Bars3Icon, UserCircleIcon } from '@heroicons/react/24/outline'
+import { AuthContext } from '../../context/AuthContext'
 
 export const NavBar = () => {
   const navigate = useNavigate()
-  const { isLogged } = useContext(AppContext)
+  const { isLogged, logout } = useContext(AuthContext)
 
   const { pathname } = useLocation()
 
@@ -35,19 +35,28 @@ export const NavBar = () => {
             onClick={() => navigate(ROUTES.LOGIN)}
           />
         )}
+        {isLogged && (
+          <Button
+            label='Salir'
+            style='primary'
+            onClick={() => {  
+              logout()
+              navigate(ROUTES.HOME)} }
+          />
+        )}
         {/* <Button
   label='Regístrate'
   style='secondary'
   onClick={() => navigate(ROUTES.SIGN_UP)}
 /> */}
-        {isLogged && (
+        {/* {isLogged && (
           <Button
             label='Perfil'
             style='primary'
             onClick={() => navigate(ROUTES.ADMIN)}
             icon={<UserCircleIcon className='w-6 h-6 text-current' />}
           />
-        )}
+        )} */}
       </div>
       <button className='md:hidden'>
         <Bars3Icon className='w-6 h-6 text-black' />

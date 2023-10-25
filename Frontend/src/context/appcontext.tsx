@@ -1,54 +1,57 @@
-import { createContext, ReactNode, useState } from "react";
+import { createContext, ReactNode, useState } from 'react'
+import { Camp, City } from '../types/types'
 
 interface AppContextProps {
-  children: ReactNode;
+  children: ReactNode
 }
 interface AppContextData {
-  isLogged: boolean;
-  userIslogged: () => void;
-  userIsNotlogged: () => void;
-  bookingData: BookData | null;
-  saveBooking: (bookingData: BookData) => void;
+  bookingData: BookData | null
+  saveBooking: (bookingData: BookData) => void
+  cityId: City['id'] | null
+  setCity: (city: City['id']) => void
+  resetCity: () => void
 }
 
 type BookData = {
-  id: string;
-  cancha: string;
-  fecha: Date;
-  hora: number;
-  precio: number;
-};
+  id: string
+  cancha: Camp
+  fecha: Date
+  hora: number
+  // precio: number
+}
 
-export const AppContext = createContext<AppContextData>({} as AppContextData);
+export const AppContext = createContext<AppContextData>({} as AppContextData)
 
 export const AppProvider = ({ children }: AppContextProps) => {
-  const [isLogged, setIsLogged] = useState(true);
-  const [bookingData, setBookingData] = useState<BookData | null>(null);
+  const [bookingData, setBookingData] = useState<BookData | null>(null)
+  const [cityId, setCityId] = useState<City['id'] | null>(null)
 
-  const userIslogged = () => {
-    setIsLogged(true);
-  };
-  const userIsNotlogged = () => {
-    setIsLogged(false);
-  };
+  const setCity = (city: City['id']) => {
+    setCityId(city)
+  }
 
-  const saveBooking = ({ id, cancha, fecha, hora, precio }: BookData) => {
-    setBookingData((prevState) => {
-      return { ...prevState, id, cancha, fecha, hora, precio };
-    });
-  };
+  const resetCity = () => {
+    setCityId(null)
+  }
+
+  const saveBooking = ({ id, cancha, fecha, hora }: BookData) => {
+    setBookingData(prevState => {
+      return { ...prevState, id, cancha, fecha, hora }
+    })
+  }
+
+  console.log(cityId, bookingData)
 
   return (
     <AppContext.Provider
       value={{
-        isLogged,
-        userIslogged,
-        userIsNotlogged,
         bookingData,
         saveBooking,
-      }}
-    >
+        cityId,
+        setCity,
+        resetCity,
+      }}>
       {children}
     </AppContext.Provider>
-  );
-};
+  )
+}

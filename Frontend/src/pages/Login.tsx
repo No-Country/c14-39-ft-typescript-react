@@ -1,19 +1,49 @@
-import { NavLink } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
 import { Button } from '../components/Button'
 import { ROUTES } from '../data/consts'
 import { GoogleBtn } from '../components/form/GoogleBtn'
-import { EmailInput } from '../components/form/EmailInput'
-import { PasswordInput } from '../components/form/PasswordInput'
+import { useContext, useEffect } from 'react'
+import { AuthContext } from '../context/AuthContext'
+import { useForm } from 'react-hook-form'
+import { EmailInput, PasswordInput } from '../components/form'
+
+interface IFormInput {
+  email: string;
+  password: string;
+}
 
 const Login = () => {
+
+  const { register, handleSubmit } = useForm<IFormInput>();
+  const { signIn, errors, isLogged} = useContext(AuthContext);
+  const navigate = useNavigate();
+
+    const emailError = errors.find(error => error.toLowerCase().includes("email"));
+    const passwordError = errors?.find(error => error.toLowerCase().includes("contraseña"));
+
+    const onSubmit = async (data: IFormInput) => {
+      try {
+        console.log(data)
+        console.log(signIn)
+        await signIn(data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    useEffect(() => {
+      if(isLogged) navigate('/')
+    }, [isLogged])
+
   return (
     <section className='wrapper'>
       <h1 className='mb-6 text-4xl text-center md:text-6xl font-display'>¡Bienvenido!</h1>
       <div className='max-w-xs gap-8 mx-auto my-0'>
-        <form className='flex flex-col gap-6 h-80 rounded-xl'>
-          <EmailInput />
+        <form className='flex flex-col gap-6 h-80 rounded-xl' onSubmit={handleSubmit((data) => onSubmit(data)
+        )} >
+          <EmailInput register={register('email')} error={emailError}/>
 
-          <PasswordInput />
+          <PasswordInput register={register('password')} error={passwordError}/>
 
           <NavLink
             to={ROUTES.SIGN_UP}
@@ -28,7 +58,7 @@ const Login = () => {
             override='w-full'
           />
 
-          <GoogleBtn />
+          {/* <GoogleBtn /> */}
           <div className='flex justify-center gap-1'>
             <div>¿No tienes una cuenta?</div>
 

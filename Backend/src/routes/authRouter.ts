@@ -1,5 +1,5 @@
 import express from 'express';
-import { validateSchema } from "../../middlewares/validatorMiddleware";
+import { validateSchema } from "../middlewares/validatorMiddleware";
 import { UserSchemaValidator, loginSchemaValidator } from "../models/schemas";
 import { login, logout, register, verifyToken } from "../controllers/auth.controller";
 

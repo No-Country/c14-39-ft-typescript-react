@@ -1,66 +1,70 @@
-import { RowItem } from '../components/form/RowItem'
-import { Map, Marker, Overlay } from 'pigeon-maps'
-import { options } from '../services/manageData'
-import { calculateAverageLatLng } from '../utils/utils'
-import { Anchor, Proveedor } from '../types/types'
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { ListSportCenter } from '../types/types'
+
+import { AppContext } from '../context/appcontext'
+
 import { ROUTES } from '../data/consts'
+import { useCity } from '../data/useSportData'
+
+import { Stepper } from '../components/bookingSection/Stepper'
+import { RowItem } from '../components/form/RowItem'
+import { Mapa } from '../components/bookingSection/Mapa'
 
 const Canchas = () => {
-  const [selectedSite, setSelectedSite] = useState<Proveedor | null>(null)
+  const [selectedSite, setSelectedSite] = useState<ListSportCenter | null>(null)
 
-  const locPoints = options.map(option => option.anchor)
-  const averageLatLng: Anchor = calculateAverageLatLng(locPoints)
+  const { cityId } = useContext(AppContext)
+  const { cityInfo, isLoading, isError, errorMessage } = useCity(cityId as string)
+
+  const list_sport_centers = cityInfo?.list_sport_centers?.filter(center => center.sc_active) || []
 
   const navigate = useNavigate()
 
-  const handleClick = (proveedor: Proveedor) => {
+  const handleClick = (proveedor: ListSportCenter) => {
     setSelectedSite(proveedor)
-    navigate(`${ROUTES.FIELDS}/${proveedor?.id}`)
+    navigate(`${ROUTES.FIELDS}/${proveedor?._id}`)
   }
 
   return (
     <section className='wrapper animate-fade-in'>
-      <h1 className='w-full mb-4 text-2xl md:text-4xl font-display'>Bogotá, Colombia</h1>
-      <h2 className='mb-2'>Paso 2 de 3: Escoge tu cancha favorita.</h2>
+      {isLoading && <p>Cargando...</p>}
+      {isError && !isLoading && <p>{errorMessage}</p>}
 
-      <div className='grid md:grid-cols-[40%_1fr]  gap-2 rounded-[2rem] backdrop-filter backdrop-blur-[20px] bg-white/60 mb-6'>
-        <div className='flex flex-col h-full gap-2 p-4 overflow-x-hidden overflow-y-auto'>
-          {options.map(proveedor => (
-            <RowItem
-              proveedor={proveedor}
-              key={proveedor.id}
-              onClick={() => handleClick(proveedor)}
+      {!isLoading && !isError && cityInfo && (
+        <>
+          <h1 className='w-full mb-4 text-2xl md:text-4xl font-display'>{cityInfo.name}</h1>
+
+          <article className='grid md:grid-cols-[40%_1fr]  gap-2 rounded-[2rem] backdrop-filter backdrop-blur-[20px] bg-white/60 mb-6'>
+            <Stepper
+              paso={2}
+              total={3}
+              mensaje='Escoge tu cancha favorita.'
+              overrideClasses='md:col-span-2 px-4 pt-4'
             />
-          ))}
-        </div>
 
-        <div className='overflow-hidden rounded-[2rem] relative h-full flex-1 w-full bg-slate-300 min-h-[500px]'>
-          <Map
-            defaultCenter={averageLatLng}
-            defaultZoom={12}
-            twoFingerDrag={true}
-            metaWheelZoom={true}>
-            {options.map(proveedor => (
-              <Marker
-                key={`marker${proveedor.id}`}
-                width={50}
-                anchor={proveedor.anchor}
-                onClick={() => setSelectedSite(proveedor)}
+            <section className='flex flex-col h-full gap-2 p-4 overflow-x-hidden overflow-y-auto'>
+              {list_sport_centers?.map(proveedor => (
+                <RowItem
+                  proveedor={proveedor}
+                  key={proveedor._id}
+                  onClick={() => handleClick(proveedor)}
+                />
+              ))}
+            </section>
+
+            <section className='overflow-hidden rounded-[2rem] relative h-full flex-1 w-full bg-slate-300 min-h-[500px]'>
+              <Mapa
+                cityInfo={cityInfo}
+                list_sport_centers={list_sport_centers}
+                selectedSite={selectedSite}
+                setSelectedSite={setSelectedSite}
+                handleClick={handleClick}
               />
-            ))}
-            {selectedSite && (
-              <Overlay
-                key={`overlay${selectedSite.id}`}
-                anchor={selectedSite.anchor}
-                className='px-3 py-1 bg-white rounded-lg shadow-sh-md animate-fade-in'>
-                <h3 onClick={() => handleClick(selectedSite)}>{selectedSite.nombre}</h3>
-              </Overlay>
-            )}
-          </Map>
-        </div>
-      </div>
+            </section>
+          </article>
+        </>
+      )}
     </section>
   )
 }

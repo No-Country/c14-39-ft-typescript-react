@@ -7,6 +7,7 @@ import Confirm from '../pages/Confirm'
 import Canchas from '../pages/Canchas'
 import Registro from '../pages/Registro'
 import NotFound from '../pages/NotFound'
+import ProtectedRoutes from './ProtectedRoutes'
 
 export const AppRoutes = () => {
   const routes = useRoutes([
@@ -14,9 +15,15 @@ export const AppRoutes = () => {
     { path: ROUTES.LOGIN, element: <Login /> },
     { path: ROUTES.SIGN_UP, element: <Registro /> },
 
-    { path: ROUTES.FIELDS, element: <Canchas /> },
-    { path: ROUTES.FIELDS_DETAIL, element: <Cancha /> },
-    { path: ROUTES.CONFIRM, element: <Confirm /> },
+    { 
+      path: '/', 
+      element: <ProtectedRoutes />,
+      children: [
+        { path: ROUTES.FIELDS, element: <Canchas /> },
+        { path: ROUTES.FIELDS_DETAIL, element: <Cancha /> },
+        { path: ROUTES.CONFIRM, element: <Confirm /> }
+      ]
+    },
 
     { path: ROUTES.ADMIN, element: <Navigate to='/login' /> },
     { path: ROUTES.ANY, element: <NotFound /> },
