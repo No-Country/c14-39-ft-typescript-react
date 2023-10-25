@@ -2,7 +2,7 @@ import { createContext, ReactNode, useState } from 'react'
 import { Camp, City } from '../types/types'
 
 interface AppContextProps {
-  children: ReactNode;
+  children: ReactNode
 }
 interface AppContextData {
   bookingData: BookData | null
@@ -20,7 +20,7 @@ type BookData = {
   // precio: number
 }
 
-export const AppContext = createContext<AppContextData>({} as AppContextData);
+export const AppContext = createContext<AppContextData>({} as AppContextData)
 
 export const AppProvider = ({ children }: AppContextProps) => {
   const [bookingData, setBookingData] = useState<BookData | null>(null)
@@ -40,7 +40,7 @@ export const AppProvider = ({ children }: AppContextProps) => {
     })
   }
 
-  console.log(cityId, isLogged, bookingData)
+  console.log(cityId, bookingData)
 
   return (
     <AppContext.Provider
