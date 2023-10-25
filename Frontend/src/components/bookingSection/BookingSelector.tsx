@@ -2,7 +2,7 @@ import { useContext, useState } from 'react'
 import { AppContext } from '../../context/appcontext'
 
 import espaciosTiempo from '../../data/mockdata_timepo.json'
-import { Cancha, Proveedor } from '../../types/types'
+import { Camp, ListSportCenter } from '../../types/types'
 
 import { Calendario } from './Calendario'
 import { RowTiempo } from '../form/RowItem'
@@ -11,9 +11,9 @@ import { useNavigate } from 'react-router-dom'
 import { ROUTES } from '../../data/consts'
 import { Stepper } from './Stepper'
 
-export function BookingSelector({ proveedor }: { proveedor: Proveedor | undefined }) {
+export function BookingSelector({ proveedor }: { proveedor: ListSportCenter | undefined }) {
   const [selectedDate, setSelectedDate] = useState<Date | null>(null)
-  const [selectedCancha, setSelectedCancha] = useState<Cancha | null>(null)
+  const [selectedCancha, setSelectedCancha] = useState<Camp | null>(null)
 
   const { saveBooking } = useContext(AppContext)
 
@@ -27,7 +27,7 @@ export function BookingSelector({ proveedor }: { proveedor: Proveedor | undefine
     setSelectedDate(date)
   }
 
-  function selectCancha(cancha: Cancha) {
+  function selectCancha(cancha: Camp) {
     setSelectedCancha(cancha)
   }
 
@@ -38,10 +38,10 @@ export function BookingSelector({ proveedor }: { proveedor: Proveedor | undefine
 
   function ConfirmBooking(hora: number) {
     saveBooking({
-      id: String(proveedor?.id),
+      id: String(proveedor?._id),
       fecha: selectedDate as Date,
-      cancha: selectedCancha?.nombre as string,
-      precio: proveedor?.precio as number,
+      cancha: selectedCancha?.camp_type_id.sca_type_name as string,
+      // precio: proveedor?.price as number,
       hora,
     })
     navigate(ROUTES.CONFIRM)
@@ -67,19 +67,19 @@ export function BookingSelector({ proveedor }: { proveedor: Proveedor | undefine
         <div className='px-2 py-4 rounded-lg bg-white/60'>
           <div className='grid items-start w-full gap-2 md:w-auto md:grid-cols-2'>
             {selectedDate &&
-              proveedor?.canchas.map(item => (
+              proveedor?.list_sport_camps.map(item => (
                 <CanchaSelector
-                  cancha={item}
-                  selected={selectedCancha as Cancha}
-                  key={item.nombre}
-                  onSelectCancha={() => selectCancha(item)}
+                  canchaId={item}
+                  selected={selectedCancha as Camp}
+                  key={`cselector${item}`}
+                  onSelectCancha={p => selectCancha(p)}
                 />
               ))}
           </div>
         </div>
 
         <div className='flex flex-col gap-2'>
-          <div className='text-xl md:text-3xl '>{selectedCancha?.nombre}</div>
+          <div className='text-xl md:text-3xl '>{selectedCancha?.camp_type_id.sca_type_name}</div>
           {selectedCancha &&
             espaciosTiempo.map(item => (
               <RowTiempo
