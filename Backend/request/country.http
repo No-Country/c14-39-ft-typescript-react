@@ -1,0 +1,4 @@
+GET http://localhost:3000/api/countries
+
+### por id
+GET http://localhost:3000/api/countries/6536f7bef0484362d2ba2fda

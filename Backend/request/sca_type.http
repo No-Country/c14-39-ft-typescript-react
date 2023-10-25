@@ -1,0 +1,9 @@
+# CREATE sport center type
+POST http://localhost:3000/api/sportcamptype
+Content-Type: application/json
+
+#6536f1987a13c42f7a69b23c - futsal
+{
+  "sca_type_name": "FÚTSAL",
+  "sca_type_description": "Cancha ideal para juegos de 5 vs 5."
+}

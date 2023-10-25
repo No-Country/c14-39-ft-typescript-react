@@ -1,47 +1,43 @@
-import { Schema, model } from "mongoose";
+import mongoose, { Schema, model } from "mongoose";
 
 const sportCenterSchema = new Schema({
-  name: { type: String, required: true, unique: true },
-  description: { type: String, required: true },
-  phone: { type: Number, required: true },
-  email: { type: String, required: true, unique: true },
-  address: { type: String, required: true },
-  lat: { type: Number, required: true },
-  alt: { type: Number, required: true },
-  open: { type: Boolean, required: true },
-  close: { type: Boolean, required: true },
-  active: { type: Boolean, required: true },
-  imgs: [
-    {
-      type: String,
-      required: true
-    }
-  ],
-  camps_id: [
+  sc_name: { type: String, required: true },
+  sc_description: { type: String, required: true },
+  sc_phone: { type: String, required: true },
+  sc_info: {
+    sc_email: { type: String, required: true, unique: true },
+    sc_address: { type: String, required: true },
+    sc_lat: { type: Number, required: true },
+    sc_alt: { type: Number, required: true },
+    sc_open: { type: String, required: true },
+    sc_close: { type: String, required: true },
+  },
+  sc_active: { type: Boolean, required: true },
+  list_sport_camps: [
     {
       type: Schema.Types.ObjectId,
-      ref: "Camp",
-      required: true,
-    }
+      ref: "camps",
+      required: false,
+    },
   ],
-  country_id: {
-    type: Schema.Types.ObjectId,
-    ref: "Country",
-    required: true,
-  },
+  sc_imgs: [
+    {
+      type: String,
+      required: true,
+    },
+  ],
   user_id: {
     type: Schema.Types.ObjectId,
     ref: "User",
     required: true,
-  }
+  },
 });
 
 sportCenterSchema.set("toJSON", {
   transform: (document: any, returnedObject: any) => {
-    returnedObject.id = returnedObject._id;
-    delete returnedObject._id;
     delete returnedObject.__v;
   },
 });
 
-export const SportCenter = model("SportCenter", sportCenterSchema);
+export const SportCenterModel =
+  mongoose.models.sportcenters || model("sportcenters", sportCenterSchema);
