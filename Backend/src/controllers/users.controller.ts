@@ -1,8 +1,6 @@
 import {  UserDataWithId } from "../interface/user";
 import { User } from "../models";
 
-
-
 export const getUsers = async () => {
   try {
     const users = await User.find();
