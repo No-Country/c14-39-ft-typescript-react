@@ -1,0 +1,31 @@
+###obtener
+GET http://localhost:3000/api/sportcamp
+
+###obteer id
+GET http://localhost:3000/api/sportcamp/65379b2f1a8f5bbe8785377c
+
+###crear
+POST http://localhost:3000/api/sportcamp
+Content-Type: application/json
+
+{
+  "sca_num": 12,
+  "sca_description": "Cancha de fútbol con dimensiones profesionales y césped artificial para un óptimo deslizamiento.",
+  "sca_capacity": 23,
+  "sca_width": 10,
+  "sca_height": 4,
+  "sca_active": true,
+  "sca_imgs": [
+    "https://images.pexels.com/photos/1670187/pexels-photo-1670187.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    "https://images.pexels.com/photos/1130626/pexels-photo-1130626.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    "https://images.pexels.com/photos/373912/pexels-photo-373912.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    "https://images.pexels.com/photos/3052361/pexels-photo-3052361.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+  ],
+  "camp_type_id": "6536f1987a13c42f7a69b23c",
+  "sport_center_id": "653710662b617a35521a43b6",
+  "user_id": "65302b877d83d01c2fa0388d"
+}
+
+
+
+

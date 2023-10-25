@@ -1,13 +1,16 @@
-import express from 'express'
+import express from "express";
 import {
   getSportCenters,
   getSportCenterById,
-  registerSportCenter,
   modifySportCenterById,
   deleteSportCenter,
+  createSportCenter,
 } from "../controllers/sportCenterControllers";
-import { HttpCodes } from '../utils/HTTPCodes.util'
-import { validateSportCenter, validateUpdateSport } from '../utils/validateReq.util'
+import { HttpCodes } from "../utils/HTTPCodes.util";
+import {
+  validateSportCenter,
+  validateUpdateSport,
+} from "../utils/validateReq.util";
 
 const sportCenterRouter = express.Router();
 
@@ -20,7 +23,7 @@ sportCenterRouter
     } catch (error) {
       return res.status(HttpCodes.CODE_NOT_FOUND).json({
         message: `${error}`,
-      })
+      });
     }
   })
   .post(async (req, res) => {
@@ -28,10 +31,10 @@ sportCenterRouter
       const body = req.body;
 
       // validate se coloco en utils refactorizado
-      const { data } = validateSportCenter(body)
+      const { data } = validateSportCenter(body);
 
       // create user
-      const newSportCenter = await registerSportCenter({
+      const newSportCenter = await createSportCenter({
         ...data,
       });
 
@@ -48,45 +51,53 @@ sportCenterRouter
   .put(async (req, res) => {
     try {
       // validate
-      const body = req.body
+      const body = req.body;
 
       // validate se coloco en utils refactorizado
-      const { data } = validateUpdateSport(body)
+      const { data } = validateUpdateSport(body);
 
       // update sportCenter
       const sportCenter = await modifySportCenterById({
-        ...data
+        ...data,
       });
-      res.status(HttpCodes.CODE_SUCCESS).json(sportCenter);
+      res
+        .status(HttpCodes.CODE_SUCCESS)
+        .json({
+          message: "Centros deportivos obtenidos de manera correcta",
+          data: sportCenter,
+        });
     } catch (error) {
       return res.status(HttpCodes.CODE_BAD_REQUEST).json({
         message: `${error}`,
-      })
+      });
     }
   });
 
 sportCenterRouter
-  .route("/:sportCenterId")
+  .route("/:sport_center_id")
   .get(async (req, res) => {
     try {
-      const { sportCenterId } = req.params;
-      const sportCenter = await getSportCenterById(sportCenterId);
-      res.status(HttpCodes.CODE_SUCCESS).json(sportCenter);
+      const { sport_center_id } = req.params;
+      const sportCenter = await getSportCenterById(sport_center_id);
+      res.status(HttpCodes.CODE_SUCCESS).json({
+        message: "centro deportivo obtenido de manera correcta",
+        data: sportCenter,
+      });
     } catch (error) {
       return res.status(HttpCodes.CODE_NOT_FOUND).json({
         message: `${error}`,
-      })
+      });
     }
   })
   .delete(async (req, res) => {
     try {
-      const { sportCenterId } = req.params;
-      const sportCenter = await deleteSportCenter(sportCenterId);
+      const { sport_center_id } = req.params;
+      const sportCenter = await deleteSportCenter(sport_center_id);
       res.status(200).json(sportCenter);
     } catch (error) {
       return res.status(HttpCodes.CODE_BAD_REQUEST).json({
         message: `${error}`,
-      })
+      });
     }
   });
 

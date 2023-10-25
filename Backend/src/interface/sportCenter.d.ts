@@ -1,17 +1,25 @@
+export interface ScaInfo {
+  sc_email: string;
+  sc_address: string;
+  sc_lat: number;
+  sc_alt: number;
+  sc_open: boolean;
+  sc_close: boolean;
+}
+
 export interface SportCenterData {
-  name: string;
-  description: string;
-  phone: string;
-  email: string;
-  address: string;
-  lat: number;
-  alt: number;
-  open: boolean;
-  close: boolean;
-  active: boolean;
-  imgs: string[];
-  country_id: string;
+  sc_phone: string;
+  sc_name: string;
+  sc_description: string;
+  sc_active: boolean;
+  sc_imgs: string[];
+  sc_info: ScaInfo;
+  country_id?: string;
   user_id: string;
+}
+
+export interface SportCenterResponse extends SportCenterData {
+  _id: string | any;
 }
 
 export interface SportCenterUpdateId extends SportCenterData {
