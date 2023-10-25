@@ -1,4 +1,5 @@
 import { propsReservation } from "../reservation";
+import { propsOrder } from '../order'
 
 const properties = {
   name: {
@@ -177,5 +178,17 @@ export const components = {
       ],
       properties: { ...propsReservation },
     },
+    propsOrder: {
+      type: "object",
+      required: [
+        "order_id",
+        "fecha",
+        "hora",
+        "user_id",
+        "camp_id",
+        "sc_id",
+      ],
+      properties: { ...propsOrder },
+    }
   },
 };

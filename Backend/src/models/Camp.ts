@@ -26,8 +26,15 @@ const campSchema = new Schema({
   user_id: {
     type: Schema.Types.ObjectId,
     ref: "User",
-    requuired: true,
+    required: true,
   },
+  order_id: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Order",
+      required: true,
+    }
+  ]
 });
 
 campSchema.set("toJSON", {
