@@ -6,8 +6,7 @@ export const UserSchemaValidator = z.object({
   name: z
     .string({
       invalid_type_error: "El nombre debe ser un string",
-      required_error: "El nombre es requerido",
-    })
+    }).nonempty("El nombre es requerido")
     .min(3, {
       message: "El nombre debe tener al menos 3 caracteres",
     })
@@ -17,8 +16,7 @@ export const UserSchemaValidator = z.object({
   lastname: z
     .string({
       invalid_type_error: "El apellido debe ser un string",
-      required_error: "El apellido es requerido",
-    })
+    }).nonempty("El apellido es requerido")
     .min(3, {
       message: "El apellido debe tener al menos 3 caracteres",
     })
@@ -28,27 +26,25 @@ export const UserSchemaValidator = z.object({
   email: z
     .string({
       invalid_type_error: "El email debe ser un string",
-      required_error: "El email es requerido",
-    })
+    }).nonempty("El email es requerido")
     .email({
       message: "El email debe ser válido",
     }),
   password: z
     .string({
       invalid_type_error: "La contraseña debe ser un string",
-      required_error: "La contraseña es requerida",
-    })
+    }).nonempty("La contraseña es requerida")
     .min(6, {
       message: "La contraseña debe contener al menos 6 caracteres",
     }),
   city: z.string({
     invalid_type_error: "Tiene que ser un texto",
     // required_error: "La ciudad es requerida",
-  }),
+  }).optional(),
   address: z.string({
     invalid_type_error: "Tiene que ser un texto",
     // required_error: "La dirección es requerida",
-  }),
+  }).optional(),
   image: z
     .string({
       invalid_type_error: "Tiene que ser un texto",
@@ -57,11 +53,11 @@ export const UserSchemaValidator = z.object({
   country_id: z.string({
     invalid_type_error: "Tiene que ser un texto",
     // required_error: "El país es requerido",
-  }),
+  }).optional(),
   type_id: z.string({
     invalid_type_error: "Tiene que ser un texto",
     // required_error: "El tipo de usuario es requerido",
-  }),
+  }).optional(),
 });
 
 export const loginSchemaValidator = z.object({
