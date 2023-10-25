@@ -24,6 +24,25 @@ export interface Cancha {
   superficie: string
   imagen: string
 }
+
+export interface UserData {
+  name: string;
+  lastname: string;
+  email: string;
+  password: string;
+  city?: string;
+  address?: string;
+  image?: string;
+  country_id?: string;
+  type_id?: string;
+}
+
+export interface UserDataWithId extends UserData {
+  userId: string;
+}
+
+export interface UserLoginData extends Pick<UserData, "email" | "password"> { }
+
 // from the API
 export interface Main {
   message: string
