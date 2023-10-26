@@ -1,23 +1,25 @@
 import { useContext } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { AppContext } from '../context/appcontext'
-import { options } from '../services/manageData'
+
+import { ROUTES } from '../data/consts'
+
 import Stripes from '../components/stripes'
 import { Button } from '../components/Button'
-import { useNavigate } from 'react-router-dom'
-import { ROUTES } from '../data/consts'
+import SportCenterImage from '../SportCenterImage'
 
 const Confirm = () => {
   const navigate = useNavigate()
 
   const { bookingData } = useContext(AppContext)
 
-  const proveedor = options.find(item => item.id === Number(bookingData?.id))
+  const proveedor = bookingData?.cancha
 
   return (
-    <section
-      className={`min-h-screen z-0 relative bg-top bg-base-green1  bg-fixed bg-cover pt-24 pb-12 -mt-24 flex flex-col justify-center gap-6 `}
-      style={{ backgroundImage: `url(${proveedor?.imagen})` }}>
+    <section className={`min-h-screen z-0 relative bg-top bg-base-green1  bg-fixed bg-cover pt-24 pb-12 -mt-24 flex flex-col justify-center gap-6 `}>
+      <SportCenterImage imageUrl={`${proveedor?.sca_imgs[0]}`} />
       <Stripes />
+
       <article className='flex items-center py-0 font-body wrapper'>
         <div className='flex flex-col gap-4 rounded-[2rem] md:w-1/2 '>
           <p className='text-4xl text-white font-display md:text-black'>Tu reserva ha sido realizada!</p>
@@ -27,14 +29,15 @@ const Confirm = () => {
               <p className='text-2xl font-bold'>Información de la reserva:</p>
 
               <div className='flex flex-col gap-1'>
-                <p>Lugar: {proveedor?.nombre}</p>
-                <p>Cancha: {bookingData?.cancha}</p>
+                <p>Lugar: {proveedor?.sport_center_id.sc_name}</p>
+                <p>Cancha: {proveedor?.camp_type_id.sca_type_name}</p>
                 <p>Fecha: {bookingData?.fecha.getDate()}</p>
                 <p>Hora: {`${bookingData?.hora}:00`}</p>
               </div>
             </div>
             <div className='flex flex-col gap-3 px-6'>
-              <p>Costo de la reserva: {bookingData?.precio} USD</p>
+              {/* <p>Costo de la reserva: {bookingData?.precio} USD</p> */}
+              <p>Costo de la reserva: {'0'} USD</p>
               <p>Pago: Tu reserva ha sido pagada con éxito.</p>
               <p>Cancelación: Puedes cancelar tu reserva hasta 24 horas antes de la fecha y hora de la reserva.</p>
               <p>Asistencia: Te recomendamos llegar a la cancha al menos 15 minutos antes de la hora de inicio de la reserva.</p>
