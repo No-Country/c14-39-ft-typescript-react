@@ -1,7 +1,8 @@
 import { createContext, ReactNode, useEffect, useState } from 'react'
+import Cookies from 'js-cookie'
+
 import { UserData, UserLoginData } from '../types/types'
 import { loginRequest, registerRequest, verifyTokenRequest } from '../api/auth'
-import Cookies from 'js-cookie'
 
 interface AuthContextProps {
   children: ReactNode
@@ -29,7 +30,8 @@ export const AuthProvider = ({ children }: AuthContextProps) => {
       const res = await registerRequest(user)
       setUser(res.data)
       setIsLogged(true)
-    } catch (error: unknown) {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (error: any) {
       console.log(error)
       if (Array.isArray(error.response.data)) {
         return setErrors(error.response.data)
@@ -44,7 +46,8 @@ export const AuthProvider = ({ children }: AuthContextProps) => {
       const res = await loginRequest(user)
       setIsLogged(true)
       setUser(res.data)
-    } catch (error: unknown) {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (error: any) {
       console.log(error)
       if (Array.isArray(error.response.data)) {
         return setErrors(error.response.data)
