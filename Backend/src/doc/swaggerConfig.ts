@@ -6,12 +6,14 @@ import {
   routeSportAPI,
 } from "./api";
 import { routeReservationDoc } from "./reservation";
+import { routeOrderDoc } from "./order";
 
 const paths: Record<string, any> = {
   ...routeUserAPIValue,
   ...routeSportAPI,
   ...routesAuthControllerAPIValue,
   ...routeReservationDoc,
+  ...routeOrderDoc,
 };
 
 const options = {
