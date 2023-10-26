@@ -4,6 +4,7 @@ import { HttpCodes } from "../utils/HTTPCodes.util";
 import { validateSchema } from "../middlewares/validatorMiddleware";
 import { TypeUserSchemaValidator } from "../models/schemas/schemas.zod";
 
+
 const TypeRouter = express.Router();
 
 TypeRouter.route("/")
@@ -22,6 +23,7 @@ TypeRouter.route("/")
       const newType = new Type({
         ...req.body,
       });
+
 
       await newType.save();
 

@@ -9,8 +9,15 @@ const controller = new OrderController();
 
 orderRouter
   .route("/")
-  .get(async (_, res) => {
+
+  .get(async (req, res) => {
     try {
+      const { id } = req.query
+
+      if (id) {
+        const order = await controller.getOrderById(id as string)
+        return res.status(HttpCodes.CODE_SUCCESS).json({ order })
+      }
       const orders = await controller.getOrders()
 
       return res.status(HttpCodes.CODE_SUCCESS).json({

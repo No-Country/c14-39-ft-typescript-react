@@ -1,8 +1,12 @@
 ### GET
 GET http://localhost:3000/api/order
 
-### GET
+
+### GET by USERID
 GET http://localhost:3000/api/order/65302b877d83d01c2fa0388d
+
+### GET by ORDERID
+GET http://localhost:3000/api/order?id=1319140117
 
 ### POST
 POST http://localhost:3000/api/order
@@ -11,7 +15,7 @@ Content-Type: application/json
 {
   "fecha": "2022-04-10",
   "hora": "18:00",
-  "precio": 1000,
+  "precio": 800,
   "sc_id": "65370b542b617a35521a4389",
   "camp_id": "65379b2f1a8f5bbe8785377c",
   "user_id": "65302b877d83d01c2fa0388d"
