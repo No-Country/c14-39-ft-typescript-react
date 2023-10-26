@@ -55,7 +55,7 @@ export class OrderController implements IOrderController {
     }
   }
 
-  public async createCheckout(data: IOrderValidator): Promise<string | any> {
+  public async createCheckout(data: IOrderValidator): Promise<string> {
     try {
       // si no existe el user o el sportCenter o el camp, se lanza un error
       const [user, sc, camp] = await Promise.all([
@@ -93,14 +93,15 @@ export class OrderController implements IOrderController {
             failure: "http://localhost:5173/error",
             pending: "http://localhost:5173/pending",
           },
-          notification_url: "https://reservatucancha.onrender.com/api/webhook",
+          notification_url: "https://c9d3-2800-200-f008-bca7-00-2.ngrok.io/api/webhook",
+          // notification_url: "https://reservatucancha-5rse5st6p-reservatucancha.vercel.app/api/webhook",
           auto_return: "approved",
         },
       })
 
-      return checkout.init_point
+      return checkout.init_point as string
     } catch (error) {
-      return error
+      throw error
     }
   }
 

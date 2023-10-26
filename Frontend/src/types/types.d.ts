@@ -27,6 +27,7 @@ export interface Cancha {
 
 export interface UserData {
   name: string;
+  id?: string;
   lastname: string;
   email: string;
   password: string;
