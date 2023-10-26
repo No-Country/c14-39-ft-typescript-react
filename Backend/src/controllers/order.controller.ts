@@ -1,70 +1,26 @@
 import { Payment, Preference } from "mercadopago";
 import {
   IOrderController,
-  IOrder,
   IOrderResponse,
   IOrderValidator,
 } from "../interface";
 import { Camp, Order, SportCenterModel, User } from "../models";
-import { client } from '../libs/mp'
+import { client } from "../libs/mp";
 import { randomUUID } from "crypto";
 import { PreferenceResponse } from "mercadopago/dist/clients/preference/commonTypes";
 
 export class OrderController implements IOrderController {
-
-  public async getOrders(): Promise<IOrderResponse[]> {
-
-    try {
-      const orders: IOrderResponse[] = await Order.find()
-        .populate("user_id", {
-          _id: 1,
-          name: 1,
-        })
-        .populate("camp_id", {
-          _id: 1,
-          sca_num: 1,
-        })
-        .populate("sc_id", {
-          _id: 1,
-          sc_name: 1,
-        })
-      return orders
-    } catch (error) {
-      throw error
-    }
-  }
-
-  public async getOrdersByUserId(userId: string): Promise<IOrderResponse[]> {
-    try {
-      const user = await User.findById(userId)
-
-      if (!user) {
-        throw new Error("User not found")
-      }
-
-      const orders: IOrderResponse[] = await Order.find({ user_id: userId })
-        .populate("user_id", {
-          _id: 1,
-          name: 1,
-        })
-        .populate("camp_id", {
-          _id: 1,
-          sca_num: 1,
-        })
-        .populate("sc_id", {
-          _id: 1,
-          sc_name: 1,
-        })
-      return orders
   private readonly populateFields = [
     { path: "user_id", select: "_id name" },
     { path: "camp_id", select: "_id sca_num" },
-    { path: "sc_id", select: "_id sc_name" }
+    { path: "sc_id", select: "_id sc_name" },
   ];
 
   private async populateOrders(query: any): Promise<IOrderResponse[]> {
     try {
-      const orders: IOrderResponse[] = await Order.find(query).populate(this.populateFields)
+      const orders: IOrderResponse[] = await Order.find(query).populate(
+        this.populateFields
+      );
       return orders;
     } catch (error) {
       throw error;
@@ -89,14 +45,14 @@ export class OrderController implements IOrderController {
     }
   }
 
-  public async getOrderById(orderId: string):
-    Promise<IOrderResponse | null> {
+  public async getOrderById(orderId: string): Promise<IOrderResponse | null> {
     try {
-      const order = await Order.findOne({ order_id: orderId })
-        .populate(this.populateFields)
-      return order
+      const order = await Order.findOne({ order_id: orderId }).populate(
+        this.populateFields
+      );
+      return order;
     } catch (error) {
-      throw error
+      throw error;
     }
   }
 
@@ -107,13 +63,13 @@ export class OrderController implements IOrderController {
         User.findById(data.user_id),
         SportCenterModel.findById(data.sc_id),
         Camp.findById(data.camp_id),
-      ])
+      ]);
 
       if (![user, sc, camp].every(Boolean)) {
         throw new Error("User or sportCenter or camp not found");
       }
 
-      const preference = new Preference(client)
+      const preference = new Preference(client);
 
       const checkout: PreferenceResponse = await preference.create({
         body: {
@@ -141,21 +97,20 @@ export class OrderController implements IOrderController {
           notification_url: "https://reservatucancha.onrender.com/api/webhook",
           auto_return: "approved",
         },
-      })
+      });
 
-      return checkout.init_point
+      return checkout.init_point;
     } catch (error) {
-      return error
+      return error;
     }
   }
 
-  public async createOrder(dataId: string | number):
-    Promise<any> {
+  public async createOrder(dataId: string | number): Promise<any> {
     try {
-      const paymented = new Payment(client)
+      const paymented = new Payment(client);
       const data = await paymented.get({
-        id: dataId
-      })
+        id: dataId,
+      });
 
       // verificar el estado del pago
       if (data && data.status === "approved") {
@@ -169,12 +124,12 @@ export class OrderController implements IOrderController {
           user_id: data.metadata.user_id as string,
           camp_id: data.metadata.camp_id as string,
           sc_id: data.metadata.sc_id as string,
-        })
+        });
 
-        await order.save()
+        await order.save();
       }
     } catch (error) {
-      throw error
+      throw error;
     }
   }
 }
