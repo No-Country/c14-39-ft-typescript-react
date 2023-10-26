@@ -4,7 +4,7 @@ import { ROUTES } from '../../data/consts'
 import { Button } from '../Button'
 import { Logo } from './Logo'
 import { NavbarItem } from './NavbarItem'
-import { Bars3Icon, UserCircleIcon } from '@heroicons/react/24/outline'
+import { Bars3Icon } from '@heroicons/react/24/outline'
 import { AuthContext } from '../../context/AuthContext'
 import LogoutButton from '../LogoutButton'
 
@@ -38,11 +38,6 @@ export const NavBar = () => {
         {isLogged && (
           <LogoutButton />
         )}
-        {/* <Button
-  label='Regístrate'
-  style='secondary'
-  onClick={() => navigate(ROUTES.SIGN_UP)}
-/> */}
         {/* {isLogged && (
           <Button
             label='Perfil'
