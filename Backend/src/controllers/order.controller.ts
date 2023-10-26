@@ -1,6 +1,7 @@
 import { Payment, Preference } from "mercadopago";
 import {
   IOrderController,
+  IOrder,
   IOrderResponse,
   IOrderValidator,
 } from "../interface";
@@ -11,6 +12,50 @@ import { PreferenceResponse } from "mercadopago/dist/clients/preference/commonTy
 
 export class OrderController implements IOrderController {
 
+  public async getOrders(): Promise<IOrderResponse[]> {
+
+    try {
+      const orders: IOrderResponse[] = await Order.find()
+        .populate("user_id", {
+          _id: 1,
+          name: 1,
+        })
+        .populate("camp_id", {
+          _id: 1,
+          sca_num: 1,
+        })
+        .populate("sc_id", {
+          _id: 1,
+          sc_name: 1,
+        })
+      return orders
+    } catch (error) {
+      throw error
+    }
+  }
+
+  public async getOrdersByUserId(userId: string): Promise<IOrderResponse[]> {
+    try {
+      const user = await User.findById(userId)
+
+      if (!user) {
+        throw new Error("User not found")
+      }
+
+      const orders: IOrderResponse[] = await Order.find({ user_id: userId })
+        .populate("user_id", {
+          _id: 1,
+          name: 1,
+        })
+        .populate("camp_id", {
+          _id: 1,
+          sca_num: 1,
+        })
+        .populate("sc_id", {
+          _id: 1,
+          sc_name: 1,
+        })
+      return orders
   private readonly populateFields = [
     { path: "user_id", select: "_id name" },
     { path: "camp_id", select: "_id sca_num" },

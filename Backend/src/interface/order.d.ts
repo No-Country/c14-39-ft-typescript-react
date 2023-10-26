@@ -7,6 +7,11 @@ export interface IOrderValidator {
   sc_id: string;
 }
 
+export interface IOrder extends IOrderValidator {
+  order_id: string;
+  currency: string;
+}
+
 export interface IOrderResponse extends IOrder {
   _id: string;
 }
@@ -14,6 +19,7 @@ export interface IOrderResponse extends IOrder {
 export interface IOrderController {
   getOrders(): Promise<IOrderResponse[]>;
   getOrdersByUserId(userId: string): Promise<IOrderResponse[]>;
+
   getOrderById(orderId: string): Promise<IOrderResponse | null>;
   createCheckout(data: IOrderValidator): Promise<string>;
   createOrder(payment: string | number,): Promise<any>;
