@@ -5,6 +5,8 @@ import { Button } from '../components/Button'
 import { ROUTES } from '../data/consts'
 import { useForm } from 'react-hook-form';
 import { AuthContext } from '../context/AuthContext';
+import Swal from 'sweetalert2';
+import withReactContent from 'sweetalert2-react-content';
 
 interface IFormInput {
   name: string;
@@ -15,8 +17,9 @@ interface IFormInput {
 
 const Registro: React.FC = () => {
   const { register, handleSubmit } = useForm<IFormInput>();
-  const { signUp, errors, isLogged } = useContext(AuthContext);
+  const { signUp, errors, isLogged, message, setMessage } = useContext(AuthContext);
   const navigate = useNavigate();
+  const MySwal = withReactContent(Swal);
 
   // Identifica el mensaje de error para cada campo
   const nameError = errors.find(error => error.toLowerCase().includes("nombre")) ;
@@ -35,7 +38,20 @@ const Registro: React.FC = () => {
   };
 
   useEffect(() => {
-    if (isLogged) navigate(ROUTES.HOME);
+    const checkLoginAndNavigate = async () => {
+      if (isLogged) {
+        await MySwal.fire({
+          icon: 'success',
+          title: `${message}`,
+          showConfirmButton: false,
+          timer: 1500
+        });
+        setMessage("");
+        navigate(ROUTES.HOME);
+      }
+    };
+    
+    checkLoginAndNavigate();
   }, [isLogged]);
   
   return (

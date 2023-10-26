@@ -14,6 +14,8 @@ interface AuthContextData {
     signUp: (user: UserData) => Promise<void>
     signIn: (user: UserLoginData) => Promise<void>
     logout: () => void
+    message: string | null
+    setMessage: (message: string) => void
 }
 
 export const AuthContext = createContext<AuthContextData>({} as AuthContextData)
@@ -23,11 +25,12 @@ export const AuthProvider = ({ children }: AuthContextProps) => {
     const [user, setUser] = useState<UserData | null>(null);
     const [errors, setErrors] = useState<string[]>([]);
     const [loading, setLoading] = useState(true);
+    const [message, setMessage] = useState<string>("");
 
     const signUp = async (user: UserData) => {
         try {
           const res = await registerRequest(user);
-          setUser(res.data);
+          setMessage(res.data.message);
           setIsLogged(true);
         } catch (error: any) {
           console.log(error)
@@ -42,7 +45,7 @@ export const AuthProvider = ({ children }: AuthContextProps) => {
         try {
           const res = await loginRequest(user);
           setIsLogged(true);
-          setUser(res.data);
+          setMessage(res.data.message)
         } catch (error: any) {
           console.log(error)
           if (Array.isArray(error.response.data)) {
@@ -111,6 +114,8 @@ export const AuthProvider = ({ children }: AuthContextProps) => {
                 signUp,
                 signIn,
                 logout,
+                message,
+                setMessage
             }}
         >
             {children}
