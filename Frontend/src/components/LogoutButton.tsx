@@ -21,10 +21,7 @@ const LogoutButton: React.FC = () => {
       customClass: {
         confirmButton: 'custom-primary',
         cancelButton: 'custom-secondary',
-        // title: 'text-black',
         popup: 'custom-popup',
-        // icon: 'text-black',
-        // htmlContainer: 'text-black',
       },
     }).then(result => {
       if (result.isConfirmed) {
