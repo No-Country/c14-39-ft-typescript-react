@@ -38,6 +38,9 @@ const Login = () => {
           title: `${message}`,
           showConfirmButton: false,
           timer: 1500,
+          customClass: {
+            popup: 'custom-popup',
+          },
         })
         setMessage('')
         navigate(ROUTES.HOME)
