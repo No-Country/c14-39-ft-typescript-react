@@ -1,17 +1,17 @@
 import { useContext } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
-
 import { ROUTES } from '../../data/consts'
-
 import { Button } from '../Button'
 import { Logo } from './Logo'
 import { NavbarItem } from './NavbarItem'
 import { Bars3Icon } from '@heroicons/react/24/outline'
 import { AuthContext } from '../../context/AuthContext'
+import LogoutButton from '../LogoutButton'
+
 
 export const NavBar = () => {
   const navigate = useNavigate()
-  const { isLogged, logout } = useContext(AuthContext)
+  const { isLogged } = useContext(AuthContext)
 
   const { pathname } = useLocation()
 
@@ -36,20 +36,8 @@ export const NavBar = () => {
           />
         )}
         {isLogged && (
-          <Button
-            label='Salir'
-            style='primary'
-            onClick={() => {
-              logout()
-              navigate(ROUTES.HOME)
-            }}
-          />
+          <LogoutButton />
         )}
-        {/* <Button
-  label='Regístrate'
-  style='secondary'
-  onClick={() => navigate(ROUTES.SIGN_UP)}
-/> */}
         {/* {isLogged && (
           <Button
             label='Perfil'
