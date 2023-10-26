@@ -1,15 +1,12 @@
-import { useContext, useEffect } from 'react'
 import { NavLink, useNavigate } from 'react-router-dom'
-import { useForm } from 'react-hook-form'
-
-import { AuthContext } from '../context/AuthContext'
-import { ROUTES } from '../data/consts'
-
 import { Button } from '../components/Button'
+import { ROUTES } from '../data/consts'
+import { useContext, useEffect } from 'react'
+import { AuthContext } from '../context/AuthContext'
+import { useForm } from 'react-hook-form'
 import { EmailInput, PasswordInput } from '../components/form'
-import Swal from 'sweetalert2';
-import withReactContent from 'sweetalert2-react-content';
-
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
 
 interface IFormInput {
   email: string
@@ -18,53 +15,37 @@ interface IFormInput {
 
 const Login = () => {
   const { register, handleSubmit } = useForm<IFormInput>()
-  const { signIn, errors, isLogged } = useContext(AuthContext)
+  const { signIn, errors, isLogged, message, setMessage } = useContext(AuthContext)
   const navigate = useNavigate()
-
-  const { register, handleSubmit } = useForm<IFormInput>();
-  const { signIn, errors, isLogged, message, setMessage } = useContext(AuthContext);
-  const navigate = useNavigate();
-  const MySwal = withReactContent(Swal);
+  const MySwal = withReactContent(Swal)
 
   const emailError = errors.find(error => error.toLowerCase().includes('email'))
   const passwordError = errors?.find(error => error.toLowerCase().includes('contraseña'))
 
-
   const onSubmit = async (data: IFormInput) => {
     try {
-      console.log(data)
-      console.log(signIn)
       await signIn(data)
     } catch (error) {
       console.error(error)
     }
   }
 
-    const onSubmit = async (data: IFormInput) => {
-      try {
-        await signIn(data);
-      } catch (error) {
-        console.error(error);
+  useEffect(() => {
+    const checkLoginAndNavigate = async () => {
+      if (isLogged) {
+        await MySwal.fire({
+          icon: 'success',
+          title: `${message}`,
+          showConfirmButton: false,
+          timer: 1500,
+        })
+        setMessage('')
+        navigate(ROUTES.HOME)
       }
-    };
+    }
 
-    useEffect(() => {
-      const checkLoginAndNavigate = async () => {
-        if (isLogged) {
-          await MySwal.fire({
-            icon: 'success',
-            title: `${message}`,
-            showConfirmButton: false,
-            timer: 1500
-          });
-          setMessage("");
-          navigate(ROUTES.HOME);
-        }
-      };
-  
-      checkLoginAndNavigate();    
-    }, [isLogged])
-
+    checkLoginAndNavigate()
+  }, [isLogged])
 
   return (
     <section className='wrapper'>
