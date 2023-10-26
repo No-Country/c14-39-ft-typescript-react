@@ -77,7 +77,6 @@ const Login = () => {
             override='w-full'
           />
 
-          {/* <GoogleBtn /> */}
           <div className='flex justify-center gap-1'>
             <div>¿No tienes una cuenta?</div>
 

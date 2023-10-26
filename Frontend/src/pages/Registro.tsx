@@ -4,11 +4,10 @@ import { EmailInput, PasswordInput, NameInput, LastNameInput } from '../componen
 import { Button } from '../components/Button'
 import { ROUTES } from '../data/consts'
 
-import { useForm } from 'react-hook-form';
-import { AuthContext } from '../context/AuthContext';
-import Swal from 'sweetalert2';
-import withReactContent from 'sweetalert2-react-content';
-
+import { useForm } from 'react-hook-form'
+import { AuthContext } from '../context/AuthContext'
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
 
 interface IFormInput {
   name: string
@@ -18,11 +17,10 @@ interface IFormInput {
 }
 
 const Registro: React.FC = () => {
-  const { register, handleSubmit } = useForm<IFormInput>();
-  const { signUp, errors, isLogged, message, setMessage } = useContext(AuthContext);
-  const navigate = useNavigate();
-  const MySwal = withReactContent(Swal);
-
+  const { register, handleSubmit } = useForm<IFormInput>()
+  const { signUp, errors, isLogged, message, setMessage } = useContext(AuthContext)
+  const navigate = useNavigate()
+  const MySwal = withReactContent(Swal)
 
   // Identifica el mensaje de error para cada campo
   const nameError = errors.find(error => error.toLowerCase().includes('nombre'))
@@ -41,28 +39,29 @@ const Registro: React.FC = () => {
   }
 
   useEffect(() => {
-
     const checkLoginAndNavigate = async () => {
       if (isLogged) {
         await MySwal.fire({
           icon: 'success',
           title: `${message}`,
           showConfirmButton: false,
-          timer: 1500
-        });
-        setMessage("");
-        navigate(ROUTES.HOME);
+          timer: 1500,
+        })
+        setMessage('')
+        navigate(ROUTES.HOME)
       }
-    };
-    
-    checkLoginAndNavigate();
-  }, [isLogged]);
+    }
+
+    checkLoginAndNavigate()
+  }, [isLogged])
 
   return (
     <section className='wrapper'>
       <h1 className='mb-6 text-4xl text-center md:text-6xl font-display'>¡Bienvenido!</h1>
-      <div className='max-w-xs gap-8 mx-auto my-0'>
-        <form onSubmit={handleSubmit(data => onSubmit(data))}>
+      <div className='max-w-3xl gap-8 mx-auto my-0'>
+        <form
+          onSubmit={handleSubmit(data => onSubmit(data))}
+          className='flex flex-col grid-cols-2 gap-4 md:grid mb-7'>
           <NameInput
             register={register('name')}
             error={nameError}
@@ -87,15 +86,15 @@ const Registro: React.FC = () => {
             label='Regístrate'
             type='submit'
             style='secondary'
-            override='w-full'
+            override='w-full col-span-2'
           />
 
-          <div className='flex justify-center gap-1'>
+          <div className='flex justify-center col-span-2 gap-1'>
             <div>¿Ya tienes una cuenta?</div>
 
             <NavLink
               to={ROUTES.LOGIN}
-              className='font-bold text-base-blue2'>
+              className='font-bold text-base-blue2 '>
               Ingresa
             </NavLink>
           </div>
