@@ -6,7 +6,7 @@ import { ROUTES } from '../../data/consts'
 import { Button } from '../Button'
 import { Logo } from './Logo'
 import { NavbarItem } from './NavbarItem'
-import { Bars3Icon, UserCircleIcon } from '@heroicons/react/24/outline'
+import { Bars3Icon } from '@heroicons/react/24/outline'
 import { AuthContext } from '../../context/AuthContext'
 
 export const NavBar = () => {
@@ -39,9 +39,10 @@ export const NavBar = () => {
           <Button
             label='Salir'
             style='primary'
-            onClick={() => {  
+            onClick={() => {
               logout()
-              navigate(ROUTES.HOME)} }
+              navigate(ROUTES.HOME)
+            }}
           />
         )}
         {/* <Button
