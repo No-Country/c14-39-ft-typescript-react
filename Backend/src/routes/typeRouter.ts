@@ -1,7 +1,7 @@
 import express from 'express'
 import { Type } from '../models'
 import { HttpCodes } from '../utils/HTTPCodes.util'
-import { validateSchema } from '../../middlewares/validatorMiddleware'
+import { validateSchema } from '../middlewares/validatorMiddleware'
 import { TypeUserSchemaValidator } from '../models/schemas/schemas.zod'
 
 const TypeRouter = express.Router()

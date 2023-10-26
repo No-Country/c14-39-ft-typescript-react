@@ -1,7 +1,6 @@
 import { Payment, Preference } from "mercadopago";
 import {
   IOrderController,
-  IOrder,
   IOrderResponse,
   IOrderValidator,
 } from "../interface";
@@ -11,51 +10,46 @@ import { randomUUID } from "crypto";
 import { PreferenceResponse } from "mercadopago/dist/clients/preference/commonTypes";
 
 export class OrderController implements IOrderController {
-  // Create order
-  public async getOrders(): Promise<IOrderResponse[]> {
 
+  private readonly populateFields = [
+    { path: "user_id", select: "_id name" },
+    { path: "camp_id", select: "_id sca_num" },
+    { path: "sc_id", select: "_id sc_name" }
+  ];
+
+  private async populateOrders(query: any): Promise<IOrderResponse[]> {
     try {
-      const orders: IOrderResponse[] = await Order.find()
-        .populate("user_id", {
-          _id: 1,
-          name: 1,
-        })
-        .populate("camp_id", {
-          _id: 1,
-          sca_num: 1,
-        })
-        .populate("sc_id", {
-          _id: 1,
-          sc_name: 1,
-        })
-      return orders
+      const orders: IOrderResponse[] = await Order.find(query).populate(this.populateFields)
+      return orders;
     } catch (error) {
-      throw error
+      throw error;
     }
+  }
+
+  public async getOrders(): Promise<IOrderResponse[]> {
+    return this.populateOrders({});
   }
 
   public async getOrdersByUserId(userId: string): Promise<IOrderResponse[]> {
     try {
-      const user = await User.findById(userId)
+      const user = await User.findById(userId);
 
       if (!user) {
-        throw new Error("User not found")
+        throw new Error("User not found");
       }
 
-      const orders: IOrderResponse[] = await Order.find({ user_id: userId })
-        .populate("user_id", {
-          _id: 1,
-          name: 1,
-        })
-        .populate("camp_id", {
-          _id: 1,
-          sca_num: 1,
-        })
-        .populate("sc_id", {
-          _id: 1,
-          sc_name: 1,
-        })
-      return orders
+      return this.populateOrders({ user_id: user._id });
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  public async getOrderById(orderId: string):
+    Promise<IOrderResponse | null> {
+    try {
+      const order = await Order.findOne({ order_id: orderId })
+        .populate(this.populateFields)
+      return order
     } catch (error) {
       throw error
     }
@@ -99,7 +93,7 @@ export class OrderController implements IOrderController {
             failure: "http://localhost:5173/error",
             pending: "http://localhost:5173/pending",
           },
-          notification_url: "", //Ruta deploy backend o crear ngrok: "https://46e1-2800-200-f008-bca7-00-2.ngrok.io/api/webhook",
+          notification_url: "https://reservatucancha.onrender.com/api/webhook",
           auto_return: "approved",
         },
       })
