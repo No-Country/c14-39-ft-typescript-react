@@ -11,6 +11,7 @@ interface AuthContextData {
     errors: string[]
     loading: boolean
     user: UserData | null
+    setUser: (user: UserData) => void
     signUp: (user: UserData) => Promise<void>
     signIn: (user: UserLoginData) => Promise<void>
     logout: () => void
@@ -31,6 +32,7 @@ export const AuthProvider = ({ children }: AuthContextProps) => {
         try {
           const res = await registerRequest(user);
           setMessage(res.data.message);
+          setUser(res.data.user);
           setIsLogged(true);
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         } catch (error: any) {
@@ -47,6 +49,7 @@ export const AuthProvider = ({ children }: AuthContextProps) => {
           const res = await loginRequest(user);
           setIsLogged(true);
           setMessage(res.data.message)
+          setUser(res.data.user);
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         } catch (error: any) {
           console.log(error)
@@ -75,7 +78,6 @@ export const AuthProvider = ({ children }: AuthContextProps) => {
       useEffect(() => {
         async function checkLogin() {
           const cookies = Cookies.get();
-          // console.log(cookies)
           if (!cookies.token) {
             setIsLogged(false);
             setLoading(false);
@@ -84,9 +86,8 @@ export const AuthProvider = ({ children }: AuthContextProps) => {
     
         try {
             const cookies = Cookies.get();
-            // console.log(cookies)
             const res = await verifyTokenRequest(cookies.token);
-            console.log(res)
+
             if (!res.data) {
                 setIsLogged(false);
                 setLoading(false);
@@ -113,6 +114,7 @@ export const AuthProvider = ({ children }: AuthContextProps) => {
                 errors,
                 loading,
                 user,
+                setUser,
                 signUp,
                 signIn,
                 logout,
