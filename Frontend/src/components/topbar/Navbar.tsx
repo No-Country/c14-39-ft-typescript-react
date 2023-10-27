@@ -26,18 +26,18 @@ export const NavBar = () => {
             label='Reserva'
             to={ROUTES.HOME}
           />
-          <NavbarItem
+          {/* <NavbarItem
             label='Nosotros'
             to={'/'}
-          />
+          /> */}
           <NavbarItem
             label='Beneficios'
-            to={'/'}
+            to={ROUTES.BENEFITS}
           />
-          <NavbarItem
+          {/* <NavbarItem
             label='Patrocinadores'
             to={'/'}
-          />
+          /> */}
         </ul>
         {!isLogged ? (
           <Button
