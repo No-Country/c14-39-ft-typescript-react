@@ -7,6 +7,9 @@ import { ROUTES } from '../data/consts'
 
 import { Button } from '../components/Button'
 import { EmailInput, PasswordInput } from '../components/form'
+import Swal from 'sweetalert2';
+import withReactContent from 'sweetalert2-react-content';
+
 
 interface IFormInput {
   email: string
@@ -14,26 +17,41 @@ interface IFormInput {
 }
 
 const Login = () => {
-  const { register, handleSubmit } = useForm<IFormInput>()
-  const { signIn, errors, isLogged } = useContext(AuthContext)
-  const navigate = useNavigate()
+  const { register, handleSubmit } = useForm<IFormInput>();
+  const { signIn, errors, isLogged, message, setMessage } = useContext(AuthContext);
+  const navigate = useNavigate();
+  const MySwal = withReactContent(Swal);
 
   const emailError = errors.find(error => error.toLowerCase().includes('email'))
   const passwordError = errors?.find(error => error.toLowerCase().includes('contraseña'))
 
-  const onSubmit = async (data: IFormInput) => {
-    try {
-      console.log(data)
-      console.log(signIn)
-      await signIn(data)
-    } catch (error) {
-      console.error(error)
-    }
-  }
 
-  useEffect(() => {
-    if (isLogged) navigate('/')
-  }, [isLogged])
+
+    const onSubmit = async (data: IFormInput) => {
+      try {
+        await signIn(data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    useEffect(() => {
+      const checkLoginAndNavigate = async () => {
+        if (isLogged) {
+          await MySwal.fire({
+            icon: 'success',
+            title: `${message}`,
+            showConfirmButton: false,
+            timer: 1500
+          });
+          setMessage("");
+          navigate(ROUTES.HOME);
+        }
+      };
+  
+      checkLoginAndNavigate();    
+    }, [isLogged])
+
 
   return (
     <section className='wrapper'>

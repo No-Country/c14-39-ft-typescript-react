@@ -38,7 +38,7 @@ export const register = async (req: Request, res: Response) => {
 
     res.cookie("token", token);
 
-    return res.status(HttpCodes.CODE_SUCCESS).json({ message: "Usuario registrado con exito" });
+    return res.status(HttpCodes.CODE_SUCCESS).json({ message: "Usuario registrado con exito", user: newUser});
 
 
   } catch (error: any) {
@@ -65,7 +65,7 @@ export const login = async (req: Request, res: Response) => {
 
     res.cookie("token", token);
 
-    res.status(HttpCodes.CODE_SUCCESS).json({ message: "Login correcto" });
+    res.status(HttpCodes.CODE_SUCCESS).json({ message: "Login correcto, bienvenido " + mailFound.name + "." , user: mailFound });
 
   } catch (error: any) {
     res.status(HttpCodes.CODE_INTERNAL_SERVER_ERROR).json({ message: `${error.message}` });
