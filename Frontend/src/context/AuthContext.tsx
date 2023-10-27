@@ -1,11 +1,10 @@
 import { createContext, ReactNode, useEffect, useState } from 'react'
-import Cookies from 'js-cookie'
-
 import { UserData, UserLoginData } from '../types/types'
 import { loginRequest, registerRequest, verifyTokenRequest } from '../api/auth'
+import Cookies from "js-cookie";
 
 interface AuthContextProps {
-  children: ReactNode
+    children: ReactNode
 }
 interface AuthContextData {
     isLogged: boolean
@@ -33,6 +32,7 @@ export const AuthProvider = ({ children }: AuthContextProps) => {
           const res = await registerRequest(user);
           setMessage(res.data.message);
           setIsLogged(true);
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         } catch (error: any) {
           console.log(error)
           if (Array.isArray(error.response.data)) {
@@ -47,6 +47,7 @@ export const AuthProvider = ({ children }: AuthContextProps) => {
           const res = await loginRequest(user);
           setIsLogged(true);
           setMessage(res.data.message)
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         } catch (error: any) {
           console.log(error)
           if (Array.isArray(error.response.data)) {
@@ -56,56 +57,54 @@ export const AuthProvider = ({ children }: AuthContextProps) => {
         }
       };
 
-  const signIn = async (user: UserLoginData) => {
-    try {
-      const res = await loginRequest(user)
-      setIsLogged(true)
-      setUser(res.data)
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    } catch (error: any) {
-      console.log(error)
-      if (Array.isArray(error.response.data)) {
-        return setErrors(error.response.data)
-      }
-      setErrors([error.response.data.message])
-    }
-  }
+      const logout = () => {
+        Cookies.remove("token");
+        setIsLogged(false);
+        setUser(null);
+      };
 
-  const logout = () => {
-    Cookies.remove('token')
-    setIsLogged(false)
-    setUser(null)
-  }
-
-  useEffect(() => {
-    if (errors.length > 0) {
-      const timer = setTimeout(() => {
-        setErrors([])
-      }, 5000)
-      return () => clearTimeout(timer)
-    }
-  }, [errors])
-
-  useEffect(() => {
-    async function checkLogin() {
-      const cookies = Cookies.get()
-      // console.log(cookies)
-      if (!cookies.token) {
-        setIsLogged(false)
-        setLoading(false)
-        return setUser(null)
-      }
-
-      try {
-        const cookies = Cookies.get()
-        // console.log(cookies)
-        const res = await verifyTokenRequest(cookies.token)
-        console.log(res)
-        if (!res.data) {
-          setIsLogged(false)
-          setLoading(false)
-          return
+      useEffect(() => {
+        if (errors.length > 0) {
+          const timer = setTimeout(() => {
+            setErrors([]);
+          }, 5000);
+          return () => clearTimeout(timer);
         }
+      }, [errors]);
+
+      useEffect(() => {
+        async function checkLogin() {
+          const cookies = Cookies.get();
+          // console.log(cookies)
+          if (!cookies.token) {
+            setIsLogged(false);
+            setLoading(false);
+            return setUser(null);
+          }
+    
+        try {
+            const cookies = Cookies.get();
+            // console.log(cookies)
+            const res = await verifyTokenRequest(cookies.token);
+            console.log(res)
+            if (!res.data) {
+                setIsLogged(false);
+                setLoading(false);
+                return;
+            }
+            setIsLogged(true);
+            setUser(res.data);
+            setLoading(false);
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        } catch (error) {
+            // console.log(error)
+            setIsLogged(false);
+            setUser(null);
+            setLoading(false);
+          }
+        }
+        checkLogin();
+      }, []);
 
     return (
         <AuthContext.Provider

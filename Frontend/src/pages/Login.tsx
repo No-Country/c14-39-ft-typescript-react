@@ -17,10 +17,6 @@ interface IFormInput {
 }
 
 const Login = () => {
-  const { register, handleSubmit } = useForm<IFormInput>()
-  const { signIn, errors, isLogged } = useContext(AuthContext)
-  const navigate = useNavigate()
-
   const { register, handleSubmit } = useForm<IFormInput>();
   const { signIn, errors, isLogged, message, setMessage } = useContext(AuthContext);
   const navigate = useNavigate();
@@ -30,15 +26,6 @@ const Login = () => {
   const passwordError = errors?.find(error => error.toLowerCase().includes('contraseña'))
 
 
-  const onSubmit = async (data: IFormInput) => {
-    try {
-      console.log(data)
-      console.log(signIn)
-      await signIn(data)
-    } catch (error) {
-      console.error(error)
-    }
-  }
 
     const onSubmit = async (data: IFormInput) => {
       try {
