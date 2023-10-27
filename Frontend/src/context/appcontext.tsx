@@ -40,7 +40,7 @@ export const AppProvider = ({ children }: AppContextProps) => {
     })
   }
 
-  console.log(cityId, isLogged, bookingData)
+  console.log(cityId, bookingData)
 
   return (
     <AppContext.Provider
