@@ -58,7 +58,7 @@ export function BookingSelector({ proveedor }: { proveedor: Center | undefined }
 
   const redirectMercadoPago = (data: BookData) => {
     axios
-      .post(`${API_URL.BASE_URL}order`, {
+      .post(`http://localhost:3000/api/order`, {
         fecha: data.fecha,
         hora: data.hora.toString(),
         precio: 500,

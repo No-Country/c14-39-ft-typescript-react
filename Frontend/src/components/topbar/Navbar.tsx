@@ -49,7 +49,7 @@ export const NavBar = () => {
           <LogoutButton />
         )}
       </div>
-      <button className='md:hidden'>
+      <button className='flex items-center justify-center w-12 h-12 rounded-full md:hidden bg-base-green1'>
         <Bars3Icon className='w-6 h-6 text-black' />
       </button>
     </div>
