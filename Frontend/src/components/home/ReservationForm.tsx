@@ -51,8 +51,7 @@ export const ReservationForm = () => {
     <article className='wrapper font-body'>
       {isLoading && <p>Cargando...</p>}
       {isError && <p>Algo ha ocurrido, intenta de nuevo actualizando la página.</p>}
-
-      {citiesData && (
+      {!isError && !isLoading && citiesData && (
         <form
           className='flex flex-col items-center gap-4 p-2 md:p-8 bg-white/60 rounded-3xl backdrop-blur-2xl'
           onSubmit={e => handleSubmit(e)}>

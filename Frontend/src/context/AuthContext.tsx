@@ -1,7 +1,8 @@
 import { createContext, ReactNode, useEffect, useState } from 'react'
 import { UserData, UserLoginData } from '../types/types'
 import { loginRequest, registerRequest, verifyTokenRequest } from '../api/auth'
-import Cookies from "js-cookie";
+
+import Cookies from 'js-cookie'
 
 interface AuthContextProps {
     children: ReactNode
@@ -22,6 +23,7 @@ interface AuthContextData {
 export const AuthContext = createContext<AuthContextData>({} as AuthContextData)
 
 export const AuthProvider = ({ children }: AuthContextProps) => {
+
     const [isLogged, setIsLogged] = useState(false)
     const [user, setUser] = useState<UserData | null>(null);
     const [errors, setErrors] = useState<string[]>([]);

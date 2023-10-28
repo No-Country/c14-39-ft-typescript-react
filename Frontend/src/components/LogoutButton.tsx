@@ -16,18 +16,28 @@ const LogoutButton: React.FC = () => {
       title: 'Seguro que quieres salir?',
       icon: 'warning',
       showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
+
       confirmButtonText: 'Sí',
-      cancelButtonText: 'No'
-    }).then((result) => {
+      cancelButtonText: 'No',
+      customClass: {
+        confirmButton: 'custom-primary',
+        cancelButton: 'custom-secondary',
+        popup: 'custom-popup',
+      },
+    }).then(result => {
       if (result.isConfirmed) {
-        MySwal.fire('Cerraste Sesión!');
-        logout();
-        navigate(ROUTES.HOME);
+        MySwal.fire({
+          title: 'Cerraste Sesión!',
+          customClass: {
+            confirmButton: 'custom-primary',
+            popup: 'custom-popup',
+          },
+        })
+        logout()
+        navigate(ROUTES.HOME)
       }
-    });
-  };
+    })
+  }
 
   return (
     <Button
@@ -35,7 +45,8 @@ const LogoutButton: React.FC = () => {
       style='primary'
       onClick={handleLogout}
     />
-  );
+
+  )
 }
 
-export default LogoutButton;
+export default LogoutButton

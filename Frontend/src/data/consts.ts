@@ -12,6 +12,10 @@ export const ROUTES = {
   LOGIN: '/ingresa',
   SIGN_UP: '/registro',
 
+  BENEFITS: '/beneficios',
+  US: '/nosotros',
+  SPONSORS: '/patrocinadores',
+
   FIELDS: '/canchas',
   FIELDS_DETAIL: '/canchas/:cancha',
   CONFIRM: '/confirm',
