@@ -1,21 +1,22 @@
-import React, { useContext } from 'react'
-import { useNavigate } from 'react-router-dom'
-import Swal from 'sweetalert2'
-import withReactContent from 'sweetalert2-react-content'
-import { AuthContext } from '../context/AuthContext'
-import { ROUTES } from '../data/consts'
-import { Button } from './Button'
+import React, { useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
+import withReactContent from 'sweetalert2-react-content';
+import { AuthContext } from '../context/AuthContext';
+import { ROUTES } from '../data/consts';
+import { Button } from './Button';
 
 const LogoutButton: React.FC = () => {
-  const { logout } = useContext(AuthContext)
-  const navigate = useNavigate()
-  const MySwal = withReactContent(Swal)
+  const { logout } = useContext(AuthContext);
+  const navigate = useNavigate();
+  const MySwal = withReactContent(Swal);
 
   const handleLogout = () => {
     MySwal.fire({
       title: 'Seguro que quieres salir?',
       icon: 'warning',
       showCancelButton: true,
+
       confirmButtonText: 'Sí',
       cancelButtonText: 'No',
       customClass: {
@@ -44,6 +45,7 @@ const LogoutButton: React.FC = () => {
       style='primary'
       onClick={handleLogout}
     />
+
   )
 }
 

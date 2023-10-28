@@ -1,8 +1,9 @@
-import { useContext, useState, useEffect } from 'react'
-import { AppContext, BookData } from '../../context/appcontext'
+import { useContext, useState, useEffect } from "react";
+import { AppContext, BookData } from "../../context/appcontext";
+import { AuthContext } from "../../context/AuthContext";
 
-import espaciosTiempo from '../../data/mockdata_timepo.json'
-import { Camp, Center } from '../../types/types'
+import espaciosTiempo from "../../data/mockdata_timepo.json";
+import { Camp, Center, UserData } from "../../types/types";
 
 import { Calendario } from './Calendario'
 import { RowTiempo } from '../form/RowItem'
@@ -19,7 +20,8 @@ export function BookingSelector({ proveedor }: { proveedor: Center | undefined }
   const [selectedCancha, setSelectedCancha] = useState<Camp | null>(null)
   const [show, setShow] = useState<boolean>(false)
 
-  const { saveBooking, bookingData } = useContext(AppContext)
+  const { saveBooking, bookingData } = useContext(AppContext);
+  const { user } = useContext(AuthContext);
 
   // const navigate = useNavigate();
 
@@ -28,8 +30,8 @@ export function BookingSelector({ proveedor }: { proveedor: Center | undefined }
   const maxDate = new Date(today.getTime() + 14 * 24 * 60 * 60 * 1000)
 
   useEffect(() => {
-    show && bookingData && redirectMercadoPago(bookingData)
-  }, [bookingData])
+    show && bookingData && user && redirectMercadoPago(bookingData, user);
+  }, [bookingData, show, user]);
 
   function showDate(date: Date) {
     setSelectedDate(date)
@@ -38,11 +40,6 @@ export function BookingSelector({ proveedor }: { proveedor: Center | undefined }
   function selectCancha(cancha: Camp) {
     setSelectedCancha(cancha)
   }
-
-  // function reset() {
-  //   setSelectedDate(null)
-  //   setSelectedCancha(null)
-  // }
 
   function ConfirmBooking(hora: number) {
     saveBooking({
@@ -56,7 +53,7 @@ export function BookingSelector({ proveedor }: { proveedor: Center | undefined }
     // navigate(ROUTES.CONFIRM);
   }
 
-  const redirectMercadoPago = (data: BookData) => {
+  const redirectMercadoPago = (data: BookData, user: UserData) => {
     axios
       .post(`http://localhost:3000/api/order`, {
         fecha: data.fecha,
@@ -64,7 +61,7 @@ export function BookingSelector({ proveedor }: { proveedor: Center | undefined }
         precio: 500,
         sc_id: data.cancha.sport_center_id._id,
         camp_id: data.cancha._id,
-        user_id: '65302b877d83d01c2fa0388d',
+        user_id: user.id,
       })
       .then(({ data }) => {
         window.location.href = data.initPoint

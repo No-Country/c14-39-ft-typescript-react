@@ -10,8 +10,13 @@ import { City } from '../../types/types'
 import { COMMON_TWSTYLES, ROUTES } from '../../data/consts'
 
 import { useCities } from '../../data/useSportData'
+import { AuthContext } from '../../context/AuthContext'
+import Swal from 'sweetalert2';
+import withReactContent from 'sweetalert2-react-content';
 
 export const ReservationForm = () => {
+  const {isLogged} = useContext(AuthContext)
+  const MySwal = withReactContent(Swal);
   const [selectedOption, setSelectedOption] = useState<City | null>(null)
 
   const { citiesData, isLoading, isError } = useCities()
@@ -25,12 +30,20 @@ export const ReservationForm = () => {
     setSelectedOption(selectedOption || null)
   }
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async(e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     const formData = new FormData(e.currentTarget)
     const data = Object.fromEntries(formData)
     setCity(data.city as string)
-
+    if(!isLogged){
+     await MySwal.fire({
+        icon: 'warning',
+        title: 'Debes iniciar sesión para continuar',
+        showConfirmButton: false,
+        timer: 3000
+      })      
+            navigate(ROUTES.LOGIN)
+    }
     navigate(ROUTES.FIELDS)
   }
 
