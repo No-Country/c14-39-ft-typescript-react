@@ -4,9 +4,12 @@ import countryRouter from "../routes/countryRouter";
 import typeRouter from "../routes/typeRouter";
 import authRouter from "./authRouter";
 import sportCenterRouter from "../routes/sportCenterRouter";
+import { authRequired } from "../middlewares/validateToken";
 import reservationRouter from "./reservationRouter";
 import sportCampRouter from "./sportCampRouter";
 import sca_type_router from "./campTypeRouter";
+import webhookRouter from "./webhookRouter";
+import orderRouter from './orderRouter';
 
 const app = express();
 const server = express.Router();
@@ -27,5 +30,7 @@ app.use("/reservation", reservationRouter);
 app.use("/sportcenter", sportCenterRouter);
 app.use("/sportcamp", sportCampRouter);
 app.use("/sportcamptype", sca_type_router);
+app.use("/webhook", webhookRouter);
+app.use("/order", orderRouter)
 
 export default app;
