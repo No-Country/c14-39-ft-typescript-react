@@ -1,27 +1,24 @@
-import { useContext, useState, useEffect } from "react";
-import { AppContext, BookData } from "../../context/appcontext";
-import { AuthContext } from "../../context/AuthContext";
+import { useContext, useState, useEffect } from 'react'
+import { AppContext, BookData } from '../../context/appcontext'
+import { AuthContext } from '../../context/AuthContext'
 
-import espaciosTiempo from "../../data/mockdata_timepo.json";
-import { Camp, Center, UserData } from "../../types/types";
+import espaciosTiempo from '../../data/mockdata_timepo.json'
+import { Camp, Center, UserData } from '../../types/types'
 
 import { Calendario } from './Calendario'
 import { RowTiempo } from '../form/RowItem'
 import { CanchaSelector } from './CanchaSelector'
-// import { useNavigate } from "react-router-dom";
-// import { ROUTES } from "../../data/consts";
 import { Stepper } from './Stepper'
 
 import axios from 'axios'
-import { API_URL } from '../../data/consts'
 
 export function BookingSelector({ proveedor }: { proveedor: Center | undefined }) {
   const [selectedDate, setSelectedDate] = useState<Date | null>(null)
   const [selectedCancha, setSelectedCancha] = useState<Camp | null>(null)
   const [show, setShow] = useState<boolean>(false)
 
-  const { saveBooking, bookingData } = useContext(AppContext);
-  const { user } = useContext(AuthContext);
+  const { saveBooking, bookingData } = useContext(AppContext)
+  const { user } = useContext(AuthContext)
 
   // const navigate = useNavigate();
 
@@ -30,8 +27,8 @@ export function BookingSelector({ proveedor }: { proveedor: Center | undefined }
   const maxDate = new Date(today.getTime() + 14 * 24 * 60 * 60 * 1000)
 
   useEffect(() => {
-    show && bookingData && user && redirectMercadoPago(bookingData, user);
-  }, [bookingData, show, user]);
+    show && bookingData && user && redirectMercadoPago(bookingData, user)
+  }, [bookingData, show, user])
 
   function showDate(date: Date) {
     setSelectedDate(date)
