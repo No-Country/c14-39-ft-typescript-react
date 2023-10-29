@@ -11,6 +11,8 @@ import { Stepper } from '../components/bookingSection/Stepper'
 import { RowItem } from '../components/form/RowItem'
 import { Mapa } from '../components/bookingSection/Mapa'
 
+import { SectionTitle } from '../components/SectionTitle'
+
 const Canchas = () => {
   const [selectedSite, setSelectedSite] = useState<ListSportCenter | null>(null)
 
@@ -33,7 +35,7 @@ const Canchas = () => {
 
       {!isLoading && !isError && cityInfo && (
         <>
-          <h1 className='w-full mb-4 text-2xl md:text-4xl font-display'>{cityInfo.name}</h1>
+          <SectionTitle title={cityInfo.name} />
 
           <article className='grid md:grid-cols-[40%_1fr]  gap-2 rounded-[2rem] backdrop-filter backdrop-blur-[20px] bg-white/60 mb-6'>
             <Stepper
@@ -68,5 +70,4 @@ const Canchas = () => {
     </section>
   )
 }
-
 export default Canchas

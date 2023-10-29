@@ -8,7 +8,6 @@ import { Bars3Icon } from '@heroicons/react/24/outline'
 import { AuthContext } from '../../context/AuthContext'
 import LogoutButton from '../LogoutButton'
 
-
 export const NavBar = () => {
   const navigate = useNavigate()
   const { isLogged } = useContext(AuthContext)
@@ -23,31 +22,34 @@ export const NavBar = () => {
 
       <div className='items-center hidden gap-3 p-2 rounded-full md:flex bg-base-green1'>
         <ul className='flex gap-6 px-4 py-0'>
-          <NavbarItem label='Reserva' />
-          <NavbarItem label='Nosotros' />
-          <NavbarItem label='Beneficios' />
-          <NavbarItem label='Patrocinadores' />
+          <NavbarItem
+            label='Reserva'
+            to={ROUTES.HOME}
+          />
+          {/* <NavbarItem
+            label='Nosotros'
+            to={'/'}
+          /> */}
+          <NavbarItem
+            label='Beneficios'
+            to={ROUTES.BENEFITS}
+          />
+          {/* <NavbarItem
+            label='Patrocinadores'
+            to={'/'}
+          /> */}
         </ul>
-        {!isLogged && (
+        {!isLogged ? (
           <Button
             label='Ingresa'
             style='primary'
             onClick={() => navigate(ROUTES.LOGIN)}
           />
-        )}
-        {isLogged && (
+        ) : (
           <LogoutButton />
         )}
-        {/* {isLogged && (
-          <Button
-            label='Perfil'
-            style='primary'
-            onClick={() => navigate(ROUTES.ADMIN)}
-            icon={<UserCircleIcon className='w-6 h-6 text-current' />}
-          />
-        )} */}
       </div>
-      <button className='md:hidden'>
+      <button className='flex items-center justify-center w-12 h-12 rounded-full md:hidden bg-base-green1'>
         <Bars3Icon className='w-6 h-6 text-black' />
       </button>
     </div>

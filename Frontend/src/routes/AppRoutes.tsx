@@ -8,21 +8,23 @@ import Canchas from '../pages/Canchas'
 import Registro from '../pages/Registro'
 import NotFound from '../pages/NotFound'
 import ProtectedRoutes from './ProtectedRoutes'
+import Beneficios from '../pages/Beneficios'
 
 export const AppRoutes = () => {
   const routes = useRoutes([
     { path: ROUTES.HOME, element: <Home /> },
     { path: ROUTES.LOGIN, element: <Login /> },
     { path: ROUTES.SIGN_UP, element: <Registro /> },
+    { path: ROUTES.BENEFITS, element: <Beneficios /> },
 
-    { 
-      path: '/', 
+    {
+      path: '/',
       element: <ProtectedRoutes />,
       children: [
         { path: ROUTES.FIELDS, element: <Canchas /> },
         { path: ROUTES.FIELDS_DETAIL, element: <Cancha /> },
-        { path: ROUTES.CONFIRM, element: <Confirm /> }
-      ]
+        { path: ROUTES.CONFIRM, element: <Confirm /> },
+      ],
     },
 
     { path: ROUTES.ADMIN, element: <Navigate to='/login' /> },
