@@ -29,7 +29,7 @@ const Confirm = () => {
     const paymentId = searchParams.get("payment_id");
 
     axios
-      .get(`http://localhost:3000/api/order?id=${paymentId}`)
+      .get(`https://api.reservatucancha.vercel.app/api/order?id=${paymentId}`)
       .then(({ data: { order } }) => {
         setOrder({
           sc_name: order.sc_id.sc_name,

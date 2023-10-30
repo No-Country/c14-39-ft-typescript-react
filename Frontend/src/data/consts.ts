@@ -27,7 +27,7 @@ export const ROUTES = {
 // API related
 
 export const API_URL = {
-  BASE_URL: 'https://reservatucancha-5rse5st6p-reservatucancha.vercel.app/api/',
+  BASE_URL: 'https://api.reservatucancha.vercel.app/api',
   COUNTRIES: 'countries/',
   SPORTCENTER: 'sportcenter/',
   SPORTCAMP: 'sportcamp/',
