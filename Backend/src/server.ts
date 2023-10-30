@@ -14,10 +14,28 @@ import indexRoutes from "../src/routes/indexRoutes";
 const app: Express = express();
 import cors from "cors";
 
+const prodOrigins = ["https://app.reservatucancha.vercel.app"];
+const devOrigins = ["http://localhost:5173"];
+const isProduction = process.env.NODE_ENV === 'production';
+
+const allowedOrigins = isProduction ? prodOrigins : devOrigins;
+
+app.use(
+  cors({
+    origin: (origin, callback) => {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error(`${origin} not allowed by CORS`));
+      }
+    },
+    credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  }),
+);
 app.use(morgan('dev'));
 app.use(express.json());
 app.use(cookieParser())
-app.use(cors( {origin: ["http://localhost:5173", "https://app.reservatucancha.vercel.app/"], credentials: true} ));
 app.use(bodyParser.urlencoded({ extended: true }));
 
 
