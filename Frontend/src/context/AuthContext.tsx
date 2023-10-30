@@ -34,7 +34,7 @@ export const AuthProvider = ({ children }: AuthContextProps) => {
     try {
       const res = await registerRequest(user);
       setMessage(res.data.message);
-      setUser(res.data.user);
+      await setUser(res.data.user);
       setIsLogged(true);
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
@@ -51,7 +51,7 @@ export const AuthProvider = ({ children }: AuthContextProps) => {
       const res = await loginRequest(user);
       setIsLogged(true);
       setMessage(res.data.message)
-      setUser(res.data.user);
+      await setUser(res.data.user);
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
       console.log(error)

@@ -1,4 +1,4 @@
-import { useContext } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { ROUTES } from '../../data/consts'
 import { Button } from '../Button'
@@ -7,14 +7,35 @@ import { NavbarItem } from './NavbarItem'
 import { Bars3Icon } from '@heroicons/react/24/outline'
 import { AuthContext } from '../../context/AuthContext'
 import LogoutButton from '../LogoutButton'
+import { Avatar } from 'flowbite-react';
+import { UserData } from '../../types/types'
 
 export const NavBar = () => {
   const navigate = useNavigate()
-  const { isLogged } = useContext(AuthContext)
+
+  const { isLogged, user } = useContext(AuthContext)
+
+
+  const [initials, setInitials] = useState<string>("")
+
+  useEffect(() => {
+    const savedInitials = localStorage.getItem("initials");
+    if (savedInitials) {
+      setInitials(savedInitials);
+    } else if (user) {
+      const timer = setTimeout(() => {
+        const newInitials = user.name[0] + user.lastname[0];
+        setInitials(newInitials);
+        localStorage.setItem("initials", newInitials);
+      }, 500);
+      return () => clearTimeout(timer);
+    }
+  }, [user])
 
   const { pathname } = useLocation()
 
-  const thisIsHome = pathname !== ROUTES.HOME
+  const thisIsHome = pathname !== ROUTES.HOME && pathname !== '/'
+
 
   return (
     <div className={`w-full max-w-6xl flex items-center px-4 md:px-7 h-20 justify-between`}>
@@ -46,7 +67,14 @@ export const NavBar = () => {
             onClick={() => navigate(ROUTES.LOGIN)}
           />
         ) : (
-          <LogoutButton />
+          <>
+            {initials && (
+              <div className="flex flex-wrap gap-2">
+                <Avatar placeholderInitials={initials} onClick={() => navigate(ROUTES.USER)} />
+              </div>
+            )}
+            <LogoutButton />
+          </>
         )}
       </div>
       <button className='flex items-center justify-center w-12 h-12 rounded-full md:hidden bg-base-green1'>
