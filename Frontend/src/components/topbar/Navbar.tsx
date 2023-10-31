@@ -26,18 +26,18 @@ export const NavBar = () => {
             label='Reserva'
             to={ROUTES.HOME}
           />
-          {/* <NavbarItem
+          <NavbarItem
             label='Nosotros'
-            to={'/'}
-          /> */}
+            to={ROUTES.US}
+          />
           <NavbarItem
             label='Beneficios'
             to={ROUTES.BENEFITS}
           />
-          {/* <NavbarItem
-            label='Patrocinadores'
-            to={'/'}
-          /> */}
+          <NavbarItem
+            label='Pronto: Torneos'
+            to={ROUTES.TOURNAMENTS}
+          />
         </ul>
         {!isLogged ? (
           <Button

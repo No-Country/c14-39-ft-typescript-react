@@ -14,7 +14,7 @@ export const ROUTES = {
 
   BENEFITS: '/beneficios',
   US: '/nosotros',
-  SPONSORS: '/patrocinadores',
+  TOURNAMENTS: '/torneos',
 
   FIELDS: '/canchas',
   FIELDS_DETAIL: '/canchas/:cancha',

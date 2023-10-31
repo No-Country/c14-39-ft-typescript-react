@@ -9,6 +9,8 @@ import Registro from '../pages/Registro'
 import NotFound from '../pages/NotFound'
 import ProtectedRoutes from './ProtectedRoutes'
 import Beneficios from '../pages/Beneficios'
+import Nosotros from '../pages/Nosotros'
+import Torneos from '../pages/Torneos'
 
 export const AppRoutes = () => {
   const routes = useRoutes([
@@ -16,6 +18,8 @@ export const AppRoutes = () => {
     { path: ROUTES.LOGIN, element: <Login /> },
     { path: ROUTES.SIGN_UP, element: <Registro /> },
     { path: ROUTES.BENEFITS, element: <Beneficios /> },
+    { path: ROUTES.US, element: <Nosotros /> },
+    { path: ROUTES.TOURNAMENTS, element: <Torneos /> },
 
     {
       path: '/',
