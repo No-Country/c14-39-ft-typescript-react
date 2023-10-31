@@ -8,20 +8,20 @@ import { specs } from "./doc/swaggerConfig";
 import cookieParser from "cookie-parser";
 // Ruta principal
 import indexRoutes from "../src/routes/indexRoutes";
-import { aceptedOrigins } from "./data/consts";
+import { devOrigins, prodOrigins } from "./data/consts";
 
 // dependencias node
 const app: Express = express();
 import cors from "cors";
 
-// const isProduction = process.env.NODE_ENV === 'production';
+const isProduction = process.env.NODE_ENV === 'production';
 
-// const allowedOrigins = isProduction ? prodOrigins : devOrigins;
+const allowedOrigins = isProduction ? prodOrigins : devOrigins;
 
 app.use(
   cors({
     origin: (origin, callback) => {
-      if (!origin || aceptedOrigins.includes(origin)) {
+      if (!origin || allowedOrigins.includes(origin)) {
         callback(null, true);
       } else {
         callback(new Error(`${origin} not allowed by CORS`));
