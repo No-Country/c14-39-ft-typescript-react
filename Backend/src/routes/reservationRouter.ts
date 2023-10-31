@@ -10,9 +10,9 @@ const controller = new ReservationController();
 
 reservationRouter
   .route("/")
-  .get((_, res) => {
-    res.send("pagina de reservas");
-  })
+  // .get((req, res) => {
+  //   res.send("pagina de reservas");
+  // })
   .post(async (req: Request, res: Response) => {
     try {
       const body = req.body;
@@ -47,5 +47,22 @@ reservationRouter
       res.status(HttpCodes.CODE_BAD_GATEWAY).json({ error: `${error}` });
     }
   });
+
+reservationRouter
+  .route("/:userId")
+  .get(async (req, res) => {
+    try {
+      const { userId } = req.params
+
+      const reservations = await controller.getReservationsByUser(userId as string)
+
+      return res.status(HttpCodes.CODE_SUCCESS).json({
+        message: "Reservas se obtuvieron de manera exitosa",
+        reservations
+      })
+    } catch (error) {
+      res.status(HttpCodes.CODE_NOT_FOUND).json({ error: `${error}` })
+    }
+  })
 
 export default reservationRouter;

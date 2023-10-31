@@ -18,6 +18,9 @@ export interface IFrschedule {
 }
 
 export interface IRerservationController {
+  getReservationsByUser(
+    userId: string
+  ): Promise<IReservationResponse[]>
   createReservation(
     reservationData: IReservation
   ): Promise<IReservationResponse>;

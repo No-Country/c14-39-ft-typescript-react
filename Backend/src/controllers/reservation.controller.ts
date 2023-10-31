@@ -3,8 +3,26 @@ import {
   IReservation,
   IReservationResponse,
 } from "../interface";
+import { User } from "../models";
+import { ReservationModel } from "../models/Revervation";
 
 export class ReservationController implements IRerservationController {
+  public async getReservationsByUser(userId: string): Promise<IReservationResponse[]> {
+    try {
+      const user = await User.findById(userId)
+
+      if (!user) throw new Error('User not found')
+
+      const reservations = await ReservationModel.find({
+        user_id: user._id
+      })
+
+      return reservations
+    } catch (error) {
+      throw error
+    }
+  }
+
   // Create reservation
   public async createReservation(
     reservationData: IReservation
