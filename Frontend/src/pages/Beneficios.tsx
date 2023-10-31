@@ -8,10 +8,10 @@ const Beneficios = () => {
       <SectionTitle title='Beneficios para ti' />
       <article className='flex flex-col items-center gap-4 pb-4 '>
         <img
-          className='object-cover w-full h-full mx-0 aspect-[4/1] rounded-3xl '
+          className='object-cover w-full h-full mx-0 aspect-square md:aspect-[4/1] rounded-3xl '
           src='./images/beneficios_img.webp'
         />
-        <div className='grid w-full grid-cols-3 gap-4 py-2 text-base text-black text-balance'>
+        <div className='grid w-full gap-4 py-2 text-base text-black md:grid-cols-3 text-balance'>
           {BeneficiosList.map(item => (
             <BeneficiosCard
               titulo={item.titulo}
