@@ -7,7 +7,7 @@ import { ROUTES } from "../data/consts";
 import Stripes from "../components/stripes";
 import { Button } from "../components/Button";
 import SportCenterImage from "../SportCenterImage";
-import axios from "axios";
+import instance from "../api/axios";
 
 const Confirm = () => {
   const navigate = useNavigate();
@@ -28,8 +28,8 @@ const Confirm = () => {
     const searchParams = new URLSearchParams(queryString);
     const paymentId = searchParams.get("payment_id");
 
-    axios
-      .get(`https://api.reservatucancha.vercel.app/api/order?id=${paymentId}`)
+    instance
+      .get(`/order?id=${paymentId}`)
       .then(({ data: { order } }) => {
         setOrder({
           sc_name: order.sc_id.sc_name,

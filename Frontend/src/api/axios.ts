@@ -1,7 +1,8 @@
 import axios from 'axios'
+import { API_URL } from '../data/consts'
 
 const instance = axios.create({
-  baseURL: 'https://api.reservatucancha.vercel.app/api',
+  baseURL: API_URL.BASE_URL,
   withCredentials: true,
 })
 

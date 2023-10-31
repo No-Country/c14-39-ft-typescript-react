@@ -1,8 +1,5 @@
 import express from 'express'
 import { HttpCodes } from '../utils';
-import { Payment } from 'mercadopago'
-import { client } from '../libs/mp'
-import { User, Order } from '../models';
 import { OrderController } from '../controllers/order.controller';
 
 const webhookRouter = express.Router();

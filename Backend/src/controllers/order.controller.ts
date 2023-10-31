@@ -8,7 +8,7 @@ import { Camp, Order, SportCenterModel, User } from "../models";
 import { client } from '../libs/mp'
 import { randomUUID } from "crypto";
 import { PreferenceResponse } from "mercadopago/dist/clients/preference/commonTypes";
-import { BASE_URL_FRONT, WEBHOOK_URL } from "../data/consts";
+import { aceptedOrigins, webhookUrl } from "../data/consts";
 
 export class OrderController implements IOrderController {
 
@@ -79,7 +79,7 @@ export class OrderController implements IOrderController {
               title: `Campo ${camp.sca_num}`,
               unit_price: data.precio,
               quantity: 1,
-              currency_id: "PEN",
+              currency_id: "ARS",
             },
           ],
           metadata: {
@@ -90,10 +90,10 @@ export class OrderController implements IOrderController {
             camp_id: camp._id,
           },
           back_urls: {
-            success: `${BASE_URL_FRONT}/confirm`,
-            failure: `${BASE_URL_FRONT}/error`,
+            success: `${aceptedOrigins[0]}/confirm`,
+            failure: `${aceptedOrigins[0]}/error`,
           },
-          notification_url: WEBHOOK_URL,
+          notification_url: webhookUrl,
           auto_return: "approved",
         },
       })
