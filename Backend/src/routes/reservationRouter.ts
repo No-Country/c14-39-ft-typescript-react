@@ -31,16 +31,19 @@ reservationRouter
       });
 
       if (!isValid) {
-        console.log({ errors });
-
         throw new Error(errors);
       }
 
-      const dataResponse = await controller.createReservation(data);
+      const dataValid: IReservation = data;
+      dataValid.fr_schedule.s_date_reserved = data?.fr_schedule.s_date_reserved
+        ?.toISOString()
+        .split("T")[0];
+
+      const dataResponse = await controller.createReservation(dataValid);
 
       res.status(HttpCodes.CODE_SUCCESS).json({
         message: "Reserva realizada con éxito",
-        data,
+        data: dataResponse,
       });
     } catch (error: String | any) {
       console.log(error);

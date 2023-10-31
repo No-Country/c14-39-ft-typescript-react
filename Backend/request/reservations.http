@@ -3,14 +3,14 @@ POST http://localhost:3000/api/reservation
 Content-Type: application/json
 
 {
-  "fr_date_reservation": "2023-10-22T17:14:46.360Z",
-  "fr_date_reserved": "23-10-2023",
-  "fr_status": "RESERVADO",
+  "fr_date_reservation": "2023-10-30T09:00:00Z",
+  "fr_status": "RESERVADO", 
   "fr_schedule": {
-    "s_start": "16:00:00",
-    "s_end":"17:00:00"
+    "s_date_reserved": "2023-10-30T24:00:00.000Z",
+    "s_start": "09:00:00",
+    "s_end": "10:00:00"
   },
-  "user_id":"652ff85a5e95f355a0630ce0",
-  "sc_id": "652ff85a5e95f355a0630ce0",
-  "sca_id": "652ff85a5e95f355a0630ce0"
+  "user_id": "652ff85a5e95f355a0630ce0",
+  "sc_id": "65370b542b617a35521a4389",
+  "sca_id": "65379b2f1a8f5bbe8785377c"
 }
