@@ -15,6 +15,6 @@ export interface IOrderController {
   getOrders(): Promise<IOrderResponse[]>;
   getOrdersByUserId(userId: string): Promise<IOrderResponse[]>;
   getOrderById(orderId: string): Promise<IOrderResponse | null>;
-  createCheckout(data: IOrderValidator): Promise<string>;
+  createCheckout(data: IOrderValidator, originUrl: string): Promise<string>;
   createOrder(payment: string | number,): Promise<any>;
 }
