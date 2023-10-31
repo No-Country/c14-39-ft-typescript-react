@@ -8,7 +8,7 @@ import { Camp, Order, SportCenterModel, User } from "../models";
 import { client } from '../libs/mp'
 import { randomUUID } from "crypto";
 import { PreferenceResponse } from "mercadopago/dist/clients/preference/commonTypes";
-import { aceptedOrigins, webhookUrl } from "../data/consts";
+import { prodOrigins, devOrigins, webhookUrl } from "../data/consts";
 
 export class OrderController implements IOrderController {
 
@@ -71,6 +71,8 @@ export class OrderController implements IOrderController {
 
       const preference = new Preference(client)
 
+      const url = process.env.NODE_ENV === 'production' ? prodOrigins : devOrigins;
+
       const checkout: PreferenceResponse = await preference.create({
         body: {
           items: [
@@ -90,8 +92,8 @@ export class OrderController implements IOrderController {
             camp_id: camp._id,
           },
           back_urls: {
-            success: `${aceptedOrigins[0]}/confirm`,
-            failure: `${aceptedOrigins[0]}/error`,
+            success: `${url[0]}/confirm`,
+            failure: `${url[0]}/error`,
           },
           notification_url: webhookUrl,
           auto_return: "approved",
