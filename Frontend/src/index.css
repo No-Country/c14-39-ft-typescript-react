@@ -27,7 +27,7 @@
   --sizes-x5: 48px;
   --sizes-xo5: 8px;
 
-  --hero-image: url('images/hero_bg.webp');
+  --hero-image: url('/images/hero_bg.webp');
 }
 
 @layer components {
