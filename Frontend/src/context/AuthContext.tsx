@@ -83,13 +83,13 @@ export const AuthProvider = ({ children }: AuthContextProps) => {
     console.log('render')
     async function checkLogin() {
       console.log('checkLogin')
-      const cookies = Cookies.get();
-      console.log(cookies);
-      if (!cookies.token) {
-        setIsLogged(false);
-        setLoading(false);
-        return setUser(null);
-      }
+      // const cookies = Cookies.get();
+      // console.log(cookies);
+      // if (!cookies.token) {
+      //   setIsLogged(false);
+      //   setLoading(false);
+      //   return setUser(null);
+      // }
 
       try {
         const res = await verifyTokenRequest();
