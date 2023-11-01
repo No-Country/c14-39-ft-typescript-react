@@ -1,23 +1,23 @@
-import { useContext, useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from "react"
 
-import { useLocation, useNavigate } from 'react-router-dom'
-import { ROUTES } from '../../data/consts'
-import { Button } from '../Button'
-import { Logo } from './Logo'
-import { NavbarItem } from './NavbarItem'
-import { Bars3Icon } from '@heroicons/react/24/outline'
-import { AuthContext } from '../../context/AuthContext'
-import LogoutButton from '../LogoutButton'
-import { Avatar } from 'flowbite-react';
-import { UserData } from '../../types/types'
+import { useLocation, useNavigate } from "react-router-dom"
+import { ROUTES } from "../../data/consts"
+import { Button } from "../Button"
+import { Logo } from "./Logo"
+import { NavbarItem } from "./NavbarItem"
+import { Bars3Icon } from "@heroicons/react/24/outline"
+import { AuthContext } from "../../context/AuthContext"
+import LogoutButton from "../LogoutButton"
+import { Avatar, CustomFlowbiteTheme } from "flowbite-react"
+import { UserData } from "../../types/types"
 
 const mdBreakPoint = 768
 
 export const NavBar = () => {
   const navigate = useNavigate()
+  const { pathname } = useLocation()
 
   const { isLogged, user } = useContext(AuthContext)
-
   const [initials, setInitials] = useState<string>()
 
   useEffect(() => {
@@ -29,28 +29,39 @@ export const NavBar = () => {
     }
   }, [user])
 
-  const { pathname } = useLocation()
-
-  const thisIsHome = pathname !== ROUTES.HOME && pathname !== '/'
-
+  const thisIsHome = pathname !== ROUTES.HOME && pathname !== "/"
 
   useEffect(() => {
-    const menu = document.querySelector('#nav-menu')
+    const menu = document.querySelector("#nav-menu")
     const thisWidth = window.innerWidth
 
     if (thisWidth < mdBreakPoint) {
-      menu?.classList.add('hidden')
+      menu?.classList.add("hidden")
     }
     return () => {}
   }, [pathname])
 
   function toggleMenu() {
-    const menu = document.querySelector('#nav-menu')
-    menu?.classList.toggle('hidden')
+    const menu = document.querySelector("#nav-menu")
+    menu?.classList.toggle("hidden")
+  }
+
+  const customTheme: CustomFlowbiteTheme["avatar"] = {
+    root: {
+      base: "flex justify-center items-center space-x-4 rounded cursor-pointer",
+      color: {
+        light: "ring-white",
+      },
+      initials: {
+        text: "font-display text-black text-sm",
+        base: "inline-flex overflow-hidden relative justify-center items-center bg-transparent",
+      },
+    },
   }
 
   return (
-    <div className={`w-full max-w-6xl flex items-center px-4 md:px-7 h-20 justify-between`}>
+    <div
+      className={`w-full max-w-6xl flex items-center px-4 md:px-7 h-20 justify-between`}>
       <Logo inHome={thisIsHome} />
 
       <div
@@ -82,14 +93,19 @@ export const NavBar = () => {
               onClick={() => navigate(ROUTES.LOGIN)}
             />
           ) : (
-            <>
+            <div className='flex gap-2'>
               {initials && (
-                <div className="flex flex-wrap gap-2">
-                  <Avatar placeholderInitials={initials} onClick={() => navigate(ROUTES.USER)} />
-                </div>
+                <Avatar
+                  placeholderInitials={initials}
+                  onClick={() => navigate(ROUTES.USER)}
+                  bordered
+                  color='light'
+                  rounded
+                  theme={customTheme}
+                />
               )}
               <LogoutButton />
-            </>
+            </div>
           )}
         </div>
       </div>

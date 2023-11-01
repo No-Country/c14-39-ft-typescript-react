@@ -1,5 +1,7 @@
 export const CanchaSelectorSkeleton = () => {
-  return <div className='rounded-2xl min-h-[96px] md:min-h-[48px] h-full bg-white/60'></div>
+  return (
+    <div className='rounded-2xl min-h-[96px] md:min-h-[48px] h-full bg-white/60'></div>
+  )
 }
 
 export const CanchasSkeleton = () => {
@@ -42,5 +44,13 @@ export const ReservationFormSkeleton = () => {
         </div>
       </div>
     </>
+  )
+}
+
+export const RouteSkeleton = () => {
+  return (
+    <div className='w-full h-64 wrapper bg-white/60 rounded-3xl'>
+      <p>Cargando contenido...</p>
+    </div>
   )
 }

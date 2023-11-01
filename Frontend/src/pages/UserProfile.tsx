@@ -6,7 +6,7 @@ import {
   MatchHistoryComponent,
 } from "../components/userProfile"
 
-export const UserProfile = () => {
+const UserProfile = () => {
   const { user } = useContext(AuthContext)
 
   const [activeComponent, setActiveComponent] = useState("")
@@ -57,3 +57,5 @@ export const UserProfile = () => {
     </>
   )
 }
+
+export default UserProfile
