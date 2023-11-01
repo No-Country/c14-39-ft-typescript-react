@@ -37,7 +37,8 @@ export const register = async (req: Request, res: Response) => {
     const token = await createToken({ userId: newUser._id.toString() });
 
     res.cookie("token", token, {
-      sameSite: "lax", // O "strict" 
+      secure: true,
+      sameSite: "none",
       maxAge: 24 * 60 * 60 * 1000 // 1 día 
     });
 
@@ -67,8 +68,9 @@ export const login = async (req: Request, res: Response) => {
     const token = await createToken({ userId: mailFound._id.toString() });
 
     res.cookie("token", token, {
-      sameSite: "lax", // O "strict" 
-      maxAge: 24 * 60 * 60 * 1000 // 1 día
+      secure: true,
+      sameSite: "none",
+      maxAge: 24 * 60 * 60 * 1000 // 1 día 
     });
 
     res.status(HttpCodes.CODE_SUCCESS).json({ message: "Login correcto, bienvenido " + mailFound.name + ".", user: mailFound });
