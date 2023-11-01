@@ -51,4 +51,20 @@ reservationRouter
     }
   });
 
+reservationRouter
+  .route("/:id_reserved")
+  .get(async (req: Request, res: Response) => {
+    try {
+      const { id_reserved } = req.params;
+      const dataResponse = await controller.getReservationById(id_reserved);
+      res.status(HttpCodes.CODE_SUCCESS).json({
+        message: "Reserva obtenida con éxito",
+        data: dataResponse,
+      });
+    } catch (error: String | any) {
+      console.log(error);
+      res.status(HttpCodes.CODE_BAD_GATEWAY).json({ error: `${error}` });
+    }
+  });
+
 export default reservationRouter;

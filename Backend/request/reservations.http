@@ -14,3 +14,6 @@ Content-Type: application/json
   "sc_id": "65370b542b617a35521a4389",
   "sca_id": "65379b2f1a8f5bbe8785377c"
 }
+
+###Get reservation by id
+GET http://localhost:3000/api/reservation/6542dfa7f7a366abe64af6f2

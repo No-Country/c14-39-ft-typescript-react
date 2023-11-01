@@ -34,12 +34,12 @@ const ResevationSchema = new Schema({
   },
   sc_id: {
     type: Schema.Types.ObjectId,
-    ref: "SportCenter",
+    ref: "sportcenters",
     required: true,
   },
   sca_id: {
     type: Schema.Types.ObjectId,
-    ref: "Camp",
+    ref: "camps",
     required: true,
   },
 });

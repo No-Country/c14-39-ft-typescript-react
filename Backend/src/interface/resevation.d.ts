@@ -21,4 +21,5 @@ export interface IRerservationController {
   createReservation(
     reservationData: IReservation
   ): Promise<IReservationResponse>;
+  getReservationById(id: string): Promise<IReservationResponse>;
 }

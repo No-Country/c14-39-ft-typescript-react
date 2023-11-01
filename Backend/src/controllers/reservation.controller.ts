@@ -77,4 +77,37 @@ export class ReservationController implements IRerservationController {
       throw new Error(error);
     }
   }
+
+  public async getReservationById(id: string): Promise<IReservationResponse> {
+    try {
+      const reservation = await ReservationModel.findById(id)
+        .populate("user_id", {
+          name: 1,
+          lastname: 1,
+          email: 1,
+          city: 1,
+          address: 1,
+        })
+        .populate("sc_id", {
+          sc_info: 1,
+          sc_name: 1,
+          sc_description: 1,
+          sc_phone: 1,
+        })
+        .populate("sca_id", {
+          sca_num: 1,
+          sca_description: 1,
+          sca_price: 1,
+          sca_capacity: 1,
+          sca_price_ISO: 1,
+        });
+
+      if (!reservation) {
+        throw new Error("La reserva no existe");
+      }
+      return reservation;
+    } catch (error: any) {
+      throw new Error(error);
+    }
+  }
 }
