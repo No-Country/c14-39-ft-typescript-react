@@ -14,7 +14,7 @@ export const ROUTES = {
 
   BENEFITS: '/beneficios',
   US: '/nosotros',
-  SPONSORS: '/patrocinadores',
+  TOURNAMENTS: '/torneos',
 
   FIELDS: '/canchas',
   FIELDS_DETAIL: '/canchas/:cancha',
@@ -25,10 +25,8 @@ export const ROUTES = {
   ANY: '*',
 }
 
-// API related
-
 export const API_URL = {
-  BASE_URL: 'http://localhost:3000/api',
+  BASE_URL: 'https://reservatucancha.vercel.app/api',
   COUNTRIES: 'countries/',
   SPORTCENTER: 'sportcenter/',
   SPORTCAMP: 'sportcamp/',

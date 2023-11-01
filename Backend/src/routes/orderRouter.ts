@@ -52,7 +52,9 @@ orderRouter
         throw new Error(errors);
       }
 
-      const initPoint = await controller.createCheckout(data)
+      const originUrl = req.headers.origin as string
+
+      const initPoint = await controller.createCheckout(data, originUrl)
 
       return res.status(HttpCodes.CODE_SUCCESS).json({ initPoint })
     } catch (error) {

@@ -8,16 +8,33 @@ import { specs } from "./doc/swaggerConfig";
 import cookieParser from "cookie-parser";
 // Ruta principal
 import indexRoutes from "../src/routes/indexRoutes";
-
+import { aceptedOrigins } from "./data/consts";
 
 // dependencias node
 const app: Express = express();
 import cors from "cors";
 
+// const isProduction = process.env.NODE_ENV === 'production';
+
+// const allowedOrigins = isProduction ? prodOrigins : devOrigins;
+
+app.use(
+  cors({
+    origin: (origin, callback) => {
+      if (!origin || aceptedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error(`${origin} not allowed by CORS`));
+      }
+    },
+    credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  }),
+);
+
 app.use(morgan('dev'));
 app.use(express.json());
 app.use(cookieParser())
-app.use(cors( {origin: "http://localhost:5173", credentials: true} ));
 app.use(bodyParser.urlencoded({ extended: true }));
 
 

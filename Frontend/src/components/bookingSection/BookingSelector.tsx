@@ -10,7 +10,7 @@ import { RowTiempo } from '../form/RowItem'
 import { CanchaSelector } from './CanchaSelector'
 import { Stepper } from './Stepper'
 
-import axios from 'axios'
+import instance from '../../api/axios'
 
 export function BookingSelector({ proveedor }: { proveedor: Center | undefined }) {
   const [selectedDate, setSelectedDate] = useState<Date | null>(null)
@@ -51,8 +51,8 @@ export function BookingSelector({ proveedor }: { proveedor: Center | undefined }
   }
 
   const redirectMercadoPago = (data: BookData, user: UserData) => {
-    axios
-      .post(`http://localhost:3000/api/order`, {
+    instance
+      .post('/order', {
         fecha: data.fecha,
         hora: data.hora.toString(),
         precio: 500,
@@ -84,7 +84,7 @@ export function BookingSelector({ proveedor }: { proveedor: Center | undefined }
         </div>
 
         <div className='px-2 py-4 rounded-lg bg-white/60'>
-          <div className='grid items-start w-full gap-2 md:w-auto md:grid-cols-2'>
+          <div className='grid items-start w-full gap-2 md:w-auto lg:grid-cols-2'>
             {selectedDate &&
               proveedor?.list_sport_camps?.map(item => (
                 <CanchaSelector
