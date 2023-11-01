@@ -92,7 +92,7 @@ export const AuthProvider = ({ children }: AuthContextProps) => {
       }
 
       try {
-        const res = await verifyTokenRequest(cookies.token);
+        const res = await verifyTokenRequest();
         console.log(res)
         if (!res.data) {
           setIsLogged(false);
