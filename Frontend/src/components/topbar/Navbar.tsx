@@ -15,20 +15,14 @@ export const NavBar = () => {
 
   const { isLogged, user } = useContext(AuthContext)
 
-
-  const [initials, setInitials] = useState<string>("")
+  const [initials, setInitials] = useState<string>()
 
   useEffect(() => {
-    const savedInitials = localStorage.getItem("initials");
-    if (savedInitials) {
-      setInitials(savedInitials);
-    } else if (user) {
-      const timer = setTimeout(() => {
-        const newInitials = user.name[0] + user.lastname[0];
-        setInitials(newInitials);
-        localStorage.setItem("initials", newInitials);
-      }, 500);
-      return () => clearTimeout(timer);
+    if (user) {
+      const { name, lastname } = user as UserData
+      const firstInitial = name.charAt(0)
+      const lastInitial = lastname.charAt(0)
+      setInitials(`${firstInitial}${lastInitial}`)
     }
   }, [user])
 

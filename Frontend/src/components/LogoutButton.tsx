@@ -33,8 +33,6 @@ const LogoutButton: React.FC = () => {
             popup: 'custom-popup',
           },
         })
-        localStorage.removeItem('userInitials');
-        localStorage.removeItem('userProfile');
         logout()
         navigate(ROUTES.HOME)
       }

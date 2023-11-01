@@ -36,7 +36,11 @@ export const register = async (req: Request, res: Response) => {
     //crear y guardar el token en una cookie
     const token = await createToken({ userId: newUser._id.toString() });
 
-    res.cookie("token", token);
+    res.cookie("token", token, {
+      secure: process.env.NODE_ENV === "production", // Solo en producción
+      sameSite: "lax", // O "strict" dependiendo de tus necesidades
+      maxAge: 24 * 60 * 60 * 1000 // 1 día en milisegundos, ajusta según tus necesidades
+    });
 
     return res.status(HttpCodes.CODE_SUCCESS).json({ message: "Usuario registrado con exito", user: newUser });
 
@@ -63,7 +67,11 @@ export const login = async (req: Request, res: Response) => {
 
     const token = await createToken({ userId: mailFound._id.toString() });
 
-    res.cookie("token", token);
+    res.cookie("token", token, {
+      secure: process.env.NODE_ENV === "production", 
+      sameSite: "lax", // O "strict" 
+      maxAge: 24 * 60 * 60 * 1000 // 1 día
+    });
 
     res.status(HttpCodes.CODE_SUCCESS).json({ message: "Login correcto, bienvenido " + mailFound.name + ".", user: mailFound });
 
@@ -90,7 +98,7 @@ export const logout = async (req: Request, res: Response) => {
 
 export const verifyToken = async (req: Request, res: Response) => {
   const { token } = req.cookies;
-  // console.log(token)
+  console.log(token)
 
   if (!token) return res.status(HttpCodes.CODE_UNAUTHORIZED).json({ message: "Unauthorized" });
 
@@ -108,9 +116,6 @@ export const verifyToken = async (req: Request, res: Response) => {
     if (!userFound) {
       return res.status(HttpCodes.CODE_UNAUTHORIZED).json({ message: "Unauthorized - User not found" });
     }
-
-    // Aquí puedes agregar el usuario al objeto req si planeas usarlo después
-    // req.user = userFound;
 
     return res.status(HttpCodes.CODE_SUCCESS).json({ user: userFound });
   });

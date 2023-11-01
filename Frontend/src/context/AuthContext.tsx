@@ -1,5 +1,5 @@
 import { createContext, ReactNode, useEffect, useState } from 'react'
-import { UserData, UserLoginData } from '../types/types'
+import { UserData, UserDataWithId, UserLoginData } from '../types/types'
 import { loginRequest, registerRequest, verifyTokenRequest } from '../api/auth'
 
 import Cookies from 'js-cookie'
@@ -7,34 +7,36 @@ import Cookies from 'js-cookie'
 interface AuthContextProps {
   children: ReactNode
 }
-interface AuthContextData {
+export interface AuthContextData {
   isLogged: boolean
   errors: string[]
   loading: boolean
-  user: UserData | null
+  user: UserData | UserDataWithId | undefined | null
   setUser: (user: UserData) => void
   signUp: (user: UserData) => Promise<void>
   signIn: (user: UserLoginData) => Promise<void>
   logout: () => void
   message: string | null
   setMessage: (message: string) => void
+  setErrors: (errors: string[]) => void
 }
 
 export const AuthContext = createContext<AuthContextData>({} as AuthContextData)
 
 export const AuthProvider = ({ children }: AuthContextProps) => {
 
-    const [isLogged, setIsLogged] = useState(false)
-    const [user, setUser] = useState<UserData | null>(null);
-    const [errors, setErrors] = useState<string[]>([]);
-    const [loading, setLoading] = useState(true);
-    const [message, setMessage] = useState<string>("");
-
+  
+  const [isLogged, setIsLogged] = useState(false)
+  const [user, setUser] = useState<UserData | null | undefined >(undefined);
+  const [errors, setErrors] = useState<string[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [message, setMessage] = useState<string>("");
+  
   const signUp = async (user: UserData) => {
     try {
       const res = await registerRequest(user);
       setMessage(res.data.message);
-      await setUser(res.data.user);
+      setUser(res.data.user);
       setIsLogged(true);
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
@@ -51,7 +53,7 @@ export const AuthProvider = ({ children }: AuthContextProps) => {
       const res = await loginRequest(user);
       setIsLogged(true);
       setMessage(res.data.message)
-      await setUser(res.data.user);
+      setUser(res.data.user);
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
       console.log(error)
@@ -78,8 +80,11 @@ export const AuthProvider = ({ children }: AuthContextProps) => {
   }, [errors]);
 
   useEffect(() => {
+    console.log('render')
     async function checkLogin() {
+      console.log('checkLogin')
       const cookies = Cookies.get();
+      console.log(cookies);
       if (!cookies.token) {
         setIsLogged(false);
         setLoading(false);
@@ -87,20 +92,20 @@ export const AuthProvider = ({ children }: AuthContextProps) => {
       }
 
       try {
-        const cookies = Cookies.get();
         const res = await verifyTokenRequest(cookies.token);
-
+        console.log(res)
         if (!res.data) {
           setIsLogged(false);
           setLoading(false);
           return;
         }
         setIsLogged(true);
-        setUser(res.data);
+        setUser(res.data.user);
+        console.log("user", res.data.user)
         setLoading(false);
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
       } catch (error) {
-        // console.log(error)
+        console.log(error)
         setIsLogged(false);
         setUser(null);
         setLoading(false);
@@ -121,7 +126,8 @@ export const AuthProvider = ({ children }: AuthContextProps) => {
         signIn,
         logout,
         message,
-        setMessage
+        setMessage,
+        setErrors
       }}
     >
       {children}
