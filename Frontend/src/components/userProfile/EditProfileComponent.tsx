@@ -1,14 +1,14 @@
-import React, { useContext, useEffect } from 'react'
-import { NavLink, useNavigate } from 'react-router-dom'
-import { NameInput, LastNameInput } from '../../components/form'
-import { Button } from '../Button'
-import { ROUTES } from '../../data/consts'
-import { set, useForm } from 'react-hook-form'
-import { AuthContext, AuthContextData } from '../../context/AuthContext'
-import Swal from 'sweetalert2'
-import withReactContent from 'sweetalert2-react-content'
-import { UserContext } from '../../context/UserContext'
-import { UserData } from '../../types/types'
+import React, { useContext } from "react"
+import { useNavigate } from "react-router-dom"
+import { NameInput, LastNameInput } from "../../components/form"
+import { Button } from "../Button"
+import { ROUTES } from "../../data/consts"
+import { useForm } from "react-hook-form"
+import { AuthContext, AuthContextData } from "../../context/AuthContext"
+import Swal from "sweetalert2"
+import withReactContent from "sweetalert2-react-content"
+import { UserContext } from "../../context/UserContext"
+import { UserData } from "../../types/types"
 
 interface IFormInput {
   name: string
@@ -20,53 +20,55 @@ export const EditProfileComponent: React.FC = () => {
   const { register, handleSubmit, watch } = useForm<IFormInput>()
   const navigate = useNavigate()
 
-  const { errors, setMessage, user, logout } = useContext<AuthContextData>(AuthContext)
+  const { errors, setMessage, user, logout } =
+    useContext<AuthContextData>(AuthContext)
   const { updateUser, deleteUser } = useContext(UserContext)
 
-  const watchedName = watch('name');
-  const watchedLastname = watch('lastname');
-  const isSubmitDisabled = !watchedName && !watchedLastname;
-
+  const watchedName = watch("name")
+  const watchedLastname = watch("lastname")
+  const isSubmitDisabled = !watchedName && !watchedLastname
 
   const MySwal = withReactContent(Swal)
 
   // Identifica el mensaje de error para cada campo
-  const nameError = errors.find(error => error.includes('nombre'))
-  const lastnameError = errors.find(error => error.includes('apellido'))
+  const nameError = errors.find(error => error.includes("nombre"))
+  const lastnameError = errors.find(error => error.includes("apellido"))
 
   const onSubmit = async (data: IFormInput) => {
     try {
       const result = await MySwal.fire({
-        title: 'Seguro que quieres modificar tus datos?',
-        icon: 'warning',
+        title: "Seguro que quieres modificar tus datos?",
+        icon: "warning",
         showCancelButton: true,
-  
-        confirmButtonText: 'Sí',
-        cancelButtonText: 'No',
+
+        confirmButtonText: "Sí",
+        cancelButtonText: "No",
         customClass: {
-          confirmButton: 'custom-primary',
-          cancelButton: 'custom-secondary',
-          popup: 'custom-popup',
+          confirmButton: "custom-primary",
+          cancelButton: "custom-secondary",
+          popup: "custom-popup",
         },
       })
       if (result.isConfirmed) {
-        data.name === '' ? data.name = user?.name as string : data.name
-        data.lastname === '' ? data.lastname = user?.lastname as string : data.lastname
+        data.name === "" ? (data.name = user?.name as string) : data.name
+        data.lastname === ""
+          ? (data.lastname = user?.lastname as string)
+          : data.lastname
         const dataWithId = { ...data, id: user?.id }
         console.log(dataWithId)
         await updateUser(dataWithId)
         console.log(errors)
-        if(errors.length === 0){
-           MySwal.fire({
-            icon: 'success',
+        if (errors.length === 0) {
+          MySwal.fire({
+            icon: "success",
             title: `Cambios realizados correctamente`,
             showConfirmButton: false,
             timer: 1500,
             customClass: {
-              popup: 'custom-popup',
+              popup: "custom-popup",
             },
           })
-          setMessage('')
+          setMessage("")
           navigate(ROUTES.HOME)
         }
       }
@@ -77,16 +79,16 @@ export const EditProfileComponent: React.FC = () => {
 
   const handleDelete = async (user: UserData) => {
     const result = await MySwal.fire({
-      title: 'Seguro que quieres eliminar tu cuenta?',
-      icon: 'warning',
+      title: "Seguro que quieres eliminar tu cuenta?",
+      icon: "warning",
       showCancelButton: true,
 
-      confirmButtonText: 'Sí',
-      cancelButtonText: 'No',
+      confirmButtonText: "Sí",
+      cancelButtonText: "No",
       customClass: {
-        confirmButton: 'custom-primary',
-        cancelButton: 'custom-secondary',
-        popup: 'custom-popup',
+        confirmButton: "custom-primary",
+        cancelButton: "custom-secondary",
+        popup: "custom-popup",
       },
     })
     if (result.isConfirmed) {
@@ -94,12 +96,12 @@ export const EditProfileComponent: React.FC = () => {
       logout()
       navigate(ROUTES.HOME)
       await MySwal.fire({
-        icon: 'success',
-        title: 'Cuenta eliminada correctamente',
+        icon: "success",
+        title: "Cuenta eliminada correctamente",
         showConfirmButton: false,
         timer: 1500,
         customClass: {
-          popup: 'custom-popup',
+          popup: "custom-popup",
         },
       })
     }
@@ -107,23 +109,22 @@ export const EditProfileComponent: React.FC = () => {
 
   return (
     <section className='wrapper'>
-      <h1 className='text-3xl font-bold text-center mt-6 mb-6'>Edita tu perfil</h1>
+      <h1 className='mt-6 mb-6 text-3xl font-bold text-center'>
+        Edita tu perfil
+      </h1>
       <div className='max-w-3xl gap-8 mx-auto my-0'>
         <form
           onSubmit={handleSubmit(data => onSubmit(data))}
           className='flex flex-col grid-cols-2 gap-4 md:grid mb-7'>
           <NameInput
-            register={register('name')}
+            register={register("name")}
             error={nameError}
-
           />
 
           <LastNameInput
-            register={register('lastname')}
+            register={register("lastname")}
             error={lastnameError}
-
           />
-
 
           <Button
             label='Modificar datos'
@@ -145,4 +146,3 @@ export const EditProfileComponent: React.FC = () => {
     </section>
   )
 }
-
