@@ -37,9 +37,8 @@ export const register = async (req: Request, res: Response) => {
     const token = await createToken({ userId: newUser._id.toString() });
 
     res.cookie("token", token, {
-      secure: process.env.NODE_ENV === "production", // Solo en producción
-      sameSite: "lax", // O "strict" dependiendo de tus necesidades
-      maxAge: 24 * 60 * 60 * 1000 // 1 día en milisegundos, ajusta según tus necesidades
+      sameSite: "lax", // O "strict" 
+      maxAge: 24 * 60 * 60 * 1000 // 1 día 
     });
 
     return res.status(HttpCodes.CODE_SUCCESS).json({ message: "Usuario registrado con exito", user: newUser });
@@ -68,7 +67,6 @@ export const login = async (req: Request, res: Response) => {
     const token = await createToken({ userId: mailFound._id.toString() });
 
     res.cookie("token", token, {
-      secure: process.env.NODE_ENV === "production", 
       sameSite: "lax", // O "strict" 
       maxAge: 24 * 60 * 60 * 1000 // 1 día
     });
