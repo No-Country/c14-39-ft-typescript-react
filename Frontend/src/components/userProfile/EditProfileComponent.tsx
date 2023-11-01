@@ -1,9 +1,9 @@
-import React, { useContext } from "react"
+import React, { useContext, useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { NameInput, LastNameInput } from "../../components/form"
 import { Button } from "../Button"
 import { ROUTES } from "../../data/consts"
-import { useForm } from "react-hook-form"
+import { set, useForm } from "react-hook-form"
 import { AuthContext, AuthContextData } from "../../context/AuthContext"
 import Swal from "sweetalert2"
 import withReactContent from "sweetalert2-react-content"
@@ -20,9 +20,10 @@ export const EditProfileComponent: React.FC = () => {
   const { register, handleSubmit, watch } = useForm<IFormInput>()
   const navigate = useNavigate()
 
-  const { errors, setMessage, user, logout } =
+  const { errors, setMessage, user, logout, setErrors } =
     useContext<AuthContextData>(AuthContext)
   const { updateUser, deleteUser } = useContext(UserContext)
+  const [userUpdated, setUserUpdated] = useState<boolean>(false)
 
   const watchedName = watch("name")
   const watchedLastname = watch("lastname")
@@ -57,25 +58,42 @@ export const EditProfileComponent: React.FC = () => {
         const dataWithId = { ...data, id: user?.id }
         console.log(dataWithId)
         await updateUser(dataWithId)
-        console.log(errors)
-        if (errors.length === 0) {
-          MySwal.fire({
-            icon: "success",
-            title: `Cambios realizados correctamente`,
-            showConfirmButton: false,
-            timer: 1500,
-            customClass: {
-              popup: "custom-popup",
-            },
-          })
-          setMessage("")
-          navigate(ROUTES.HOME)
-        }
+        setUserUpdated(true)
       }
     } catch (error) {
       console.error(error)
     }
   }
+
+  useEffect(() => {
+    let timer: number | undefined ;
+
+    // Comprueba si hay errores después de un tiempo definido
+    timer = setTimeout(() => {
+      console.log(errors);
+      if (errors.length === 0 && userUpdated) {
+        MySwal.fire({
+          icon: "success",
+          title: `Cambios realizados correctamente`,
+          showConfirmButton: false,
+          timer: 1500,
+          customClass: {
+            popup: "custom-popup",
+          },
+        });
+        setMessage("");
+        setErrors([]);
+        setUserUpdated(false);
+        navigate(ROUTES.HOME);
+      }else {
+        setUserUpdated(false);
+        setErrors([]);
+      }
+    }, 1000);
+  
+    // Limpieza del timer si el componente se desmonta
+    return () => clearTimeout(timer);
+  }, [userUpdated]);
 
   const handleDelete = async (user: UserData) => {
     const result = await MySwal.fire({

@@ -12,10 +12,16 @@ import { Stepper } from './Stepper'
 
 import instance from '../../api/axios'
 
+import withReactContent from 'sweetalert2-react-content'
+import Swal from 'sweetalert2'
+
 export function BookingSelector({ proveedor }: { proveedor: Center | undefined }) {
   const [selectedDate, setSelectedDate] = useState<Date | null>(null)
   const [selectedCancha, setSelectedCancha] = useState<Camp | null>(null)
   const [show, setShow] = useState<boolean>(false)
+
+  const MySwal = withReactContent(Swal)
+
 
   const { saveBooking, bookingData } = useContext(AppContext)
   const { user } = useContext(AuthContext)
@@ -38,7 +44,21 @@ export function BookingSelector({ proveedor }: { proveedor: Center | undefined }
     setSelectedCancha(cancha)
   }
 
-  function ConfirmBooking(hora: number) {
+  async function  ConfirmBooking(hora: number) {
+    const result = await MySwal.fire({
+      title: `Reserva: \n ${selectedCancha?.sport_center_id.sc_name}: ${selectedCancha?.camp_type_id.sca_type_name} \n Día: ${selectedDate?.toLocaleDateString()} \n Hora: ${hora}:00 \n Precio: ??? \n¿Desea continuar al pago?`,
+      icon: "warning",
+      showCancelButton: true,
+
+      confirmButtonText: "Sí",
+      cancelButtonText: "No",
+      customClass: {
+        confirmButton: "custom-primary",
+        cancelButton: "custom-secondary",
+        popup: "custom-popup",
+      },
+    })
+    if(result.isConfirmed) {
     saveBooking({
       id: String(proveedor?._id),
       fecha: selectedDate as Date,
@@ -47,6 +67,7 @@ export function BookingSelector({ proveedor }: { proveedor: Center | undefined }
       hora,
     })
     setShow(true)
+  }
     // navigate(ROUTES.CONFIRM);
   }
 
