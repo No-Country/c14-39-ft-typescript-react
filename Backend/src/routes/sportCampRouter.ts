@@ -10,6 +10,7 @@ import { SportCampController } from "../controllers/sportCamp.controller";
 import { validateSchema } from "../models/schemas";
 import { ISportCamp } from "../interface/sportCamp";
 import { campSchemaValidation } from "../models/schemas/sportCamp.zod";
+import { Camp } from "../models";
 
 const sportCampRouter = express.Router();
 const controller = new SportCampController();
@@ -64,17 +65,12 @@ sportCampRouter
   })
   .put(async (req, res) => {
     try {
-      // validate
-      const body = req.body;
-
-      // validate se coloco en utils refactorizado
-      const { data } = validateUpdateSport(body);
-
-      // update sportCenter
-      const sportCenter = await modifySportCenterById({
-        ...data,
-      });
-      res.status(HttpCodes.CODE_SUCCESS).json(sportCenter);
+      const result = await Camp.updateMany(
+        {},
+        { $set: { sca_price_ISO: "COP" } }
+      );
+      console.log(result);
+      res.status(200).json(result);
     } catch (error) {
       return res.status(HttpCodes.CODE_BAD_REQUEST).json({
         message: `${error}`,

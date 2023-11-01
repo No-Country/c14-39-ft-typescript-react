@@ -1,6 +1,8 @@
 import mongoose, { Schema, model } from "mongoose";
 
 const campSchema = new Schema({
+  sca_price: { type: Number, required: true },
+  sca_price_ISO: { type: String, default: "COP" },
   sca_num: { type: Number, required: true },
   sca_description: { type: String, required: true },
   sca_capacity: { type: Number, required: true },
@@ -33,8 +35,8 @@ const campSchema = new Schema({
       type: Schema.Types.ObjectId,
       ref: "Order",
       required: true,
-    }
-  ]
+    },
+  ],
 });
 
 campSchema.set("toJSON", {
