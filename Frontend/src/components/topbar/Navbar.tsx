@@ -1,4 +1,5 @@
-import { useContext, useEffect } from 'react'
+import { useContext, useEffect, useState } from 'react'
+
 import { useLocation, useNavigate } from 'react-router-dom'
 import { ROUTES } from '../../data/consts'
 import { Button } from '../Button'
@@ -7,16 +8,31 @@ import { NavbarItem } from './NavbarItem'
 import { Bars3Icon } from '@heroicons/react/24/outline'
 import { AuthContext } from '../../context/AuthContext'
 import LogoutButton from '../LogoutButton'
+import { Avatar } from 'flowbite-react';
+import { UserData } from '../../types/types'
 
 const mdBreakPoint = 768
 
 export const NavBar = () => {
   const navigate = useNavigate()
-  const { isLogged } = useContext(AuthContext)
+
+  const { isLogged, user } = useContext(AuthContext)
+
+  const [initials, setInitials] = useState<string>()
+
+  useEffect(() => {
+    if (user) {
+      const { name, lastname } = user as UserData
+      const firstInitial = name.charAt(0)
+      const lastInitial = lastname.charAt(0)
+      setInitials(`${firstInitial}${lastInitial}`)
+    }
+  }, [user])
 
   const { pathname } = useLocation()
 
-  const thisIsHome = pathname !== ROUTES.HOME
+  const thisIsHome = pathname !== ROUTES.HOME && pathname !== '/'
+
 
   useEffect(() => {
     const menu = document.querySelector('#nav-menu')
@@ -66,7 +82,14 @@ export const NavBar = () => {
               onClick={() => navigate(ROUTES.LOGIN)}
             />
           ) : (
-            <LogoutButton />
+            <>
+              {initials && (
+                <div className="flex flex-wrap gap-2">
+                  <Avatar placeholderInitials={initials} onClick={() => navigate(ROUTES.USER)} />
+                </div>
+              )}
+              <LogoutButton />
+            </>
           )}
         </div>
       </div>

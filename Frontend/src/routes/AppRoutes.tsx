@@ -9,6 +9,7 @@ import Registro from '../pages/Registro'
 import NotFound from '../pages/NotFound'
 import ProtectedRoutes from './ProtectedRoutes'
 import Beneficios from '../pages/Beneficios'
+import { UserProfile } from '../pages/UserProfile'
 import Nosotros from '../pages/Nosotros'
 import Torneos from '../pages/Torneos'
 
@@ -28,6 +29,7 @@ export const AppRoutes = () => {
         { path: ROUTES.FIELDS, element: <Canchas /> },
         { path: ROUTES.FIELDS_DETAIL, element: <Cancha /> },
         { path: ROUTES.CONFIRM, element: <Confirm /> },
+        { path: ROUTES.USER, element: <UserProfile/>}
       ],
     },
 

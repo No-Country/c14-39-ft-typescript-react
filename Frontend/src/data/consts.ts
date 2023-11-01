@@ -21,6 +21,7 @@ export const ROUTES = {
   CONFIRM: '/confirm',
 
   ADMIN: '/admin',
+  USER: '/user',
   ANY: '*',
 }
 

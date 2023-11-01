@@ -29,8 +29,8 @@ export interface UserData {
   name: string;
   id?: string;
   lastname: string;
-  email: string;
-  password: string;
+  email?: string;
+  password?: string;
   city?: string;
   address?: string;
   image?: string;

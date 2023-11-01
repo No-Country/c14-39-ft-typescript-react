@@ -68,14 +68,20 @@ export const loginSchemaValidator = z.object({
 });
 
 // user update schema validate
-export const UserUpdateSchema = UserSchemaValidator.partial().merge(
-  z.object({
-    userId: z.string({
-      invalid_type_error: "El id debe ser un string",
-      required_error: "El id es requerido",
-    }),
-  })
-);
+export const UserUpdateSchema = z.object({
+  name: z.string().min(3, {
+    message: "El nombre debe tener al menos 3 caracteres",
+  }).max(20, {
+    message: "El nombre debe tener menos de 20 caracteres",
+  }).optional(),
+  lastname: z.string().min(3, {
+    message: "El apellido debe tener al menos 3 caracteres",
+  }).max(20, {
+    message: "El apellido debe tener menos de 20 caracteres",
+  }).optional(),
+});
+
+
 
 // country schema validate
 export const CountrySchemaValidator = z.object({
