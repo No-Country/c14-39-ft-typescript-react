@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom"
 import { NameInput, LastNameInput } from "../../components/form"
 import { Button } from "../Button"
 import { ROUTES } from "../../data/consts"
-import { set, useForm } from "react-hook-form"
+import {  useForm } from "react-hook-form"
 import { AuthContext, AuthContextData } from "../../context/AuthContext"
 import Swal from "sweetalert2"
 import withReactContent from "sweetalert2-react-content"
@@ -66,8 +66,7 @@ export const EditProfileComponent: React.FC = () => {
   }
 
   useEffect(() => {
-    let timer: number | undefined ;
-
+    let timer: any
     // Comprueba si hay errores después de un tiempo definido
     timer = setTimeout(() => {
       console.log(errors);

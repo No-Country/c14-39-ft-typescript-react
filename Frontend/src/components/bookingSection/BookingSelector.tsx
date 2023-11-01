@@ -49,9 +49,8 @@ export function BookingSelector({ proveedor }: { proveedor: Center | undefined }
       title: `Reserva: \n ${selectedCancha?.sport_center_id.sc_name}: ${selectedCancha?.camp_type_id.sca_type_name} \n Día: ${selectedDate?.toLocaleDateString()} \n Hora: ${hora}:00 \n Precio: ??? \n¿Desea continuar al pago?`,
       icon: "warning",
       showCancelButton: true,
-
-      confirmButtonText: "Sí",
       cancelButtonText: "No",
+      confirmButtonText: "Sí",
       customClass: {
         confirmButton: "custom-primary",
         cancelButton: "custom-secondary",
