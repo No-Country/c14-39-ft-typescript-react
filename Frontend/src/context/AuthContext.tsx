@@ -65,7 +65,7 @@ export const AuthProvider = ({ children }: AuthContextProps) => {
   };
 
   const logout = () => {
-    document.cookie = 'token=; expires=Thu, 01 Jan 1970 00:00:00 UTC;  secure; samesite=none;';
+    document.cookie = 'token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; secure; samesite=none;';
     setIsLogged(false);
     setUser(null);
   };
@@ -80,7 +80,6 @@ export const AuthProvider = ({ children }: AuthContextProps) => {
   }, [errors]);
 
   useEffect(() => {
-    console.log('render')
     async function checkLogin() {
       console.log('checkLogin')
       // const cookies = Cookies.get();
@@ -90,7 +89,7 @@ export const AuthProvider = ({ children }: AuthContextProps) => {
       //   setLoading(false);
       //   return setUser(null);
       // }
-
+      if(!isLogged) return 
       try {
         const res = await verifyTokenRequest();
         console.log(res)
