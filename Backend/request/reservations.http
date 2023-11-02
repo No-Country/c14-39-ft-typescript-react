@@ -3,12 +3,12 @@ POST http://localhost:3000/api/reservation
 Content-Type: application/json
 
 {
-  "fr_date_reservation": "2023-10-30T09:00:00Z",
+  "fr_date_reservation": "2023-11-02T09:00:00Z",
   "fr_status": "RESERVADO", 
   "fr_schedule": {
-    "s_date_reserved": "2023-10-30T24:00:00.000Z",
-    "s_start": "09:00:00",
-    "s_end": "10:00:00"
+    "s_date_reserved": "2023-11-02T24:00:00.000Z",
+    "s_start": "13:00:00",
+    "s_end": "15:00:00"
   },
   "user_id": "652ff85a5e95f355a0630ce0",
   "sc_id": "65370b542b617a35521a4389",
@@ -16,4 +16,8 @@ Content-Type: application/json
 }
 
 ###Get reservation by id
-GET http://localhost:3000/api/reservation/6542dfa7f7a366abe64af6f2
+GET http://localhost:3000/api/reservation/65439cd7f5a0e09f58f224b1
+
+
+### user get reservations
+GET http://localhost:3000/api/users/reservations/652ff85a5e95f355a0630ce0

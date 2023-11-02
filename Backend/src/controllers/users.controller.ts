@@ -1,5 +1,6 @@
-import {  UserDataWithId } from "../interface/user";
+import { UserDataWithId } from "../interface/user";
 import { User } from "../models";
+import { ReservationModel } from "../models/Revervation";
 
 export const getUsers = async () => {
   try {
@@ -43,6 +44,24 @@ export const modifyUserById = async (result: Partial<UserDataWithId>) => {
       { new: true }
     );
     return user;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const getUserReservationById = async (userId: string) => {
+  try {
+    const user = await User.findById(userId);
+
+    if (!user) {
+      throw new Error("User no encontrado");
+    }
+
+    const userReservations = ReservationModel.find({
+      user_id: userId,
+    });
+
+    return userReservations;
   } catch (error) {
     throw error;
   }

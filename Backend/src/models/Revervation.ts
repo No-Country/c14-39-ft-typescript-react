@@ -27,6 +27,11 @@ const ResevationSchema = new Schema({
     default: AppString.FR_STATUS[0],
   },
   fr_schedule: fr_scheduleItem,
+  price_total: {
+    type: Number,
+    required: true,
+    default: 0,
+  },
   user_id: {
     type: Schema.Types.ObjectId,
     ref: "User",
