@@ -125,7 +125,7 @@ export const EditProfileComponent: React.FC = () => {
 
   return (
     <section className='wrapper'>
-      <h1 className='mt-6 mb-6 text-3xl font-bold text-center'>
+      <h1 className='mt-6 mb-6 text-3xl text-center font-display text-base-blue1'>
         Edita tu perfil
       </h1>
       <div className='max-w-3xl gap-8 mx-auto my-0'>
@@ -151,7 +151,7 @@ export const EditProfileComponent: React.FC = () => {
           />
         </form>
       </div>
-      <div>
+      <div className='max-w-3xl mx-auto my-0'>
         <Button
           label='Eliminar cuenta'
           style='secondary'
