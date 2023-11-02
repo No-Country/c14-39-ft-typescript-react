@@ -65,7 +65,7 @@ export const AuthProvider = ({ children }: AuthContextProps) => {
   };
 
   const logout = () => {
-    Cookies.remove("token");
+    document.cookie = 'token=; expires=Thu, 01 Jan 1970 00:00:00 UTC;  secure; samesite=none;';
     setIsLogged(false);
     setUser(null);
   };
