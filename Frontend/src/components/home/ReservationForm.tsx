@@ -13,6 +13,7 @@ import { useCities } from '../../data/useSportData'
 import { AuthContext } from '../../context/AuthContext'
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
+import { ReservationFormSkeleton } from '../bookingSection/Skeletons'
 
 export const ReservationForm = () => {
   const { isLogged } = useContext(AuthContext)
@@ -61,68 +62,23 @@ export const ReservationForm = () => {
           overrideClasses='mb-2'
         />
 
-        {isLoading && (
-          <>
-            <div className='grid w-full gap-8 md:grid-cols-2 md:flex-nowrap md:gap-20'>
-              <div className='w-full'>
-                <div className='h-4 rounded bg-white/60'></div>
-                <div className='h-12 rounded bg-white/60'></div>
-              </div>
-              <div className='w-full'>
-                <div className='h-4 rounded bg-white/60'></div>
-                <div className='h-12 rounded-full bg-white/60'></div>
-              </div>
-            </div>
-          </>
-        )}
+        {isLoading && <ReservationFormSkeleton />}
         {isError && <p>Algo ha ocurrido, intenta de nuevo actualizando la página.</p>}
         {!isError && !isLoading && citiesData && (
           <>
             <div className='grid w-full gap-8 md:grid-cols-2 md:flex-nowrap md:gap-20'>
               <div className='flex flex-col justify-between w-full'>
                 <p className='mb-3 text-lg'>Puedes empezar por tu ubicación</p>
-                {/* <div className='flex flex-wrap items-end justify-center gap-3 md:flex-nowrap md:justify-start place-items-stretch'> */}
                 <MySelect
                   options={citiesData}
                   value={selectedOption}
                   onChange={handleChange}
                   name='city'
                 />
-
-                {/* <div className='w-32 flex-col gap-1.5 flex'>
-                    <label
-                      htmlFor='date'
-                      className='text-base leading-tight uppercase '>
-                      Fecha
-                    </label>
-                    <input
-                      type='date'
-                      name='date'
-                      id='date'
-                      className={COMMON_TWSTYLES.input}
-                      placeholder='Hoy'
-                    />
-                  </div> */}
-                {/* <div className='w-32 flex-col gap-1.5 flex'>
-                    <label
-                      htmlFor='time'
-                      className='text-base leading-tight uppercase '>
-                      Hora
-                    </label>
-                    <input
-                      type='time'
-                      name='time'
-                      id='time'
-                      className={COMMON_TWSTYLES.input}
-                      placeholder='13:00'
-                    />
-                  </div> */}
-                {/* </div> */}
               </div>
 
               <div className='flex flex-col justify-between w-full '>
                 <p className='text-lg'>Pronto, podrás buscar por el nombre de tu centro favorito!</p>
-                {/* <p className='text-lg'>o puedes buscar tu cancha por su nombre</p> */}
 
                 <input
                   type='search'

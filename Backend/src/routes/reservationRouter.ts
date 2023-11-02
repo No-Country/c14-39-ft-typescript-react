@@ -31,16 +31,19 @@ reservationRouter
       });
 
       if (!isValid) {
-        console.log({ errors });
-
         throw new Error(errors);
       }
 
-      const dataResponse = await controller.createReservation(data);
+      const dataValid: IReservation = data;
+      dataValid.fr_schedule.s_date_reserved = data?.fr_schedule.s_date_reserved
+        ?.toISOString()
+        .split("T")[0];
+
+      const dataResponse = await controller.createReservation(dataValid);
 
       res.status(HttpCodes.CODE_SUCCESS).json({
         message: "Reserva realizada con éxito",
-        data,
+        data: dataResponse,
       });
     } catch (error: String | any) {
       console.log(error);
@@ -49,20 +52,19 @@ reservationRouter
   });
 
 reservationRouter
-  .route("/:userId")
-  .get(async (req, res) => {
+  .route("/:id_reserved")
+  .get(async (req: Request, res: Response) => {
     try {
-      const { userId } = req.params
-
-      const reservations = await controller.getReservationsByUser(userId as string)
-
-      return res.status(HttpCodes.CODE_SUCCESS).json({
-        message: "Reservas se obtuvieron de manera exitosa",
-        reservations
-      })
-    } catch (error) {
-      res.status(HttpCodes.CODE_NOT_FOUND).json({ error: `${error}` })
+      const { id_reserved } = req.params;
+      const dataResponse = await controller.getReservationById(id_reserved);
+      res.status(HttpCodes.CODE_SUCCESS).json({
+        message: "Reserva obtenida con éxito",
+        data: dataResponse,
+      });
+    } catch (error: String | any) {
+      console.log(error);
+      res.status(HttpCodes.CODE_BAD_GATEWAY).json({ error: `${error}` });
     }
-  })
+  });
 
 export default reservationRouter;

@@ -5,6 +5,7 @@ import { CanchaData } from '../components/CanchaData'
 import { BookingSelector } from '../components/bookingSection/BookingSelector'
 import { useSportCenter } from '../data/useSportData'
 import SportCenterImage from '../SportCenterImage'
+import { CanchaSkeleton } from '../components/bookingSection/Skeletons'
 
 const Cancha = () => {
   const { cancha } = useParams()
@@ -16,7 +17,7 @@ const Cancha = () => {
       <SportCenterImage imageUrl={`${sportCenterInfo?.sc_imgs[0]}`} />
 
       <Stripes />
-      {isLoading ? <p>Cargando...</p> : null}
+      {isLoading ? <CanchaSkeleton /> : null}
       {isError ? <p>{errorMessage}</p> : null}
       {sportCenterInfo && !isLoading && !isError ? (
         <>

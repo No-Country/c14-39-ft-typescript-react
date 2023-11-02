@@ -26,23 +26,23 @@ export interface Cancha {
 }
 
 export interface UserData {
-  name: string;
-  id?: string;
-  lastname: string;
-  email: string;
-  password: string;
-  city?: string;
-  address?: string;
-  image?: string;
-  country_id?: string;
-  type_id?: string;
+  name: string
+  id?: string
+  lastname: string
+  email?: string
+  password?: string
+  city?: string
+  address?: string
+  image?: string
+  country_id?: string
+  type_id?: string
 }
 
 export interface UserDataWithId extends UserData {
-  userId: string;
+  userId: string
 }
 
-export interface UserLoginData extends Pick<UserData, "email" | "password"> { }
+export interface UserLoginData extends Pick<UserData, "email" | "password"> {}
 
 // from the API
 export interface Main {
@@ -90,6 +90,8 @@ export interface Camp {
   camp_type_id: CampTypeID
   sport_center_id: SportCenterID
   user_id: UserID
+  sca_price: number
+  sca_price_ISO: string
 }
 
 export interface CampTypeID {
