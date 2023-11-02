@@ -1,6 +1,7 @@
 import { createContext, ReactNode, useEffect, useState } from 'react'
 import { UserData, UserDataWithId, UserLoginData } from '../types/types'
-import { loginRequest, registerRequest, verifyTokenRequest } from '../api/auth'
+import { loginRequest, logoutRequest, registerRequest, verifyTokenRequest } from '../api/auth'
+import Cookies from 'js-cookie'
 
 interface AuthContextProps {
   children: ReactNode
@@ -64,6 +65,7 @@ export const AuthProvider = ({ children }: AuthContextProps) => {
 
   const logout = () => {
     document.cookie = 'token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; secure; samesite=none;';
+    logoutRequest();
     setIsLogged(false);
     setUser(null);
   };
@@ -80,13 +82,13 @@ export const AuthProvider = ({ children }: AuthContextProps) => {
   useEffect(() => {
     async function checkLogin() {
       console.log('checkLogin')
-      // const cookies = Cookies.get();
-      // console.log(cookies);
-      // if (!cookies.token) {
-      //   setIsLogged(false);
-      //   setLoading(false);
-      //   return setUser(null);
-      // }
+      const cookies = Cookies.get();
+      console.log(cookies);
+      if (!cookies.token) {
+        setIsLogged(false);
+        setLoading(false);
+        return setUser(null);
+      }
 
       try {
         const res = await verifyTokenRequest();
