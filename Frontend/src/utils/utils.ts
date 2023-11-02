@@ -1,4 +1,5 @@
-import { Anchor } from '../types/types'
+import { FALLBACKS } from "../data/consts"
+import { Anchor } from "../types/types"
 
 export function calculateAverageLatLng(coordinates: Anchor[]): Anchor {
   if (!coordinates || !coordinates.length) {
@@ -16,4 +17,17 @@ export function calculateAverageLatLng(coordinates: Anchor[]): Anchor {
   const averageLongitude = sumLongitude / coordinates.length
 
   return [averageLatitude, averageLongitude]
+}
+
+export function formatPrice(
+  precio: number,
+  moneda: string | undefined = FALLBACKS.CURRENCY,
+  decimales: number = 0
+) {
+  return new Intl.NumberFormat("es-CO", {
+    style: "currency",
+    currency: moneda,
+    currencyDisplay: "symbol",
+    maximumFractionDigits: decimales,
+  }).format(precio)
 }

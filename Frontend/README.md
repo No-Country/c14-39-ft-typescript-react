@@ -13,7 +13,7 @@
 
 ## API
 
-`https://reservatucancha-5rse5st6p-reservatucancha.vercel.app/api/`
+`https://reservatucancha.vercel.app/api`
 
 Get
 
