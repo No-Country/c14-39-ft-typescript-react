@@ -1,7 +1,6 @@
 import { createContext, ReactNode, useEffect, useState } from 'react'
 import { UserData, UserDataWithId, UserLoginData } from '../types/types'
 import { loginRequest, logoutRequest, registerRequest, verifyTokenRequest } from '../api/auth'
-import Cookies from 'js-cookie'
 
 interface AuthContextProps {
   children: ReactNode
