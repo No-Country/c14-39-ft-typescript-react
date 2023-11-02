@@ -90,7 +90,7 @@ export function BookingSelector({
       .post("/order", {
         fecha: data.fecha,
         hora: data.hora.toString(),
-        precio: 500,
+        precio: data.precio,
         sc_id: data.cancha.sport_center_id._id,
         camp_id: data.cancha._id,
         user_id: user.id,
