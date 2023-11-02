@@ -42,6 +42,11 @@ export class ReservationController implements IRerservationController {
         );
       }
 
+      const differenceInMilliseconds = endTime - startTime;
+
+      // Convertir la diferencia de milisegundos a horas
+      const differenceInHours = differenceInMilliseconds / (1000 * 60 * 60);
+
       const [user, sport_center, sport_camp] = await Promise.all([
         User.findById(reservationData.user_id),
         SportCenterModel.findById(reservationData.sc_id),
@@ -68,7 +73,12 @@ export class ReservationController implements IRerservationController {
         throw new Error("El campo deportivo no pertenece al centro deportivo");
       }
 
-      const newReservation = new ReservationModel(reservationData);
+      const priceHour: number = sport_camp.sca_price;
+
+      const newReservation = new ReservationModel({
+        ...reservationData,
+        price_total: priceHour * differenceInHours,
+      });
 
       await newReservation.save();
 
@@ -100,6 +110,7 @@ export class ReservationController implements IRerservationController {
           sca_price: 1,
           sca_capacity: 1,
           sca_price_ISO: 1,
+          price_total: 1,
         });
 
       if (!reservation) {

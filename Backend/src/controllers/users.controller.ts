@@ -1,7 +1,9 @@
+import { ReservationModel } from "../models/Revervation";
 import { Request, Response } from "express";
 import {  UserDataWithId } from "../interface/user";
 import { User } from "../models";
 import { HttpCodes } from "../utils";
+
 
 export const getUsers = async () => {
   try {
@@ -39,5 +41,23 @@ export const modifyUserById = async (req: Request, res: Response) => {
 
   } catch (error: any) {
     res.status(HttpCodes.CODE_INTERNAL_SERVER_ERROR).json({ message: `${error.message}` });
+  }
+};
+
+export const getUserReservationById = async (userId: string) => {
+  try {
+    const user = await User.findById(userId);
+
+    if (!user) {
+      throw new Error("User no encontrado");
+    }
+
+    const userReservations = ReservationModel.find({
+      user_id: userId,
+    });
+
+    return userReservations;
+  } catch (error) {
+    throw error;
   }
 };
