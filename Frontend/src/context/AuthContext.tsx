@@ -87,7 +87,7 @@ export const AuthProvider = ({ children }: AuthContextProps) => {
       //   setLoading(false);
       //   return setUser(null);
       // }
-      if(!isLogged) return 
+
       try {
         const res = await verifyTokenRequest();
         console.log(res)
