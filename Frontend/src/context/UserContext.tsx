@@ -1,7 +1,8 @@
-import { createContext, ReactNode, useContext } from "react";
-import { deleteUserById, modifyUserById } from "../api/user";
-import { UserData } from "../types/types";
+import { createContext, ReactNode, useContext, useState } from "react";
+import { deleteUserById, getUserReservations, modifyUserById } from "../api/user";
+import { Reservation, UserData } from "../types/types";
 import { AuthContext } from "./AuthContext";
+import { set } from "react-hook-form";
 
 interface UserContextProps {
   children: ReactNode;
@@ -9,11 +10,16 @@ interface UserContextProps {
 interface UserContextData {
   updateUser: (user: UserData) => Promise<void>;
   deleteUser: (user: UserData) => Promise<void>;
+  getReservations: (user: UserData) => Promise<void>;
+  reservations: Reservation[];
+  setReservations: (reservations: Reservation[]) => void;
 }
   
 export const UserContext = createContext<UserContextData>({} as UserContextData);
 
 export const UserProvider = ({ children }: UserContextProps) => {
+
+  const [reservations, setReservations] = useState<Reservation[]>([])
 
   const {setUser, setMessage, setErrors} = useContext(AuthContext)
 
@@ -49,11 +55,28 @@ export const UserProvider = ({ children }: UserContextProps) => {
     }
   }
 
+  const getReservations = async (user: UserData) => {
+    try {
+      const res = await getUserReservations(user);
+      console.log(res.data.data)
+      setReservations(res.data.data)
+    } catch (error:any) {
+      console.log(error)
+      if (Array.isArray(error.response.data)) {
+        return setErrors(error.response.data);
+      }
+      setErrors([error.response.data]);
+    }
+  }
+
   return (
     <UserContext.Provider
       value={{
         updateUser,
         deleteUser,
+        getReservations,
+        reservations,
+        setReservations
       }}
     >
       {children}

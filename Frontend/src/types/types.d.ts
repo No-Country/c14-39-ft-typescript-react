@@ -136,3 +136,21 @@ export interface ListSportCamp {
   _id: string
   sca_num: number
 }
+
+interface Reservation {
+  fr_schedule: Schedule;
+  _id: string;
+  fr_date_reservation: string;
+  fr_status: string;
+  price_total: number;
+  user_id: string;
+  sc_id: string;
+  sca_id: string;
+  __v: number;
+}
+
+interface Schedule {
+  s_date_reserved: string;
+  s_start: string;
+  s_end: string;
+}
