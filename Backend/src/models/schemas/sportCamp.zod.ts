@@ -2,6 +2,20 @@ import { z } from "zod";
 import { isValidObjectId } from "mongoose";
 
 export const campSchemaValidation = z.object({
+  sca_price: z
+    .number({
+      invalid_type_error: "El precio debe ser un numero.",
+      required_error: "El precio es requerido.",
+    })
+    .min(1, {
+      message: "El precio minimo es $1.",
+    }),
+  sca_price_ISO: z
+    .string({
+      invalid_type_error: "El tipo de moneda debe ser un texto.",
+      required_error: "El tipo de moneda  es requerido.",
+    })
+    .optional(),
   sca_num: z
     .number({
       invalid_type_error: "El numero de campo debe ser un numero.",

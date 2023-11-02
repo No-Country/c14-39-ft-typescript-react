@@ -2,6 +2,10 @@ import mongoose, { Schema } from "mongoose";
 import { AppString } from "../utils";
 
 const fr_scheduleItem = {
+  s_date_reserved: {
+    type: String,
+    required: true,
+  },
   s_start: {
     type: String,
     required: true,
@@ -13,7 +17,7 @@ const fr_scheduleItem = {
 };
 
 const ResevationSchema = new Schema({
-  fr_date: {
+  fr_date_reservation: {
     type: Date,
     required: true,
   },
@@ -30,12 +34,12 @@ const ResevationSchema = new Schema({
   },
   sc_id: {
     type: Schema.Types.ObjectId,
-    ref: "SportCenter",
+    ref: "sportcenters",
     required: true,
   },
   sca_id: {
     type: Schema.Types.ObjectId,
-    ref: "Camp",
+    ref: "camps",
     required: true,
   },
 });
