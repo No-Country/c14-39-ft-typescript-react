@@ -17,6 +17,7 @@ interface IFormInput {
 }
 
 const Registro: React.FC = () => {
+
   const { register, handleSubmit } = useForm<IFormInput>()
   const { signUp, errors, isLogged, message, setMessage } = useContext(AuthContext)
   const navigate = useNavigate()
@@ -39,12 +40,14 @@ const Registro: React.FC = () => {
   }
 
   useEffect(() => {
+
     const checkLoginAndNavigate = async () => {
       if (isLogged) {
         await MySwal.fire({
           icon: 'success',
           title: `${message}`,
           showConfirmButton: false,
+
           timer: 1500,
           customClass: {
             popup: 'custom-popup',

@@ -11,6 +11,9 @@ import { Stepper } from '../components/bookingSection/Stepper'
 import { RowItem } from '../components/form/RowItem'
 import { Mapa } from '../components/bookingSection/Mapa'
 
+import { SectionTitle } from '../components/SectionTitle'
+import { CanchasSkeleton } from '../components/bookingSection/Skeletons'
+
 const Canchas = () => {
   const [selectedSite, setSelectedSite] = useState<ListSportCenter | null>(null)
 
@@ -21,6 +24,8 @@ const Canchas = () => {
 
   const navigate = useNavigate()
 
+  const canchasTitle = isLoading ? 'Cargando..' : cityInfo?.name
+
   const handleClick = (proveedor: ListSportCenter) => {
     setSelectedSite(proveedor)
     navigate(`${ROUTES.FIELDS}/${proveedor?._id}`)
@@ -28,21 +33,19 @@ const Canchas = () => {
 
   return (
     <section className='wrapper animate-fade-in'>
-      {isLoading && <p>Cargando...</p>}
-      {isError && !isLoading && <p>{errorMessage}</p>}
+      <SectionTitle title={canchasTitle} />
+      <article className='grid md:grid-cols-[40%_1fr]  gap-2 rounded-[2rem] backdrop-filter backdrop-blur-[20px] bg-white/60 mb-6'>
+        <Stepper
+          paso={2}
+          total={3}
+          mensaje='Escoge tu cancha favorita.'
+          overrideClasses='md:col-span-2 px-4 pt-4'
+        />
+        {isLoading && <CanchasSkeleton />}
+        {isError && !isLoading && <p>{errorMessage}</p>}
 
-      {!isLoading && !isError && cityInfo && (
-        <>
-          <h1 className='w-full mb-4 text-2xl md:text-4xl font-display'>{cityInfo.name}</h1>
-
-          <article className='grid md:grid-cols-[40%_1fr]  gap-2 rounded-[2rem] backdrop-filter backdrop-blur-[20px] bg-white/60 mb-6'>
-            <Stepper
-              paso={2}
-              total={3}
-              mensaje='Escoge tu cancha favorita.'
-              overrideClasses='md:col-span-2 px-4 pt-4'
-            />
-
+        {!isLoading && !isError && cityInfo && (
+          <>
             <section className='flex flex-col h-full gap-2 p-4 overflow-x-hidden overflow-y-auto'>
               {list_sport_centers?.map(proveedor => (
                 <RowItem
@@ -62,11 +65,10 @@ const Canchas = () => {
                 handleClick={handleClick}
               />
             </section>
-          </article>
-        </>
-      )}
+          </>
+        )}
+      </article>
     </section>
   )
 }
-
 export default Canchas

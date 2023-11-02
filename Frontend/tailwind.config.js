@@ -38,6 +38,9 @@ export default {
       animation: {
         'fade-in': 'fade-in 0.3s ease-in-out',
       },
+      backgroundImage: {
+        'hero-image': 'var(--hero-image)',
+      },
     },
   },
   plugins: ['flowbite/plugin'],

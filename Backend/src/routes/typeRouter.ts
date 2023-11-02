@@ -1,9 +1,8 @@
-import express from "express";
-import { Type } from "../models";
-import { HttpCodes } from "../utils/HTTPCodes.util";
-import { validateSchema } from "../middlewares/validatorMiddleware";
-import { TypeUserSchemaValidator } from "../models/schemas/schemas.zod";
-
+import express from 'express'
+import { Type } from '../models'
+import { HttpCodes } from '../utils/HTTPCodes.util'
+import { validateSchema } from '../middlewares/validatorMiddleware'
+import { TypeUserSchemaValidator } from '../models/schemas/schemas.zod'
 
 const TypeRouter = express.Router();
 
@@ -21,9 +20,8 @@ TypeRouter.route("/")
   .post(validateSchema(TypeUserSchemaValidator), async (req, res) => {
     try {
       const newType = new Type({
-        ...req.body,
-      });
-
+        ...req.body
+      })
 
       await newType.save();
 
