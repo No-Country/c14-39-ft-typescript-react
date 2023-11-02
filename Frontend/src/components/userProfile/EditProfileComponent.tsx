@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom"
 import { NameInput, LastNameInput } from "../../components/form"
 import { Button } from "../Button"
 import { ROUTES } from "../../data/consts"
-import {  useForm } from "react-hook-form"
+import { useForm } from "react-hook-form"
 import { AuthContext, AuthContextData } from "../../context/AuthContext"
 import Swal from "sweetalert2"
 import withReactContent from "sweetalert2-react-content"
@@ -66,10 +66,9 @@ export const EditProfileComponent: React.FC = () => {
   }
 
   useEffect(() => {
-    let timer: any
     // Comprueba si hay errores después de un tiempo definido
-    timer = setTimeout(() => {
-      console.log(errors);
+    const timer = setTimeout(() => {
+      console.log(errors)
       if (errors.length === 0 && userUpdated) {
         MySwal.fire({
           icon: "success",
@@ -79,20 +78,20 @@ export const EditProfileComponent: React.FC = () => {
           customClass: {
             popup: "custom-popup",
           },
-        });
-        setMessage("");
-        setErrors([]);
-        setUserUpdated(false);
-        navigate(ROUTES.HOME);
-      }else {
-        setUserUpdated(false);
-        setErrors([]);
+        })
+        setMessage("")
+        setErrors([])
+        setUserUpdated(false)
+        navigate(ROUTES.HOME)
+      } else {
+        setUserUpdated(false)
+        setErrors([])
       }
-    }, 1000);
-  
+    }, 1000)
+
     // Limpieza del timer si el componente se desmonta
-    return () => clearTimeout(timer);
-  }, [userUpdated]);
+    return () => clearTimeout(timer)
+  }, [userUpdated])
 
   const handleDelete = async (user: UserData) => {
     const result = await MySwal.fire({
