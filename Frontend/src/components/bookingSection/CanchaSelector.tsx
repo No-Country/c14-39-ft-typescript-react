@@ -1,6 +1,7 @@
 import { FALLBACKS } from '../../data/consts'
 import { useSportCamp } from '../../data/useSportData'
 import { Camp } from '../../types/types'
+import { CanchaSelectorSkeleton } from './Skeletons'
 
 export function CanchaSelector({ canchaId, selected, onSelectCancha }: { canchaId: string; selected: Camp; onSelectCancha: (cancha: Camp) => void }) {
   const { sportCampInfo, isLoading, isError, errorMessage } = useSportCamp(canchaId)
@@ -8,7 +9,7 @@ export function CanchaSelector({ canchaId, selected, onSelectCancha }: { canchaI
   const selectedClass = selected?._id === sportCampInfo?._id ? 'bg-base-blue2 text-white' : 'bg-white'
   return (
     <>
-      {isLoading && <p>Cargando...</p>}
+      {isLoading && <CanchaSelectorSkeleton />}
       {isError && <p>{errorMessage}</p>}
       {sportCampInfo && (
         <div

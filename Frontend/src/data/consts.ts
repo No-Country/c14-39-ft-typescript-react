@@ -12,18 +12,21 @@ export const ROUTES = {
   LOGIN: '/ingresa',
   SIGN_UP: '/registro',
 
+  BENEFITS: '/beneficios',
+  US: '/nosotros',
+  TOURNAMENTS: '/torneos',
+
   FIELDS: '/canchas',
   FIELDS_DETAIL: '/canchas/:cancha',
   CONFIRM: '/confirm',
 
   ADMIN: '/admin',
+  USER: '/user',
   ANY: '*',
 }
 
-// API related
-
 export const API_URL = {
-  BASE_URL: 'https://reservatucancha.onrender.com/api/',
+  BASE_URL: 'https://reservatucancha.vercel.app/api',
   COUNTRIES: 'countries/',
   SPORTCENTER: 'sportcenter/',
   SPORTCAMP: 'sportcamp/',

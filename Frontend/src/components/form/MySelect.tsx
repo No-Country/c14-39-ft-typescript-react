@@ -10,7 +10,7 @@ type MySelectProps = {
 
 export function MySelect({ options, value, onChange, name }: MySelectProps) {
   return (
-    <div className='relative'>
+    <div className='relative w-full'>
       <select
         value={value?.id}
         onChange={event => onChange(event)}
@@ -22,7 +22,7 @@ export function MySelect({ options, value, onChange, name }: MySelectProps) {
           <option
             key={option.id}
             value={option.id}
-            className='p-2 text-base'>
+            className='w-full p-2'>
             {option.name}
           </option>
         ))}

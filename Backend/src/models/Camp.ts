@@ -35,8 +35,8 @@ const campSchema = new Schema({
       type: Schema.Types.ObjectId,
       ref: "Order",
       required: true,
-    },
-  ],
+    }
+  ]
 });
 
 campSchema.set("toJSON", {

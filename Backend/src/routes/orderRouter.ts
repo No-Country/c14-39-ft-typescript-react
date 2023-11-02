@@ -9,7 +9,6 @@ const controller = new OrderController();
 
 orderRouter
   .route("/")
-
   .get(async (req, res) => {
     try {
       const { id } = req.query
@@ -18,6 +17,7 @@ orderRouter
         const order = await controller.getOrderById(id as string)
         return res.status(HttpCodes.CODE_SUCCESS).json({ order })
       }
+
       const orders = await controller.getOrders()
 
       return res.status(HttpCodes.CODE_SUCCESS).json({
@@ -52,7 +52,9 @@ orderRouter
         throw new Error(errors);
       }
 
-      const initPoint = await controller.createCheckout(data)
+      const originUrl = req.headers.origin as string
+
+      const initPoint = await controller.createCheckout(data, originUrl)
 
       return res.status(HttpCodes.CODE_SUCCESS).json({ initPoint })
     } catch (error) {
