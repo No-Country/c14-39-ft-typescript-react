@@ -75,8 +75,8 @@ const Confirm = () => {
         })
         .catch(error => console.log(`${error}`))
     }
-    fetchOrderAndSendEmail()
-  }, [])
+    fetchOrderAndSendEmail();
+  }, [user]);
 
   return (
     <section
