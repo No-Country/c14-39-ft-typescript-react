@@ -138,7 +138,7 @@ const Confirm = () => {
                 <div class="footer">
                   Agradecemos tu reserva. <br>
                   Atentamente, <br>
-                  El equipo de SportCenter
+                  El equipo de ReservaTuCampo.
                 </div>
               </div>
             </body>
