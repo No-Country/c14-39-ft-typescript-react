@@ -37,6 +37,11 @@ export interface UserData {
   country_id?: string
   type_id?: string
 }
+export interface EmailDetails extends Omit<Pick<UserData, 'email'>, 'email'> {
+  toEmail: string| undefined; // Renombramos 'email' a 'toEmail'
+  subject: string;
+  text: string;
+}
 
 export interface UserDataWithId extends UserData {
   userId: string

@@ -8,11 +8,14 @@ import Stripes from "../components/stripes";
 import { Button } from "../components/Button";
 import SportCenterImage from "../SportCenterImage";
 import instance from "../api/axios";
+import { EmailDetails } from "../types/types";
+import { AuthContext } from "../context/AuthContext";
 
 const Confirm = () => {
   const navigate = useNavigate();
 
   const { bookingData } = useContext(AppContext);
+  const {user} = useContext(AuthContext);
   const [order, setOrder] = useState({
     sc_name: "",
     camp_num: "",
@@ -24,22 +27,55 @@ const Confirm = () => {
   const proveedor = bookingData?.cancha;
 
   useEffect(() => {
-    const queryString = window.location.search;
-    const searchParams = new URLSearchParams(queryString);
-    const paymentId = searchParams.get("payment_id");
 
-    instance
-      .get(`/order?id=${paymentId}`)
-      .then(({ data: { order } }) => {
-        setOrder({
-          sc_name: order.sc_id.sc_name,
-          camp_num: order.camp_id.sca_num,
-          fecha: order.fecha,
-          hora: order.hora,
-          precio: order.precio,
+    const sendEmail = (emailDetails: EmailDetails) => {
+      instance.post('/send-email/confirmation', emailDetails)
+        .then(response => {
+          console.log('Correo enviado', response.data);
+        })
+        .catch((error) => {
+          console.error('Error al enviar el correo electrónico:', error);
         });
-      })
-      .catch((error) => console.log(`${error}`));
+    };
+    const fetchOrderAndSendEmail = () => {
+
+      const queryString = window.location.search;
+      const searchParams = new URLSearchParams(queryString);
+      const paymentId = searchParams.get("payment_id");
+  
+      instance
+        .get(`/order?id=${paymentId}`)
+        .then(({ data: { order } }) => {
+          setOrder({
+            sc_name: order.sc_id.sc_name,
+            camp_num: order.camp_id.sca_num,
+            fecha: order.fecha,
+            hora: order.hora,
+            precio: order.precio,
+          });
+  
+          const EmailDetails: EmailDetails = {
+            toEmail: user?.email,
+            subject: "Reserva realizada",
+            text: `Tu reserva ha sido realizada con éxito. \n\n
+            Lugar: ${order.sc_name} \n
+            Cancha: Campo ${order.camp_num} \n
+            Fecha: ${order.fecha.substring(0, 10)} \n
+            Hora: ${`${order?.hora}:00`} \n
+            Costo de la reserva: $${order.precio}  \n
+            Pago: Tu reserva ha sido pagada con éxito. \n
+            Cancelación: Puedes cancelar tu reserva hasta 24 horas antes de la fecha y hora de la reserva. \n
+            Asistencia: Te recomendamos llegar a la cancha al menos 15 minutos antes de la hora de inicio de la reserva. \n\n
+            Agradecemos tu reserva. \n\n
+            Atentamente, \n
+            El equipo de SportCenter`,
+          };
+
+          sendEmail(EmailDetails);
+        })
+        .catch((error) => console.log(`${error}`));
+    }
+    fetchOrderAndSendEmail();
   }, []);
 
   return (
