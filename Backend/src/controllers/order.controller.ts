@@ -80,7 +80,7 @@ export class OrderController implements IOrderController {
               title: `Campo ${camp.sca_num}`,
               unit_price: data.precio,
               quantity: 1,
-              // currency_id: "COP",
+              currency_id: "COP",
               picture_url: "http://www.myapp.com/myimage.jpg",
               category_id: "category_1",
             },
