@@ -9,11 +9,11 @@ const { MAIL_PASSWORD } = process.env;
 interface EmailRequest {
     toEmail: string;
     subject: string;
-    text: string;
+    html: string;
 }
 
 export const sendEmail = async (req: Request, res: Response) => {
-    const { toEmail, subject, text }: EmailRequest = req.body;
+    const { toEmail, subject, html }: EmailRequest = req.body;
 
     const transporter = nodemailer.createTransport({
         host: 'smtp.gmail.com',
@@ -30,7 +30,7 @@ export const sendEmail = async (req: Request, res: Response) => {
         from: 'reservatucampo@gmail.com',
         to: toEmail,
         subject: subject,
-        text: text
+        html: html
     };
 
     try {

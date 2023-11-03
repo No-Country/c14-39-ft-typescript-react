@@ -58,18 +58,86 @@ const Confirm = () => {
           const EmailDetails: EmailDetails = {
             toEmail: user?.email,
             subject: "Reserva realizada",
-            text: `Tu reserva ha sido realizada con éxito. \n\n
-            Lugar: ${order.sc_name} \n
-            Cancha: Campo ${order.camp_num} \n
-            Fecha: ${order.fecha.substring(0, 10)} \n
-            Hora: ${`${order?.hora}:00`} \n
-            Costo de la reserva: $${order.precio}  \n
-            Pago: Tu reserva ha sido pagada con éxito. \n
-            Cancelación: Puedes cancelar tu reserva hasta 24 horas antes de la fecha y hora de la reserva. \n
-            Asistencia: Te recomendamos llegar a la cancha al menos 15 minutos antes de la hora de inicio de la reserva. \n\n
-            Agradecemos tu reserva. \n\n
-            Atentamente, \n
-            El equipo de SportCenter`,
+            html: `
+            <html>
+            <head>
+              <style>
+                body {
+                  font-family: Arial, sans-serif;
+                  margin: 0;
+                  padding: 0;
+                  color: #333;
+                }
+                .container {
+                  padding: 20px;
+                  max-width: 600px;
+                  margin: auto;
+                  background-color: #f7f7f7;
+                  border: 1px solid #dedede;
+                  border-radius: 4px;
+                  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+                }
+                .header {
+                  background-color: #004d99;
+                  color: white;
+                  padding: 10px;
+                  text-align: center;
+                  border-radius: 4px 4px 0 0;
+                }
+                .content {
+                  padding: 20px;
+                  background: white;
+                  border-radius: 0 0 4px 4px;
+                }
+                .footer {
+                  margin-top: 20px;
+                  text-align: center;
+                  font-size: 12px;
+                  color: #888;
+                }
+              </style>
+            </head>
+            <body>
+              <div class="container">
+                <div class="header">
+                  <h1>Confirmación de Reserva</h1>
+                </div>
+                <div class="content">
+                  <p>¡Hola <strong>${user?.name}</strong>, tu reserva ha sido realizada con éxito!</p>
+                  <table>
+                    <tr>
+                      <td><strong>Lugar:</strong></td>
+                      <td>${order.sc_id.sc_name}</td>
+                    </tr>
+                    <tr>
+                      <td><strong>Cancha:</strong></td>
+                      <td>Campo ${order.camp_id.sca_num}</td>
+                    </tr>
+                    <tr>
+                      <td><strong>Fecha:</strong></td>
+                      <td>${order.fecha.substring(0, 10)}</td>
+                    </tr>
+                    <tr>
+                      <td><strong>Hora:</strong></td>
+                      <td>${order.hora}:00</td>
+                    </tr>
+                    <tr>
+                      <td><strong>Costo de la reserva:</strong></td>
+                      <td>$${order.precio}</td>
+                    </tr>
+                  </table>
+                  <p>El pago de tu reserva se ha realizado con éxito. Recuerda que puedes cancelar tu reserva hasta 24 horas antes de la fecha y hora programadas.</p>
+                  <p>Te recomendamos llegar a la cancha al menos 15 minutos antes de la hora de inicio de tu reserva.</p>
+                </div>
+                <div class="footer">
+                  Agradecemos tu reserva. <br>
+                  Atentamente, <br>
+                  El equipo de SportCenter
+                </div>
+              </div>
+            </body>
+          </html>
+          `,
           };
           console.log(EmailDetails);
           sendEmail(EmailDetails);
@@ -107,7 +175,7 @@ const Confirm = () => {
             </div>
             <div className="flex flex-col gap-3 px-6">
               {/* <p>Costo de la reserva: {bookingData?.precio} USD</p> */}
-              <p>Costo de la reserva: {order.precio} USD</p>
+              <p>Costo de la reserva: ${order.precio} </p>
               <p>Pago: Tu reserva ha sido pagada con éxito.</p>
               <p>
                 Cancelación: Puedes cancelar tu reserva hasta 24 horas antes de

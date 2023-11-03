@@ -40,7 +40,7 @@ export interface UserData {
 export interface EmailDetails extends Omit<Pick<UserData, 'email'>, 'email'> {
   toEmail: string| undefined; // Renombramos 'email' a 'toEmail'
   subject: string;
-  text: string;
+  html: string;
 }
 
 export interface UserDataWithId extends UserData {
