@@ -46,10 +46,17 @@ const Confirm = () => {
       instance
         .get(`/order?id=${paymentId}`)
         .then(({ data: { order } }) => {
+          const formatDate = (date: string) => {
+            const options: Intl.DateTimeFormatOptions = {year: 'numeric', month: 'long', day: 'numeric'}
+            return new Date(date).toLocaleDateString('es-ES', options)
+
+          }
+
+          const fecha = order.fecha = formatDate(order.fecha)
           setOrder({
             sc_name: order.sc_id.sc_name,
             camp_num: order.camp_id.sca_num,
-            fecha: order.fecha,
+            fecha: fecha,
             hora: order.hora,
             precio: order.precio,
           })
@@ -114,14 +121,14 @@ const Confirm = () => {
                     </tr>
                     <tr>
                       <td><strong>Fecha:</strong></td>
-                      <td>${order.fecha.substring(0, 10)}</td>
+                      <td>${fecha}</td>
                     </tr>
                     <tr>
                       <td><strong>Hora:</strong></td>
-                      <td>${order.hora}:00</td>
+                      <td>${order.hora}</td>
                     </tr>
                     <tr>
-                      <td><strong>Costo de la reserva:</strong></td>
+                      <td><strong>Coste:</strong></td>
                       <td>$${order.precio}</td>
                     </tr>
                   </table>

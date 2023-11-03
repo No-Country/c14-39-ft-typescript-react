@@ -135,14 +135,28 @@ export function BookingSelector({
           overrideClasses='col-span-1 md:col-span-3'
         />
         <div className=''>
+        {!selectedDate && (
+          <div className='flex flex-col items-center justify-center p-1 mb-1 rounded-xl bg-white text-red-500'>
+            <p className='text-xs text-center'>
+              Selecciona un día
+              </p>
+              </div>
+              )}
           <Calendario
             minDate={minDate}
             maxDate={maxDate}
             showDate={showDate}
           />
         </div>
-
+        
         <div className='px-2 py-4 rounded-lg bg-white/60'>
+        {/* {!selectedDate && (
+          <div className='flex flex-col items-center justify-center gap-4 p-4 rounded-lg bg-white/60 text-red-500'>
+            <p className='text-l text-center'>
+              Selecciona un día
+              </p>
+              </div>
+              )} */}
           <div className='grid items-start w-full gap-2 md:w-auto lg:grid-cols-2'>
             {selectedDate &&
               proveedor?.list_sport_camps?.map(item => (
@@ -155,6 +169,7 @@ export function BookingSelector({
               ))}
           </div>
         </div>
+       
 
         <div className='flex flex-col gap-2'>
           <div className='text-xl md:text-3xl '>
