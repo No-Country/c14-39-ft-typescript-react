@@ -3,10 +3,11 @@ POST http://localhost:3000/api/reservation
 Content-Type: application/json
 
 {
-  "fr_date_reservation": "2023-11-02T09:00:00Z",
+  "fr_date_reservation": 
+  "2023-11-03T16:20:27.267Z",
   "fr_status": "RESERVADO", 
   "fr_schedule": {
-    "s_date_reserved": "2023-11-02T24:00:00.000Z",
+    "s_date_reserved": "2023-11-03T24:00:00.000Z",
     "s_start": "13:00:00",
     "s_end": "15:00:00"
   },

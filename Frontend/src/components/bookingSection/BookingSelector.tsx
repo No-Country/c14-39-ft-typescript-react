@@ -87,17 +87,40 @@ export function BookingSelector({
   }
 
   const redirectMercadoPago = (data: BookData, user: UserData) => {
-    instance
-      .post("/order", {
-        fecha: data.fecha,
-        hora: data.hora.toString(),
+    const fechaActual = new Date() // Obtiene la fecha y hora actual
+
+    // Formatea la fecha como una cadena en el formato "YYYY-MM-DD"
+    const fechaFormateada = fechaActual
+      .toISOString()
+      .split("T")[0]
+      .concat("T24:00:00.000Z")
+
+    Promise.all([
+      instance.post("/order", {
+        fecha: fechaActual.toString(),
+        hora: data.hora.toString().concat(":00:00"),
         precio: data.precio,
         sc_id: data.cancha.sport_center_id._id,
         camp_id: data.cancha._id,
         user_id: user.id,
-      })
-      .then(({ data }) => {
-        window.location.href = data.initPoint
+      }),
+      instance.post("/reservation", {
+        fr_date_reservation: fechaActual,
+        fr_status: "RESERVADO",
+        fr_schedule: {
+          s_date_reserved: fechaFormateada,
+          s_start: data.hora.toString().concat(":00:00"),
+          s_end: (data.hora + 1).toString().concat(":00:00"),
+        },
+        user_id: user.id,
+        sc_id: data.cancha.sport_center_id._id,
+        sca_id: data.cancha._id,
+      }),
+    ])
+      .then(([order, reservation]) => {
+        if (reservation.status === 200) {
+          window.location.href = order.data.initPoint
+        }
       })
       .catch(error => console.log(`${error}`))
   }
