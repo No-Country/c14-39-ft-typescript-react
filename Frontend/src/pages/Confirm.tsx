@@ -23,6 +23,7 @@ const Confirm = () => {
     hora: "",
     precio: "",
   });
+  console.log(user)
 
   const proveedor = bookingData?.cancha;
 
@@ -70,7 +71,7 @@ const Confirm = () => {
             Atentamente, \n
             El equipo de SportCenter`,
           };
-
+          console.log(EmailDetails);
           sendEmail(EmailDetails);
         })
         .catch((error) => console.log(`${error}`));
