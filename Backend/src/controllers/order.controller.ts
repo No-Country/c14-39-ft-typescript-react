@@ -8,7 +8,7 @@ import { Camp, Order, SportCenterModel, User } from "../models";
 import { client } from '../libs/mp'
 import { randomUUID } from "crypto";
 import { PreferenceResponse } from "mercadopago/dist/clients/preference/commonTypes";
-import { aceptedOrigins, webhookUrl } from "../data/consts";
+import { aceptedOrigins, webhookUrl } from '../data/consts';
 
 export class OrderController implements IOrderController {
 
@@ -75,13 +75,32 @@ export class OrderController implements IOrderController {
         body: {
           items: [
             {
-              id: randomUUID(),
+              id: "123456",
+              description: "Campos de Futbol",
               title: `Campo ${camp.sca_num}`,
               unit_price: data.precio,
               quantity: 1,
-              currency_id: "ARS",
+              // currency_id: "COP",
+              picture_url: "http://www.myapp.com/myimage.jpg",
+              category_id: "category_1",
             },
           ],
+          payer: {
+            phone: {
+              area_code: "11",
+              number: "1111111111",
+            },
+            email: "email",
+            address: {
+              zip_code: "111111",
+              street_name: "Street",
+              street_number: 1,
+            }
+          },
+          payment_methods: {
+            excluded_payment_methods: [],
+            excluded_payment_types: [],
+          },
           metadata: {
             fecha: data.fecha,
             hora: data.hora,
