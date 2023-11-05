@@ -51,6 +51,7 @@ Para desplegar esta aplicación, se utilizan los siguientes recursos:
 | Features        | descripcion                                                                  |
 | --------------- | ---------------------------------------------------------------------------- |
 | Admin Dashboard |  Crear un perfil para los admin de los sportcamps para gestionar sus cancha  |
+| Reviews         |  Usuarios van a poder dejar una reserña sobre los Sportcamps                 |
 | Torneos         |  Implementar funcionalidad de torneos por establecimiento                    |
 | Notificaciones  |  WebSocket para habilitar notificaciones en tiempo real a admins y users     |
 
