@@ -29,7 +29,7 @@ Para la pasarela de pagos, utiliza el siguiente usuario y contraseña:
 - Historial de Reservas.
 - Localizacion de Sportcamps con geolocalizacion.
 - MongoDB utilizado como base de datos para almacenamiento de datos.
-- Interfaz amigable y diseño adaptable gracias a Tailwind y Flowbite.
+- Interfaz amigable y diseño responsive gracias a Tailwind, SweetAlert2 y Flowbite.
 
 ## Tecnologías
 - Frontend: ReactTs
