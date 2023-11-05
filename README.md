@@ -22,7 +22,8 @@ Para la pasarela de pagos, utiliza el siguiente usuario y contraseña:
 
 ## Features
 - Sistema de reserva de turnos.
-- Encriptacion de contraseña utilizando JsonWebToken.
+- Sistema de registro y login.
+- Encriptacion de contraseña de usuarios utilizando JsonWebToken.
 - Rutas protegidas con validacion de cookies.
 - Pasarela de pagos (Mercado Pago).
 - Envio de email con confirmación de reserva.
